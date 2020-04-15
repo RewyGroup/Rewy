@@ -1,20 +1,18 @@
 package se.rewy.site.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Vote {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
     private User user;
 
-    private VoteType type;
+    private String type;
 
     public Vote(){}
 
@@ -34,12 +32,10 @@ public class Vote {
         this.user = user;
     }
 
-    public VoteType getType() {
-        return type;
-    }
+    public String getType() { return type; }
 
     public void setType(VoteType type) {
-        this.type = type;
+        this.type = type.toString().toLowerCase();
     }
 }
 

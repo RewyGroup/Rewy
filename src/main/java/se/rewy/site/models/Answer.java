@@ -7,7 +7,9 @@ import java.util.List;
 public class Answer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String text;
     private boolean isCorrect;
 

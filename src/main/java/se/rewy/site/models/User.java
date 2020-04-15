@@ -1,8 +1,6 @@
 package se.rewy.site.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -10,6 +8,7 @@ import java.util.Date;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -17,7 +16,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private Role role;
+    private String role;
     private Date createdAt;
 
     public User(){}
@@ -70,12 +69,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
     public void setRole(Role role) {
-        this.role = role;
+        this.role = role.toString().toLowerCase();
     }
 
     public Date getCreatedAt() {

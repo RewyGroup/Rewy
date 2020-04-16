@@ -7,7 +7,8 @@ create Table user (
   first_name varchar (255),
   last_name varchar (255),
   role ENUM('admin','member') not null default 'member',
-  created_at Datetime default current_timestamp()
+  created_at Datetime default current_timestamp(),
+  profile_image_url varchar (255)
 );
 
 create Table category(
@@ -30,6 +31,7 @@ create Table question (
     text varchar(255),
     user_id bigint unsigned not null,
     category_id bigint unsigned not null,
+    created_at Datetime default current_timestamp(),
     foreign key(user_id) references user(id),
     foreign key(category_id) references category(id)
  );
@@ -40,6 +42,7 @@ create Table answer(
     is_correct boolean default false,
     user_id bigint unsigned not null,
     question_id bigint unsigned not null,
+    created_at Datetime default current_timestamp(),
     foreign key(user_id)references user(id),
     foreign key(question_id)references question(id)
  );

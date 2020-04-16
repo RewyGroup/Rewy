@@ -1,0 +1,12 @@
+version: '2'
+services:
+  frontend:
+    image: rewygroup/frontend
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+  backend:
+    image: rewygroup/backend
+    ports:
+      - '4000:4000'

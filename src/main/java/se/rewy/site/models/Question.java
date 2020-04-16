@@ -3,6 +3,7 @@ package se.rewy.site.models;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private  String title;
+    private String title;
     private String text;
 
     @OneToOne
@@ -29,6 +30,8 @@ public class Question {
 
     @ManyToMany
     private List<Vote> votes;
+
+    private Date createdAt;
 
     public Question() {
     }
@@ -96,4 +99,8 @@ public class Question {
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
     }
+
+    public Date getCreatedAt() { return createdAt; }
+
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 }

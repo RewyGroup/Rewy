@@ -18,6 +18,7 @@ public class User {
     private String lastName;
     private String role;
     private Date createdAt;
+    private String profileImageUrl;
 
     public User(){}
 
@@ -84,4 +85,10 @@ public class User {
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
+
+    public String getProfileImageUrl() { return profileImageUrl; }
+
+    public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
 }
+
+

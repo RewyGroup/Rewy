@@ -20,8 +20,9 @@ class CategoryForm extends Component {
     this.getUser();
 }
     handleSubmit = event =>{
+        const url = "http://localhost:4000";
         const postbody = {typeName: this.state.typename};
-        axios.post("/category",postbody);
+        axios.post(url + "/category",postbody);
         event.preventDefault();      
 }
     handleChange = event =>{

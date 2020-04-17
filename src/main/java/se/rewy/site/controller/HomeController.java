@@ -1,4 +1,4 @@
-package se.rewy.site;
+package se.rewy.site.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

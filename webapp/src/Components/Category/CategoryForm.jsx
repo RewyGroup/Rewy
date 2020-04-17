@@ -8,11 +8,14 @@ class CategoryForm extends Component {
 
     this.state = {
       typename: "",
-      username:""
+      username:"",
+      profileImage: null,
+      profileImagePreview: null
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleFileChange = this.handleFileChange.bind(this);
 
   }
 
@@ -35,8 +38,27 @@ class CategoryForm extends Component {
         axios.get(url + "/user/1").then(response => this.setState({username:response.data.username}));
     }
 
+    handleFileChange = event =>{
+    
+      this.setState({profileImagePreview: URL.createObjectURL(event.target.files[0]), profileImage : event.target.files[0]});
+
+    }
+
+
+    handleFileSubmit = event =>{
+      event.preventDefault();
+      const file = this.state.profileImage;
+      const formdata = new FormData();
+      formdata.append("multipartFile", file);
+      const url = "http://localhost:4000";
+      axios.post(url + "/upload", formdata, {
+        headers: {
+          'Content-Type': 'multipart/form-data'}}).then(response => console.log(response.data)
+          )
+    }
+
   render() {
-       
+
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -46,6 +68,19 @@ class CategoryForm extends Component {
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
+          </Button>
+        </Form>
+
+        <Form onSubmit={this.handleFileSubmit}>
+          <Form.Group>
+            <label htmlFor="getFile" className="btn btn-primary btn-outlined">add image</label>
+            <Form.Control id="getFile" type="file" onChange={this.handleFileChange} style={{display:"none"}}/> 
+          <div>
+              {this.state.profileImagePreview !== null ? <img src={this.state.profileImagePreview} width="100" height="100"/>: ""}
+          </div>
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit Image
           </Button>
         </Form>
       </div>

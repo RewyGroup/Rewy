@@ -1,7 +1,8 @@
 package se.rewy.site.models;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name ="user")
@@ -17,7 +18,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String role;
-    private Date createdAt;
+    private LocalDateTime createdAt;
     private String profileImageUrl;
 
     public User(){}
@@ -78,11 +79,11 @@ public class User {
         this.role = role.toString().toLowerCase();
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

@@ -1,18 +1,18 @@
 import React, {useState,useEffect} from 'react';
-import Button from 'react-bootstrap/Button';
+import {Form} from 'react-bootstrap';
+import {connect} from 'react-redux';
+
+class LoginForm extends React.Component {
 
 
- function LoginForm() {
 
-    const [username, setUsername] = useState('kenny');
+  render() {
+    
 
     return (
-
-    <div><Button>{username}</Button></div>
-
+<div></div>
     );
+  }
+}
 
-
- }
-
- export default LoginForm
+export default LoginForm;

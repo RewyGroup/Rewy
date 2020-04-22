@@ -21,7 +21,6 @@ import java.util.Arrays;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-
     @Autowired
     private UserService userService;
 
@@ -31,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/signin")
+                .antMatchers("/auth/login","/user/*")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

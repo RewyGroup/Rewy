@@ -1,15 +1,12 @@
 import React from 'react';
-import LoginForm from '../components/Login/LoginForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { signout, checkLoggedIn,stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
-import jwt_decode from 'jwt-decode';
-
+import LoginForm from '../components/Login/LoginForm';
 
 function LoginPage() {
 
     const isLoggedIn = useSelector(state => state.isLoggedIn.isLoggedIn);
-    const user = {username: "johnnyh97", password: "johnnyh"};
     const dispatch = useDispatch();
 
     const cookies = new Cookies();
@@ -18,16 +15,14 @@ function LoginPage() {
     if(session_token){
         dispatch(stillLoggedIn(session_token));
     }
-    
-    
-    
 
-    
+    if(isLoggedIn){
+     
+    }
         return (
             <div>
-                {isLoggedIn ? <button onClick={() => dispatch(signout())}>sign out</button> : <button onClick={() => dispatch(checkLoggedIn(user))}>sign in</button>}
-                {isLoggedIn ?  <h1>you are logged in</h1> : ""}
-              
+                <LoginForm/>
+               {isLoggedIn ?<div> <button onClick={() => dispatch(signout())}>sign out</button><h1>you are logged in</h1></div>:""}
             </div>
         );
 }

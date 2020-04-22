@@ -1,10 +1,7 @@
-import axios from "axios";
 import {Cookies} from 'react-cookie';
 import api from '../api/api';
 
-const url = "http://localhost:4000";
 const cookies = new Cookies();
-
 
 export const checkLoggedIn = (user) => {
     return (dispatch) => {

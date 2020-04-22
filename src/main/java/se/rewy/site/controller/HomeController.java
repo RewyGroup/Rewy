@@ -47,12 +47,6 @@ public class HomeController {
         return ResponseEntity.ok().build();
     }
 
-     @GetMapping("user/{id}")
-     ResponseEntity<User> findUserById(@PathVariable long id){
-        User user =userService.findById(id);
-        user.setRole(Role.ADMIN);
-        return ResponseEntity.ok(user);
-     }
 
      @GetMapping("question/{id}")
     ResponseEntity<Question> findQuestionById(@PathVariable long id){

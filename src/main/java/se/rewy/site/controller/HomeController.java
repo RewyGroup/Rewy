@@ -9,6 +9,7 @@ import se.rewy.site.services.QuestionService;
 import se.rewy.site.services.SubCategoryService;
 import se.rewy.site.services.UserService;
 
+
 @RestController
 @RequestMapping("/")
 public class HomeController {
@@ -17,14 +18,16 @@ public class HomeController {
     private final CategoryService categoryService;
     private final SubCategoryService subCategoryService;
 
+
     @Autowired
     public HomeController(UserService userService,QuestionService questionService,CategoryService categoryService,SubCategoryService subCategoryService){
         this.userService = userService;
         this.questionService = questionService;
         this.categoryService = categoryService;
         this.subCategoryService = subCategoryService;
-
     }
+
+
 
     @PostMapping("category")
     ResponseEntity<Category> createCategory(@RequestBody Category category){

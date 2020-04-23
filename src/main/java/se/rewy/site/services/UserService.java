@@ -1,11 +1,13 @@
 package se.rewy.site.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import se.rewy.site.exception.UserServiceException;
 import se.rewy.site.models.Role;
 import se.rewy.site.models.User;
 import se.rewy.site.models.UserCredentials;
@@ -32,7 +34,7 @@ public class UserService implements UserDetailsService {
 
     public Optional<User> findByEmail(String email) { return userRepository.findUserByEmail(email);}
 
-    public void saveUser (User user) throws Exception {
+    public ResponseEntity<?> saveUser (User user) throws UserServiceException {
         Optional<User> optionalUser = findByUsername(user.getUsername());
         Optional<User> optionalUserByEmail = findByEmail(user.getEmail());
 
@@ -46,15 +48,16 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
         }else{
             if(optionalUser.isPresent() && optionalUserByEmail.isPresent()){
-                throw new Exception("Username and Email is already in use!");
+                throw new UserServiceException("Username and Email is already in use!");
             }
             else if(optionalUser.isPresent()){
-                throw new Exception("Username is already in use!");
+                throw new UserServiceException("Username is already in use!");
             }
             else{
-                throw new Exception("Email is already in use!");
+                throw new UserServiceException("Email is already in use!");
             }
         }
+        return ResponseEntity.ok().build();
 
 
     }

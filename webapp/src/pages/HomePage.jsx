@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signout,stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
-import LoginForm from '../components/Login/LoginForm';
 
 function HomePage(props) {
 

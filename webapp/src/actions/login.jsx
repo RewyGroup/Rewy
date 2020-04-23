@@ -12,12 +12,9 @@ export const checkLoggedIn = (user) => {
             dispatch(signin(response.data.jwt))
         })
         .catch(error =>{
-            console.log(error);
-
             dispatch({
-                type: 'SIGN_IN_ERROR',error:error
+                type: 'SIGN_IN_ERROR',error:error.response.data
             })
-            throw(error);
         })
     }
 }

@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import {Form,Button,Row,Container} from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {checkLoggedIn} from '../../actions/login';

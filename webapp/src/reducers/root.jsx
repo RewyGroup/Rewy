@@ -1,11 +1,11 @@
-import counterReducer from './counter';
 import isLoggedReducer from './isLogged';
+import registerReducer from './register';
 import { combineReducers } from 'redux';
 
 
 const rootReducer = combineReducers({
-    count: counterReducer,
-    isLoggedIn: isLoggedReducer
+    isLoggedIn: isLoggedReducer,
+    registerError: registerReducer,
 });
 
 export default rootReducer;

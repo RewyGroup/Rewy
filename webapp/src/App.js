@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RewyNavbar from './utils/RewyNavbar';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import HomePage from './pages/HomePage';
+import RegisterPage from './pages/RegisterPage';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <RewyNavbar/>
     <Switch>
       <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/register" component={RegisterPage}/>
       <Route exact path="/" component={HomePage} />
     </Switch>
     </Router>

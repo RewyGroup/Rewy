@@ -2,13 +2,13 @@ import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
-import LoginForm from '../components/Login/LoginForm';
+import RegisterForm from '../components/Register/RegisterForm';
 
-function LoginPage(props) {
+function RegisterPage(props) {
 
     const isLoggedIn = useSelector(state => state.isLoggedIn.isLoggedIn);
     const dispatch = useDispatch();
-
+    const isRegistered = useSelector(state => state.registerError.isRegistered);
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
 
@@ -22,6 +22,12 @@ function LoginPage(props) {
     },[isLoggedIn]);
 
 
+    useEffect(()=>{
+        if(isRegistered){
+            props.history.push("/login")
+        }
+    })
+
     if(session_token){
         dispatch(stillLoggedIn(session_token));
       
@@ -29,9 +35,9 @@ function LoginPage(props) {
 
         return (
             <div>
-                <LoginForm/>
+                <RegisterForm/>
             </div>
         );
 }
 
-export default LoginPage;
+export default RegisterPage;

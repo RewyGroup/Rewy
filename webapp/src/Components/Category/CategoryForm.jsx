@@ -41,7 +41,6 @@ class CategoryForm extends Component {
     handleFileChange = event =>{
     
       this.setState({profileImagePreview: URL.createObjectURL(event.target.files[0]), profileImage : event.target.files[0]});
-
     }
 
 

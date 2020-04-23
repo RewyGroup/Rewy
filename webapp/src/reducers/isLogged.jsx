@@ -17,6 +17,8 @@ const isLoggedReducer = ( state = initialState ,action) => {
             return {...state, isLoggedIn: initialState.isLoggedIn = false, token: ""}
         case 'STILL_LOGGED_IN':
             return {...state, isLoggedIn: initialState.isLoggedIn = true, token: action.payload} 
+        case 'SESSION_TIMED_OUT':
+            return {...state, isLoggedIn: initialState.isLoggedIn = false, token: ""} 
         default:
             return {...state, isLoggedIn: initialState.isLoggedIn}
     }

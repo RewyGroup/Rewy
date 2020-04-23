@@ -1,10 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginPage from './pages/LoginPage';
-import CategoryForm from './components/Category/CategoryForm';
-import {useSelector,useDispatch} from 'react-redux';
 import RewyNavbar from './utils/RewyNavbar';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
+import HomePage from './pages/HomePage';
+
 
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
     <RewyNavbar/>
     <Switch>
       <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/" component={HomePage} />
     </Switch>
     </Router>
     </div>

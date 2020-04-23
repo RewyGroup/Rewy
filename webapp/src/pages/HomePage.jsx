@@ -4,7 +4,7 @@ import { signout,stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
 import LoginForm from '../components/Login/LoginForm';
 
-function LoginPage(props) {
+function HomePage(props) {
 
     const isLoggedIn = useSelector(state => state.isLoggedIn.isLoggedIn);
     const dispatch = useDispatch();
@@ -12,26 +12,19 @@ function LoginPage(props) {
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
 
-    useEffect(() =>{
-
-        if(isLoggedIn){
-            console.log("welcome");    
-            props.history.push("/");  
-        }
-        
-    },[isLoggedIn]);
-
 
     if(session_token){
         dispatch(stillLoggedIn(session_token));
-      
+    }else{
+        props.history.push("/login");
     }
 
         return (
             <div>
-                <LoginForm/>
+                <h1>HomePage</h1>
+               {isLoggedIn ?<div> <button onClick={() => dispatch(signout())}>sign out</button><h1>you are logged in</h1></div>:""}
             </div>
         );
 }
 
-export default LoginPage;
+export default HomePage;

@@ -4,6 +4,7 @@ import com.sun.mail.iap.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.rewy.site.exception.UserServiceException;
 import se.rewy.site.models.User;
 import se.rewy.site.services.UserService;
 
@@ -27,7 +28,7 @@ public class UserController {
             userService.saveUser(user);
         }
         catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+            throw new UserServiceException(e.getMessage());
         }
         return ResponseEntity.ok().build();
         }

@@ -9,7 +9,7 @@ export const checkLoggedIn = (user) => {
         
         return api.signIn(user).then(response => {
             cookies.set("session_token",response.data.jwt);
-            dispatch(signin(response.data.jwt))
+            dispatch(signIn(response.data.jwt))
         })
         .catch(error =>{
             dispatch({
@@ -19,7 +19,7 @@ export const checkLoggedIn = (user) => {
     }
 }
 
-const signin = (token) =>{
+const signIn = (token) =>{
 
         return{
         type: 'SIGN_IN',
@@ -28,7 +28,7 @@ const signin = (token) =>{
     }
 };
 
-export const signout =() =>{
+export const signOut =() =>{
     cookies.remove("session_token");
     return{
         type: 'SIGN_OUT'

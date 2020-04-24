@@ -7,7 +7,7 @@ const initialState = {
 
 
 
-const isLoggedReducer = ( state = initialState ,action) => {
+const loginReducer = ( state = initialState ,action) => {
     switch(action.type){
         case 'SIGN_IN':
             return {...state, isLoggedIn: initialState.isLoggedIn = true, token: action.payload}
@@ -24,4 +24,4 @@ const isLoggedReducer = ( state = initialState ,action) => {
     }
 };
 
-export default isLoggedReducer;
+export default loginReducer;

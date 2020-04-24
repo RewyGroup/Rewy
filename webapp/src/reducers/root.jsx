@@ -1,11 +1,11 @@
-import isLoggedReducer from './isLogged';
-import registerReducer from './register';
+import loginReducer from './loginReducer';
+import registerReducer from './registerReducer';
 import { combineReducers } from 'redux';
 
 
 const rootReducer = combineReducers({
-    isLoggedIn: isLoggedReducer,
-    registerError: registerReducer,
+    loginReducer: loginReducer,
+    registerReducer: registerReducer,
 });
 
 export default rootReducer;

@@ -6,16 +6,15 @@ import RegisterForm from '../components/Register/RegisterForm';
 
 function RegisterPage(props) {
 
-    const isLoggedIn = useSelector(state => state.isLoggedIn.isLoggedIn);
+    const isLoggedIn = useSelector(state => state.loginReducer.isLoggedIn);
     const dispatch = useDispatch();
-    const isRegistered = useSelector(state => state.registerError.isRegistered);
+    const isRegistered = useSelector(state => state.registerReducer.isRegistered);
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
 
     useEffect(() =>{
 
-        if(isLoggedIn){
-            console.log("welcome");    
+        if(isLoggedIn){ 
             props.history.push("/");  
         }
         

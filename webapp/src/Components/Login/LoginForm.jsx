@@ -37,7 +37,7 @@ function LoginForm() {
       <Row>
         <Form className="form" onSubmit={handleSubmit}>
          <div id="header">
-          <h2>Sign in</h2>
+          <h2>Login</h2>
           </div>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Username</Form.Label>

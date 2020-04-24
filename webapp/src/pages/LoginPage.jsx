@@ -6,7 +6,7 @@ import LoginForm from '../components/Login/LoginForm';
 
 function LoginPage(props) {
 
-    const isLoggedIn = useSelector(state => state.isLoggedIn.isLoggedIn);
+    const isLoggedIn = useSelector(state => state.loginReducer.isLoggedIn);
     const dispatch = useDispatch();
 
     const cookies = new Cookies();
@@ -14,8 +14,7 @@ function LoginPage(props) {
 
     useEffect(() =>{
 
-        if(isLoggedIn){
-            console.log("welcome");    
+        if(isLoggedIn){ 
             props.history.push("/");  
         }
         
@@ -24,7 +23,6 @@ function LoginPage(props) {
 
     if(session_token){
         dispatch(stillLoggedIn(session_token));
-      
     }
 
         return (

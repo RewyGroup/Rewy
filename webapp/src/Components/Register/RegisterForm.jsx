@@ -12,7 +12,7 @@ function RegisterForm() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [lastName, setLastName] = useState("");
-  const errorMessage = useSelector(state => state.registerError.error);
+  const errorMessage = useSelector(state => state.registerReducer.error);
   const dispatch = useDispatch();
 
   const onChangeUsername = event => {

@@ -17,3 +17,6 @@ svg:hover{
 .dropdown > a:hover .dropdown-icon{
     color: rgba(255,255,255,0.75);
 }
+
+.dropdown-menu{
+}

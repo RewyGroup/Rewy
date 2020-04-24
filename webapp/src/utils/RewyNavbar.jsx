@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar,Nav,NavDropdown} from 'react-bootstrap';
+import {Navbar,Nav,NavDropdown,Dr} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,7 +24,8 @@ function RewyNavbar() {
       <Nav.Link href="/register">Register</Nav.Link>
       <Nav.Link href="/login">Login</Nav.Link>
     </Nav>:
-    <NavDropdown title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
+    <NavDropdown alignRight title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
+
         <NavDropdown.Item href="/">profile</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item onClick={() => dispatch(signOut())}>Sign out</NavDropdown.Item>

@@ -1,13 +1,16 @@
 package se.rewy.site.models;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Answer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String text;
     private boolean isCorrect;
 
@@ -20,6 +23,8 @@ public class Answer {
 
     @ManyToMany
     private List<Vote> votes;
+
+    private Date createdAt;
 
     public Answer(){}
 
@@ -70,4 +75,8 @@ public class Answer {
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
     }
+
+    public Date getCreatedAt() { return createdAt; }
+
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 }

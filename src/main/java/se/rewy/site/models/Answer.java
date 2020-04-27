@@ -1,6 +1,7 @@
 package se.rewy.site.models;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Answer {
     @ManyToMany
     private List<Vote> votes;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     public Answer(){}
 
@@ -76,7 +77,7 @@ public class Answer {
         this.votes = votes;
     }
 
-    public Date getCreatedAt() { return createdAt; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

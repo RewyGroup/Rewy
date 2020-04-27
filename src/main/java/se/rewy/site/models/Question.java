@@ -3,6 +3,7 @@ package se.rewy.site.models;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class Question {
     @ManyToMany
     private List<Vote> votes;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     public Question() {
     }
@@ -100,7 +101,7 @@ public class Question {
         this.votes = votes;
     }
 
-    public Date getCreatedAt() { return createdAt; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

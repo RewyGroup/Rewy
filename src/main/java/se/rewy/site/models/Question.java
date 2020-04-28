@@ -1,5 +1,6 @@
 package se.rewy.site.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Question {
     @OneToMany(fetch = FetchType.LAZY)
     private List<SubCategory> subCategoryList;
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
     private List<Answer> answers;
 

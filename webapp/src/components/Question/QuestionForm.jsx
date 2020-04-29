@@ -65,7 +65,6 @@ useEffect(() => {
   }
 
   const handleSubmit = event => {
-    console.log(questionWeb);
     event.preventDefault();
     dispatch(createQuestion(questionWeb,session_token));
   }  

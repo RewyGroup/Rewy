@@ -27,7 +27,7 @@ const signIn = () =>{
 };
 
 export const signOut =() =>{
-    cookies.remove("session_token");
+    cookies.remove("session_token",{path:'/'});
     return{
         type: 'SIGN_OUT'
     }

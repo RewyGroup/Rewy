@@ -1,6 +1,7 @@
 package se.rewy.site.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -22,6 +23,9 @@ public class User {
     private String role;
     private LocalDateTime createdAt;
     private String profileImageUrl;
+    private String gender;
+    private LocalDate dateOfBirth;
+    private String occupation;
 
     public User(){}
 
@@ -93,6 +97,30 @@ public class User {
     public String getProfileImageUrl() { return profileImageUrl; }
 
     public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth ) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
 }
 
 

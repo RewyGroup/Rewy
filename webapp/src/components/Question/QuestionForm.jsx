@@ -6,7 +6,7 @@ import {createQuestion} from '../../actions/question';
 import {Cookies} from 'react-cookie';
 import './QuestionForm.css';
 
-function QuestionForm(props) {
+const QuestionForm = (props) => {
 
   const [userId,setUserId] = useState(null);
   const [title, setTitle] = useState("");
@@ -19,17 +19,32 @@ function QuestionForm(props) {
   const cookies = new Cookies();
   const session_token = cookies.get("session_token");
   const isLoggedIn = useSelector(state => state.loginReducer.isLoggedIn);
-  const id = useSelector(state => state.loginReducer.user.id);
+  const id = useSelector(state => state.loginReducer.user.id);  
+
   
+  if(session_token){
+    dispatch(stillLoggedIn(session_token));
+}
 
-
-
-    if(session_token){
-        dispatch(stillLoggedIn(session_token));
-        if(userId === null){
-          setUserId(id);
-        }
+useEffect(() => {
+    if(!isLoggedIn){
+        props.history.push("/login");
     }
+    console.log(id);
+     
+}, [])
+
+
+useEffect(() => {
+
+    if(!isLoggedIn){
+        props.history.push("/login");
+    }
+    
+}, [isLoggedIn])
+
+
+
 
   const questionWeb = {
     userId: userId,
@@ -51,8 +66,8 @@ function QuestionForm(props) {
     event.preventDefault();
     dispatch(createQuestion(questionWeb,session_token));
   }  
-  console.log(questionWeb);
 
+ 
 
   return (
 

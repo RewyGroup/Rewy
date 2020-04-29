@@ -27,10 +27,11 @@ const QuestionForm = (props) => {
 }
 
 useEffect(() => {
+    
     if(!isLoggedIn){
         props.history.push("/login");
-    }
-    console.log(id);
+    }  
+    setUserId(id);
      
 }, [])
 
@@ -42,6 +43,7 @@ useEffect(() => {
     }
     
 }, [isLoggedIn])
+
 
 
 
@@ -63,11 +65,12 @@ useEffect(() => {
   }
 
   const handleSubmit = event => {
+    console.log(questionWeb);
     event.preventDefault();
     dispatch(createQuestion(questionWeb,session_token));
   }  
 
- 
+
 
   return (
 

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Answer {
@@ -26,7 +27,7 @@ public class Answer {
     private Question question;
 
     @ManyToMany
-    private List<Vote> votes;
+    private Set<Vote> votes;
 
     private LocalDateTime createdAt;
 
@@ -72,11 +73,11 @@ public class Answer {
         this.question = question;
     }
 
-    public List<Vote> getVotes() {
+    public Set<Vote> getVotes() {
         return votes;
     }
 
-    public void setVotes(List<Vote> votes) {
+    public void setVotes(Set<Vote> votes) {
         this.votes = votes;
     }
 

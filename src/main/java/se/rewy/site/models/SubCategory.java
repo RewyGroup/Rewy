@@ -1,9 +1,12 @@
 package se.rewy.site.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name ="sub_category")
@@ -16,6 +19,9 @@ public class SubCategory {
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Category category;
+
+    @ManyToMany(mappedBy = "subCategoryList")
+    Set<Question> questions;
 
     public SubCategory(){}
 
@@ -42,4 +48,5 @@ public class SubCategory {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 }

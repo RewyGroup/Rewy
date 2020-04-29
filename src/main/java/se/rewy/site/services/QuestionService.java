@@ -16,9 +16,7 @@ import se.rewy.site.repository.UserRepository;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class QuestionService{
@@ -60,7 +58,7 @@ public class QuestionService{
             throw new UserServiceException("Category " + categoryName+ " not found");
         }
 
-        List<SubCategory> subCategoryList = new ArrayList<>();
+        Set<SubCategory> subCategoryList = new HashSet<>();
         for (String s : questionWeb.getSubCategory()){
             Optional<SubCategory> subCategory = subCategoryRepository.findByName(s);
             if(subCategory.isPresent()){
@@ -73,5 +71,9 @@ public class QuestionService{
         question.setSubCategoryList(subCategoryList);
         question.setCreatedAt(LocalDateTime.now());
         questionRepository.save(question);
+    }
+
+    public void delete(long id){
+        questionRepository.deleteById(id);
     }
 }

@@ -33,20 +33,20 @@ function LoginForm() {
 
 
   return (
-    <Container>
-      <Row>
-        <Form className="form" onSubmit={handleSubmit}>
+    <Container className="loginContainer">
+      <Row className="loginRow">
+        <Form className="loginForm" onSubmit={handleSubmit}>
          <div id="header">
           <h2>Login</h2>
           </div>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" onChange={onChangeUsername}/>
+            <Form.Control className="loginForm-control" type="text" onChange={onChangeUsername}/>
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" onChange={onChangePassword} />
+            <Form.Control className="loginForm-control" type="password" onChange={onChangePassword} />
           </Form.Group>
           <Form.Group>
             <Button variant="dark" type="submit">

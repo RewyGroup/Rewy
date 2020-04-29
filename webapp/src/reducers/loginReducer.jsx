@@ -1,8 +1,8 @@
 
 const initialState = {
     isLoggedIn: false,
-    token : "",
-    error : ""
+    error : "",
+    user:{},
 };
 
 
@@ -10,15 +10,15 @@ const initialState = {
 const loginReducer = ( state = initialState ,action) => {
     switch(action.type){
         case 'SIGN_IN':
-            return {...state, isLoggedIn: initialState.isLoggedIn = true, token: action.payload}
+            return {...state, isLoggedIn: initialState.isLoggedIn = true}
         case 'SIGN_IN_ERROR':
             return {...state, isLoggedIn: initialState.isLoggedIn = false, error: action.error.message}
         case 'SIGN_OUT':
-            return {...state, isLoggedIn: initialState.isLoggedIn = false, token: ""}
+            return {...state, isLoggedIn: initialState.isLoggedIn = false, user: {}}
         case 'STILL_LOGGED_IN':
-            return {...state, isLoggedIn: initialState.isLoggedIn = true, token: action.payload} 
+            return {...state, isLoggedIn: initialState.isLoggedIn = true, user: action.user} 
         case 'SESSION_TIMED_OUT':
-            return {...state, isLoggedIn: initialState.isLoggedIn = false, token: ""} 
+            return {...state, isLoggedIn: initialState.isLoggedIn = false, user:{}} 
         default:
             return {...state, isLoggedIn: initialState.isLoggedIn}
     }

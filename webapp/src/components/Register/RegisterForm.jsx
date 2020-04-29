@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Container } from 'react-bootstrap';
 import { useDispatch,useSelector } from 'react-redux';
-import '../Login/LoginForm.css';
+import './RegisterForm.css';
 import { register } from '../../actions/register';
 
 function RegisterForm() {
@@ -49,37 +49,37 @@ function RegisterForm() {
 
 
   return (
-    <Container>
-      <Row>
-        <Form className="form" onSubmit={handleSubmit}>
+    <Container className="registerContainer">
+      <Row className="registerRow">
+        <Form className="registerForm" onSubmit={handleSubmit}>
           <div id="header">
             <h2>Register</h2>
           </div>
           <Form.Group controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" onChange={onChangeUsername} required />
+            <Form.Control className="registerForm-control" type="text" onChange={onChangeUsername} required />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" onChange={onChangePassword}  required/>
+            <Form.Control className="registerForm-control" type="password" onChange={onChangePassword}  required/>
           </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" onChange={onChangeEmail}  required/>
+              <Form.Control className="registerForm-control" type="email" onChange={onChangeEmail}  required/>
             </Form.Group>
 
             <Form.Group controlId="formBasicFirstName">
               <Form.Label>First name</Form.Label>
-              <Form.Control type="text" onChange={onChangeFirstName}required />
+              <Form.Control className="registerForm-control" type="text" onChange={onChangeFirstName}required />
               <Form.Text className="text-muted">
               </Form.Text>
             </Form.Group>
 
             <Form.Group controlId="formBasicLastName">
               <Form.Label>Last name</Form.Label>
-              <Form.Control type="text" onChange={onChangeLastName}required />
+              <Form.Control className="registerForm-control" type="text" onChange={onChangeLastName}required />
               <Form.Text className="text-muted">
               </Form.Text>
             </Form.Group>

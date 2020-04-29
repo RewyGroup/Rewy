@@ -5,6 +5,7 @@ import RewyNavbar from './utils/RewyNavbar';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
+import QuestionForm from './components/Question/QuestionForm';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/register" component={RegisterPage}/>
       <Route exact path="/" component={HomePage} />
+      <Route exact path="/question/create" component={QuestionForm} />
     </Switch>
     </Router>
     </div>

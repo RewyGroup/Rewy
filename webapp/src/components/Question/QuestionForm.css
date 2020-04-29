@@ -1,0 +1,14 @@
+.questionRow{
+    justify-content: center;
+
+}
+
+
+.questionForm {
+    margin-top:100px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding:60px;
+    background-color: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.1);
+    width: 500px;
+} 

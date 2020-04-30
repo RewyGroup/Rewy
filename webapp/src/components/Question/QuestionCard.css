@@ -1,4 +1,75 @@
 .cardRow{
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.cardCard{
+    border: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.1);
+    text-align: left;
+    padding:10px;
+    width: 100%;
+}
+.cardCard:hover{
+box-shadow: 0 0 7px 0 rgba(37,67,92,0.2), 0 0 10px 2px rgba(37,67,92,0.3) ;
+}
+
+.cardBody{
+    width:80%;
+}
+
+.cardNotify{
+    background-color: green;
+    height: 2.4rem;
+    width: 2.4rem;
+    position: absolute;
+    left: -20px;
+    text-align: center;
+    top: 40px;
+    border-radius: 20px;
+}
+
+.cardIcon{
+    margin-top: 12px;
+    color: white;
+}
+
+.cardFooter{
+    background-color: white;
+    border:none;
+    padding:0px;
+}
+.cardSubCategory{
+    background-color: rgba(199,209,216,.45);
+    padding:8px 12px;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.cardCategory{
+    background-color: rgba(199,209,216,.7);
+    padding:8px 12px;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: bolder;
+    white-space: nowrap;
+}
+.cardContent{
+    display: flex;
+    
+}
+.cardInfo{
+    margin:auto;
+    display: table;
+}
+
+.cardInfoText{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.cardInfoTextStat{
+    margin:0px;
 }

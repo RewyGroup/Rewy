@@ -15,9 +15,9 @@ export const createQuestion = (questionWeb,token) => {
         })
     }
 }
-export const getAllQuestions = () =>{
+export const getAllQuestions = (token) =>{
     return(dispatch) => {
-        return api.getAllQuestions().then(response => {
+        return api.getAllQuestions(token).then(response => {
             dispatch(allQuestions(response.data))
         })
     }

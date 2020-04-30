@@ -12,40 +12,25 @@ const QuestionListPage = (props) => {
 
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
+    const questionlist = useSelector(state => state.questionReducer.questionList);
 
     useEffect(() => {
     
-    dispatch(getAllQuestions());
+    dispatch(getAllQuestions(session_token));
          
     }, [])
-
-
-    const QuestionList = useSelector(state => state.questionReducer.QuestionList);
-
-
-    // function questionCard(list){
-
-    //     for(var i = 0; i < list.length; i ++){
-    //            {<QuestionCard question={question[i]}/>
-    //     }
-    // }
-
-
-    
 
     if(session_token){
         dispatch(stillLoggedIn(session_token));
     }
 
+    const questions = questionlist && questionlist.length > 0 &&  
+    questionlist.map((question)=>(<QuestionCard question={question}/>)) 
+    
+
         return (
 <Container>
-    
-    <QuestionCard/>
-    <QuestionCard/>
-    <QuestionCard/>
-    <QuestionCard/>
-    <QuestionCard/>
-
+{questions}
 </Container>
         );
 }

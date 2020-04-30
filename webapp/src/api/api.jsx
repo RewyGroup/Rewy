@@ -8,7 +8,7 @@ export const api = () => {
          register: (user) => axios.post(baseURL + "/user/create",user),
          uploadProfileImage: (formdata) => axios.post(baseURL + "/upload", formdata, {  headers: {'Content-Type': 'multipart/form-data'}}),
          createQuestion: (questionWeb,token) => axios.post(baseURL + "/question/create", questionWeb, { headers:{'Authorization': 'Bearer '+ token}}),
-         getAllQuestions: () => axios.get(baseURL + "/question/all"),
+         getAllQuestions: (token) => axios.get(baseURL + "/question/all",{ headers:{'Authorization': 'Bearer '+ token}}),
          getAllCategories: () => axios.get(baseURL + "/category/all"),
          getAllSubCategoriesByCategoryId:(categoryId) => axios.get(baseURL + "/subCategory/all/" + categoryId), 
     }

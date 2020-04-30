@@ -12,9 +12,6 @@ import se.rewy.site.models.Role;
 import se.rewy.site.models.User;
 import se.rewy.site.models.UserCredentials;
 import se.rewy.site.repository.UserRepository;
-
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -39,7 +36,7 @@ public class UserService implements UserDetailsService {
         Optional<User> optionalUserByEmail = findByEmail(user.getEmail());
 
         if(optionalUser.isEmpty() && optionalUserByEmail.isEmpty()){
-
+            user.setDateOfBirth(user.getDateOfBirth().plusDays(1));
             user.setRole(Role.MEMBER);
             user.setCreatedAt(LocalDateTime.now());
             System.out.println(LocalDateTime.now());

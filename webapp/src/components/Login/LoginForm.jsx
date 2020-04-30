@@ -40,12 +40,12 @@ function LoginForm() {
           <h2>Login</h2>
           </div>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Username</Form.Label>
+            <Form.Label className="loginForm-label">Username</Form.Label>
             <Form.Control className="loginForm-control" type="text" onChange={onChangeUsername}/>
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="loginForm-label">Password</Form.Label>
             <Form.Control className="loginForm-control" type="password" onChange={onChangePassword} />
           </Form.Group>
           <Form.Group>
@@ -54,7 +54,7 @@ function LoginForm() {
             </Button>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Don't have an account? <a href="/register" >Sign up</a></Form.Label>
+            <Form.Label className="loginForm-label">Don't have an account? <a href="/register" >Sign up</a></Form.Label>
           </Form.Group>
         </Form>
       </Row>

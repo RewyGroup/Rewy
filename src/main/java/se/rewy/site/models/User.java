@@ -1,7 +1,5 @@
 package se.rewy.site.models;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.joda.time.DateTime;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,6 +15,7 @@ public class User {
 
     private String username;
     private String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String firstName;
     private String lastName;
@@ -28,6 +27,7 @@ public class User {
     private String occupation;
 
     public User(){}
+
 
     public Long getId() {
         return id;
@@ -53,7 +53,6 @@ public class User {
         this.email = email;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }

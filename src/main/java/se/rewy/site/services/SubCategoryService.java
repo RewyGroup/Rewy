@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import se.rewy.site.models.SubCategory;
 import se.rewy.site.repository.SubCategoryRepository;
 
+import java.util.Set;
+
 @Service
 public class SubCategoryService {
     private final SubCategoryRepository subCategoryRepository;
@@ -21,4 +23,6 @@ public class SubCategoryService {
     public SubCategory findById (long id){
         return subCategoryRepository.findById(id).get();
     }
+
+    public Set<SubCategory> findAllByCategoryId(long id){return  subCategoryRepository.findAllByCategoryId(id);}
 }

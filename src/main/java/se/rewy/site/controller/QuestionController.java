@@ -9,6 +9,8 @@ import se.rewy.site.models.Question;
 import se.rewy.site.models.web.QuestionWeb;
 import se.rewy.site.services.QuestionService;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
@@ -37,5 +39,11 @@ public class QuestionController {
     ResponseEntity<?> deleteQuestionById(@PathVariable long id){
         questionService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Set<Question>> findAllQuestions(){
+        Set<Question> allQuestions = questionService.findAll();
+        return ResponseEntity.ok(allQuestions);
     }
 }

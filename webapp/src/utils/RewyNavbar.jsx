@@ -19,6 +19,9 @@ function RewyNavbar() {
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
     <FontAwesomeIcon icon={faSearch} />
+    <Nav>
+    <Nav.Link href="/question/all">Browse Questions</Nav.Link>
+    </Nav>
     {!isLoggedIn ? 
       <Nav >
       <Nav.Link href="/register">Register</Nav.Link>

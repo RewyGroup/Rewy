@@ -127,7 +127,6 @@ const QuestionForm = (props) => {
     </div>
     );
   }
-  console.log(questionWeb);
   
   
   return (

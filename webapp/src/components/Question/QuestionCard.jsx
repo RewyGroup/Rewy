@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Container, Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 import "./QuestionCard.css";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,10 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const QuestionCard = props => {
 
     const {question} = props;
-    console.log(question);
     
      const SubCategoryList = question.subCategoryList.length > 0 &&
-     question.subCategoryList.map((subCategory) =>( <span className="cardSubCategory">{subCategory.name}</span>));
+     question.subCategoryList.map((subCategory,index) =>( <span key={index} className="cardSubCategory">{subCategory.name}</span>));
   
 
   return (
@@ -30,14 +29,14 @@ const QuestionCard = props => {
           </Card.Body>
           <Card.Body className="cardInfo">
           <Card.Text className="cardInfoText">
-        <p className="cardInfoTextStat">{question.answers.length}</p>
-                  <p className="cardInfoTextStat">answer</p>
+        <span className="cardInfoTextStat">{question.answers.length}</span>
+                  <span className="cardInfoTextStat">answer</span>
               </Card.Text>
           </Card.Body>
           <Card.Body className="cardInfo">
               <Card.Text className="cardInfoText">
-        <p className="cardInfoTextStat">{question.votes.length}</p>
-                  <p className="cardInfoTextStat">votes</p>
+        <span className="cardInfoTextStat">{question.votes.length}</span>
+                  <span className="cardInfoTextStat">votes</span>
               </Card.Text>
           </Card.Body>
           </div>

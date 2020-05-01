@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {stillLoggedIn} from '../actions/login';
 import {getAllQuestions} from '../actions/question';
 import {Cookies} from 'react-cookie';
-import {Card,Button,Container,Row} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import QuestionCard from '../components/Question/QuestionCard';
 
 const QuestionListPage = (props) => {
@@ -25,7 +25,7 @@ const QuestionListPage = (props) => {
     }
 
     const questions = questionlist && questionlist.length > 0 &&  
-    questionlist.map((question)=>(<QuestionCard question={question}/>)) 
+    questionlist.map((question,index)=>(<QuestionCard key={index} question={question}/>)) 
     
 
         return (

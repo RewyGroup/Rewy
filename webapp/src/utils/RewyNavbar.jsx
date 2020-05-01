@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar,Nav,NavDropdown,Dr} from 'react-bootstrap';
+import {Navbar,Nav,NavDropdown} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,10 +15,13 @@ function RewyNavbar() {
     return (
 
 <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-  <Navbar.Brand href="/">Rewy</Navbar.Brand>
+  <Navbar.Brand href="/"><img width="20%" src="/RewyIcon.png"/></Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-    <FontAwesomeIcon icon={faSearch} />
+    <FontAwesomeIcon className="dropdown-icon" icon={faSearch} />
+    <Nav>
+    <Nav.Link href="/question/all">Browse Questions</Nav.Link>
+    </Nav>
     {!isLoggedIn ? 
       <Nav >
       <Nav.Link href="/register">Register</Nav.Link>

@@ -1,27 +1,26 @@
-.loginRow{
+.registerRow{
     justify-content: center;
-
 }
 
-.loginForm {
+.registerForm {
     font-family: Arial, Helvetica, sans-serif;
     padding:60px;
     background-color: #fff;
     box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.1);
     width: 500px;
 } 
-.loginForm-control{
+.registerForm-control{
     box-shadow: none;
     border: 0;
     border-radius: 0;
     border-bottom: 0.1rem solid	rgba(65,74,76,0.5);
 }
-.loginForm-control:focus{
+.registerForm-control:focus{
     box-shadow: none;
     border-bottom: 0.1rem solid rgba(14,17,17,0.75);
 
 }
-.loginForm-label{
+.registerForm-label{
 margin-bottom: 0;
 color:rgba(14,17,17,0.5);
 }
@@ -32,6 +31,9 @@ color:rgba(14,17,17,0.5);
 #header > h2{
     font-family: Arial, Helvetica, sans-serif;
     color: rgba(14,17,17,0.75);
+}
+.register-form-group{
+    text-align: left;
 }
 
 

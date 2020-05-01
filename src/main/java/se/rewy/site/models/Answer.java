@@ -1,8 +1,12 @@
 package se.rewy.site.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Answer {
@@ -17,14 +21,15 @@ public class Answer {
     @OneToOne
     private User user;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private Question question;
 
     @ManyToMany
-    private List<Vote> votes;
+    private Set<Vote> votes;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     public Answer(){}
 
@@ -68,15 +73,15 @@ public class Answer {
         this.question = question;
     }
 
-    public List<Vote> getVotes() {
+    public Set<Vote> getVotes() {
         return votes;
     }
 
-    public void setVotes(List<Vote> votes) {
+    public void setVotes(Set<Vote> votes) {
         this.votes = votes;
     }
 
-    public Date getCreatedAt() { return createdAt; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

@@ -41,18 +41,9 @@ public class HomeController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("question")
-    ResponseEntity<Question> createQuestion(@RequestBody Question question){
-        questionService.create(question);
-        return ResponseEntity.ok().build();
-    }
 
 
-     @GetMapping("question/{id}")
-    ResponseEntity<Question> findQuestionById(@PathVariable long id){
-        Question question = questionService.findById(id);
-        return  ResponseEntity.ok(question);
-     }
+
 
      @GetMapping("sub_category/{id}")
     ResponseEntity<SubCategory> findSubCategoryById(@PathVariable long id){

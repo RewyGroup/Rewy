@@ -1,5 +1,6 @@
 package se.rewy.site.exception;
 
+
 public class UserServiceException extends RuntimeException {
 
 

@@ -1,10 +1,13 @@
 package se.rewy.site.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Question {
@@ -22,16 +25,20 @@ public class Question {
     @OneToOne
     private Category category;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<SubCategory> subCategoryList;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "question_sub_category_list",
+            joinColumns = @JoinColumn(name ="question_id"),
+            inverseJoinColumns = @JoinColumn(name = "sub_category_id"))
+    private Set<SubCategory> subCategoryList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    private List<Answer> answers;
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question", cascade = CascadeType.ALL)
+    private Set<Answer> answers;
 
     @ManyToMany
-    private List<Vote> votes;
+    private Set<Vote> votes;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     public Question() {
     }
@@ -76,31 +83,31 @@ public class Question {
         this.category = category;
     }
 
-    public List<SubCategory> getSubCategoryList() {
+    public Set<SubCategory> getSubCategoryList() {
         return subCategoryList;
     }
 
-    public void setSubCategoryList(List<SubCategory> subCategoryList) {
+    public void setSubCategoryList(Set<SubCategory> subCategoryList) {
         this.subCategoryList = subCategoryList;
     }
 
-    public List<Answer> getAnswers() {
+    public Set<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Answer> answers) {
+    public void setAnswers(Set<Answer> answers) {
         this.answers = answers;
     }
 
-    public List<Vote> getVotes() {
+    public Set<Vote> getVotes() {
         return votes;
     }
 
-    public void setVotes(List<Vote> votes) {
+    public void setVotes(Set<Vote> votes) {
         this.votes = votes;
     }
 
-    public Date getCreatedAt() { return createdAt; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

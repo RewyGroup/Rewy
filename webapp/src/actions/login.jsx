@@ -9,7 +9,7 @@ export const checkLoggedIn = (user) => {
         
         return api.signIn(user).then(response => {
             cookies.set("session_token",response.data.jwt);
-            dispatch(signIn(response.data.jwt))
+            dispatch(signIn())
         })
         .catch(error =>{
             dispatch({
@@ -19,17 +19,15 @@ export const checkLoggedIn = (user) => {
     }
 }
 
-const signIn = (token) =>{
+const signIn = () =>{
 
         return{
-        type: 'SIGN_IN',
-        payload: token
-        
+        type: 'SIGN_IN'  
     }
 };
 
 export const signOut =() =>{
-    cookies.remove("session_token");
+    cookies.remove("session_token",{path:'/'});
     return{
         type: 'SIGN_OUT'
     }
@@ -40,6 +38,7 @@ export const stillLoggedIn =(session_token) =>{
 
     const validToken = jwt_decode(session_token);
     const expired = validToken.exp;
+    const user = validToken.user;
     
     if ( expired < Date.now() / 1000) {
 
@@ -51,7 +50,8 @@ export const stillLoggedIn =(session_token) =>{
     else {
         return{
             type: 'STILL_LOGGED_IN',
-            payload: session_token
+            payload: session_token,
+            user : user
         }
     }
 };

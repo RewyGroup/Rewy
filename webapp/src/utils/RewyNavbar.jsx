@@ -15,10 +15,10 @@ function RewyNavbar() {
     return (
 
 <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-  <Navbar.Brand href="/">Rewy</Navbar.Brand>
+  <Navbar.Brand href="/"><img width="20%" src="/RewyIcon.png"/></Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-    <FontAwesomeIcon icon={faSearch} />
+    <FontAwesomeIcon className="dropdown-icon" icon={faSearch} />
     <Nav>
     <Nav.Link href="/question/all">Browse Questions</Nav.Link>
     </Nav>

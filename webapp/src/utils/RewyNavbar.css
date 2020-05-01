@@ -6,19 +6,15 @@
     color: rgba(255,255,255,0.75);
 }
 
-svg{
+.dropdown-icon{
     color: rgba(255,255,255,0.5);
 }
-
-svg:hover{
+.dropdown-icon:hover{
     color: rgba(255,255,255,0.75);
 }
 
 .dropdown > a:hover .dropdown-icon{
     color: rgba(255,255,255,0.75);
-}
-
-.dropdown-menu{
 }
 
 .navbar {

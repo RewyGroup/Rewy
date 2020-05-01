@@ -153,7 +153,7 @@ const QuestionForm = (props) => {
 
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>choose tags</Form.Label>
-            <Select placeholder="select a tag..."  isMulti closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false} components={{Option}} options={subCategoryOption} onChange={onChangeSubCategory} />
+            <Select className="questionMultiSelect" placeholder="select a tag..."  isMulti closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false} components={{Option}} options={subCategoryOption} onChange={onChangeSubCategory} />
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlTextarea1">

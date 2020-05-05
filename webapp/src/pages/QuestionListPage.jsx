@@ -24,7 +24,7 @@ const QuestionListPage = (props) => {
     }
 
     const questions = questionlist && questionlist.length > 0 &&  
-    questionlist.map((question,index)=>(<QuestionCard key={index} question={question}/>)) 
+    questionlist.map((question,index)=>(<QuestionCard key={index} question={question} history={props.history}/>)) 
     
 
         return (

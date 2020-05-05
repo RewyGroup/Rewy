@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
 import CategoryList from '../components/Category/CategoryList';
-import {Button} from 'react-bootstrap';
+import {Button, Container} from 'react-bootstrap';
+import Description from '../components/Description/Description';
 
 function HomePage(props) {
 
@@ -20,15 +21,19 @@ function HomePage(props) {
 
 
     const createQuestion = () => {
+        if(isLoggedIn){
         props.history.push("/question/create");
+        }else{
+            props.history.push("/login");
+        }
       }  
 
         return (
             <div >
+                <Container>
+                    <Description createQuestion={createQuestion}/>
                 <CategoryList/>      
-                <div style={{textAlign:"center"}}>
-                {isLoggedIn ?<Button onClick={createQuestion}>Create Questions</Button>:""}
-                </div>
+                </Container>
             </div>
         );
 }

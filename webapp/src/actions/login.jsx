@@ -50,7 +50,6 @@ export const stillLoggedIn =(session_token) =>{
     else {
         return{
             type: 'STILL_LOGGED_IN',
-            payload: session_token,
             user : user
         }
     }

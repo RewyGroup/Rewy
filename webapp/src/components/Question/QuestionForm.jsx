@@ -11,6 +11,7 @@ import {
 } from "../../actions/category";
 
 const QuestionForm = (props) => {
+
   const [userId, setUserId] = useState(null);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -18,39 +19,44 @@ const QuestionForm = (props) => {
   const [subCategory, setSubCategory] = useState([]);
   const [categoryIndex,setCategoryIndex] = useState(-1);
   const dispatch = useDispatch();
-
+  const [checker,setChecker] = useState(true);
   const cookies = new Cookies();
   const session_token = cookies.get("session_token");
   const isLoggedIn = useSelector((state) => state.loginReducer.isLoggedIn);
   const categoryList = useSelector(
     (state) => state.categoryReducer.categoryList
   );
+  const questionIsCreated = useSelector(state => state.questionReducer.questionIsCreated);
   const id = useSelector((state) => state.loginReducer.user.id);
 
-  if (session_token) {
-    dispatch(stillLoggedIn(session_token));
-  }
+    if(checker){
+      if (session_token) {
+        dispatch(stillLoggedIn(session_token));
+      }
+      setChecker(false)
+    }
+
 
   useEffect(() => {
     if (!isLoggedIn) {
       props.history.push("/login");
     }
+  
     setUserId(id);
     dispatch(getAllCategories(session_token));
   }, []);
-  
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      props.history.push("/login");
-    }
-  }, [isLoggedIn]);
-
 
   useEffect(() => {
     const index = getIndex(category,categoryList,"typeName");
     setCategoryIndex(index);
   }, [category]);
+
+
+  useEffect(() => {
+    if(questionIsCreated){
+      props.history.push({pathname: '/question/all', showSuccessToast: true});
+    }
+  },[questionIsCreated]);
 
 
   const questionWeb = {

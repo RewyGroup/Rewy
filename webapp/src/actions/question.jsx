@@ -23,6 +23,14 @@ export const getAllQuestions = (token) =>{
     }
 }
 
+export const getQuestionById = (id,token) =>{
+    return(dispatch) => {
+        return api.getQuestionById(id,token).then(response => {
+            dispatch(selectedQuestion(response.data))
+        })
+    }
+}
+
 
 const questionSuccess = (message) =>{
 
@@ -42,3 +50,13 @@ const allQuestions = (questionList) =>{
     
 }
 };
+
+const selectedQuestion = (question) =>{
+
+    return{
+    type: 'GET_QUESTION_SUCCESS',
+    payload: question
+    
+}
+};
+

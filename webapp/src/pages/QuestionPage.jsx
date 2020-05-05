@@ -1,34 +1,35 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {Container} from 'react-bootstrap'
 import {stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
-import QuestionForm from '../components/Question/QuestionForm';
+import { getQuestionById } from '../actions/question';
+import Question from '../components/Question/Question'
 
 const QuestionPage = (props) => {
-
     const dispatch = useDispatch();
-
+    var parts = props.location.pathname.split('/');
+    const id = parts[parts.length - 1];   
+    const {checker,setChecker} = useState(true);
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
+    const question = useSelector(state => state.questionReducer.question); 
+    if(checker){
+        if (session_token) {
+          dispatch(stillLoggedIn(session_token));
+        }
+        setChecker(false)
+      }
 
-    QuestionList = useSelector(state => state.QuestionList);
 
-    if(session_token){
-        dispatch(stillLoggedIn(session_token));
-    }
+    useEffect(() => {
+            dispatch(getQuestionById(id,session_token));    
+        }, [])
 
+        const selectedQuestion = question &&  question.category && <Question question={question}></Question>
+        
 
-        return (
-    <div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-    </div>
-    </div>
-        );
+        return (<Container>{selectedQuestion} </Container> );
 }
 
 export default QuestionPage;

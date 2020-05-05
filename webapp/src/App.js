@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import QuestionForm from './components/Question/QuestionForm';
 import QuestionListPage from './pages/QuestionListPage';
-
+import QuestionPage from './pages/QuestionPage';
 
 function App() {
 
@@ -21,6 +21,7 @@ function App() {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/question/create" component={QuestionForm} />
       <Route exact path="/question/all" component={QuestionListPage} />
+      <Route path={"/question/:questionId"} component={QuestionPage}></Route>
     </Switch>
     </Router>
     </div>

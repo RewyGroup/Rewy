@@ -5,6 +5,7 @@ import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux';
 import {signOut} from '../actions/login';
 import './RewyNavbar.css'
+import LoginButton from '../components/Login/LoginButton'
 
 
 function RewyNavbar() {
@@ -24,8 +25,7 @@ function RewyNavbar() {
     </Nav>
     {!isLoggedIn ? 
       <Nav >
-      <Nav.Link href="/register">Register</Nav.Link>
-      <Nav.Link href="/login">Login</Nav.Link>
+      <Nav.Link href="/login"><LoginButton/></Nav.Link>
     </Nav>:
     <NavDropdown alignRight title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
 

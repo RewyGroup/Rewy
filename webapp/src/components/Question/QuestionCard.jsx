@@ -1,21 +1,26 @@
 import React from "react";
 import { Card, Row } from "react-bootstrap";
 import "./QuestionCard.css";
+import {useDispatch } from 'react-redux';
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const QuestionCard = props => {
-
-    const {question} = props;
-    
-     const SubCategoryList = question.subCategoryList.length > 0 &&
-     question.subCategoryList.map((subCategory,index) =>( <span key={index} className="cardSubCategory">{subCategory.name}</span>));
-  
+    const {question,history} = props;
+    const SubCategoryList = question.subCategoryList.length > 0 &&
+    question.subCategoryList.map((subCategory,index) =>( <span key={index} className="cardSubCategory">{subCategory.name}</span>));
+    const id = props.location;
+     const handleOnClick = (e) => {
+      e.preventDefault();
+      console.log(question.id)
+      const path = '/question/' + question.id;
+      history.push({pathname:path, question:question});
+    }
 
   return (
     
-    <Row className="cardRow">
-      <Card className="cardCard">
+    <Row onClick={handleOnClick} className="cardRow">
+      <Card  className="cardCard">
       <div className="cardContent">
           <Card.Body className="cardBody">
             <Card.Title>{question.title}</Card.Title>

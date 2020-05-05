@@ -3,7 +3,15 @@ import registerReducer from './registerReducer';
 import questionReducer from './questionReducer';
 import categoryReducer from './categoryReducer';
 import { combineReducers } from 'redux';
+import {persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
 
+
+const persistConfig = {
+    key:'root',
+    storage,
+    whitelist:['questionReducer']
+}
 
 const rootReducer = combineReducers({
     loginReducer: loginReducer,
@@ -12,4 +20,4 @@ const rootReducer = combineReducers({
     categoryReducer: categoryReducer,
 });
 
-export default rootReducer;
+export default persistReducer(persistConfig,rootReducer);

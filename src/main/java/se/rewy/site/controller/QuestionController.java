@@ -40,6 +40,11 @@ public class QuestionController {
         questionService.delete(id);
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/category/{categoryName}")
+    public ResponseEntity<Set<Question>> getAllQuestionsByCategoryName(@PathVariable String categoryName){
+        Set<Question> allQuestionsByCategoryName = questionService.findAllQuestionsByCategoryName(categoryName);
+        return ResponseEntity.ok(allQuestionsByCategoryName);
+    }
 
     @GetMapping("/all")
     public ResponseEntity<Set<Question>> findAllQuestions(){

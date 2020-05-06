@@ -31,6 +31,17 @@ export const getQuestionById = (id,token) =>{
     }
 }
 
+export const getAllQuestionsByCategoryName = (categoryName,token) =>{
+    return(dispatch) => {
+        return api.getAllQuestionsByCategoryName(categoryName,token).then(response => {
+            dispatch(allQuestionsByCategory(response.data))
+        })
+    }
+}
+
+
+
+
 
 const questionSuccess = (message) =>{
 
@@ -46,6 +57,15 @@ const allQuestions = (questionList) =>{
 
     return{
     type: 'GET_ALL_QUESTION_SUCCESS',
+    payload: questionList
+    
+}
+};
+
+const allQuestionsByCategory = (questionList) =>{
+
+    return{
+    type: 'GET_ALL_QUESTION_BY_CATEGORY_SUCCESS',
     payload: questionList
     
 }

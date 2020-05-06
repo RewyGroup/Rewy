@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {stillLoggedIn} from '../actions/login';
-import {getAllQuestions} from '../actions/question';
+import {getAllQuestions,getAllQuestionsByCategoryName} from '../actions/question';
 import {Cookies} from 'react-cookie';
 import {Container} from 'react-bootstrap';
 import QuestionCard from '../components/Question/QuestionCard';
@@ -20,7 +20,7 @@ const QuestionListPage = (props) => {
         if(location === "all"){
             dispatch(getAllQuestions(session_token));
         }else{
-            //dispatch(getAllQuestionsByCategoryName(categoryName));
+            dispatch(getAllQuestionsByCategoryName(location,session_token));
         }
     }, [])
 

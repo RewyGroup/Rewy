@@ -73,6 +73,16 @@ public class QuestionService{
         questionRepository.save(question);
     }
 
+    public Set<Question> findAllQuestionsByCategoryName(String categoryName){
+       Optional<Category> category = categoryRepository.findByTypeName(categoryName);
+       Set<Question> questions = new HashSet<>();
+       if (category.isPresent()) {
+          questions = questionRepository.findQuestionsByCategory_Id(category.get().getId());
+           return questions;
+       }
+       return questions;
+    }
+
     public void delete(long id){
         questionRepository.deleteById(id);
     }

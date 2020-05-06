@@ -12,7 +12,7 @@ import "./CategoryList.css";
 const CategoryList =(props) => {
 
 const categoryListItems = [
-  {category:"Math",icon:<FontAwesomeIcon
+  {category:"Mathematics",icon:<FontAwesomeIcon
   className="CategoryListCardIcon"
   icon={faCalculator}
 />},

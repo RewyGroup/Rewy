@@ -18,9 +18,9 @@ const QuestionListPage = (props) => {
     
     useEffect(() => {
         if(location === "all"){
-            dispatch(getAllQuestions(session_token));
+            dispatch(getAllQuestions());
         }else{
-            dispatch(getAllQuestionsByCategoryName(location,session_token));
+            dispatch(getAllQuestionsByCategoryName(location));
         }
     }, [])
 

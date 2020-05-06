@@ -43,7 +43,7 @@ const QuestionForm = (props) => {
     }
   
     setUserId(id);
-    dispatch(getAllCategories(session_token));
+    dispatch(getAllCategories());
   }, []);
 
   useEffect(() => {

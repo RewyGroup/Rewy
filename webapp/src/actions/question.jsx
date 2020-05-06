@@ -15,25 +15,25 @@ export const createQuestion = (questionWeb,token) => {
         })
     }
 }
-export const getAllQuestions = (token) =>{
+export const getAllQuestions = () =>{
     return(dispatch) => {
-        return api.getAllQuestions(token).then(response => {
+        return api.getAllQuestions().then(response => {
             dispatch(allQuestions(response.data))
         })
     }
 }
 
-export const getQuestionById = (id,token) =>{
+export const getQuestionById = (id) =>{
     return(dispatch) => {
-        return api.getQuestionById(id,token).then(response => {
+        return api.getQuestionById(id).then(response => {
             dispatch(selectedQuestion(response.data))
         })
     }
 }
 
-export const getAllQuestionsByCategoryName = (categoryName,token) =>{
+export const getAllQuestionsByCategoryName = (categoryName) =>{
     return(dispatch) => {
-        return api.getAllQuestionsByCategoryName(categoryName,token).then(response => {
+        return api.getAllQuestionsByCategoryName(categoryName).then(response => {
             dispatch(allQuestionsByCategory(response.data))
         })
     }

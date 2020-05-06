@@ -12,7 +12,6 @@ const QuestionCard = props => {
     const id = props.location;
      const handleOnClick = (e) => {
       e.preventDefault();
-      console.log(question.id)
       const path = '/question/' + question.id;
       history.push({pathname:path, question:question});
     }

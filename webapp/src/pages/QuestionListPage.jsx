@@ -13,10 +13,15 @@ const QuestionListPage = (props) => {
     const session_token = cookies.get("session_token");
     const questionlist = useSelector(state => state.questionReducer.questionList);
     const {showSuccessToast} = props.location;
+    var parts = props.location.pathname.split('/');
+    const location = parts[parts.length - 1];   
     
     useEffect(() => {
-    dispatch(getAllQuestions(session_token));
-         
+        if(location === "all"){
+            dispatch(getAllQuestions(session_token));
+        }else{
+            //dispatch(getAllQuestionsByCategoryName(categoryName));
+        }
     }, [])
 
     if(session_token){

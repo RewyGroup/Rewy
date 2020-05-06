@@ -10,10 +10,12 @@ const QuestionPage = (props) => {
     const dispatch = useDispatch();
     var parts = props.location.pathname.split('/');
     const id = parts[parts.length - 1];   
-    const {checker,setChecker} = useState(true);
+    const [checker,setChecker] = useState(true);
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
     const question = useSelector(state => state.questionReducer.question); 
+    const isLoggedIn = useSelector((state) => state.loginReducer.isLoggedIn);
+
     if(checker){
         if (session_token) {
           dispatch(stillLoggedIn(session_token));

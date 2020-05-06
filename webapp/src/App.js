@@ -21,7 +21,8 @@ function App() {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/question/create" component={QuestionForm} />
       <Route exact path="/question/all" component={QuestionListPage} />
-      <Route path={"/question/:questionId"} component={QuestionPage}></Route>
+      <Route exact path={"/question/category/:category"} component={QuestionListPage}/>
+      <Route exact path={"/question/:questionId"} component={QuestionPage}/>
     </Switch>
     </Router>
     </div>

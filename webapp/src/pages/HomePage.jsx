@@ -32,7 +32,7 @@ function HomePage(props) {
             <div >
                 <Container>
                     <Description createQuestion={createQuestion}/>
-                <CategoryList/>      
+                <CategoryList history={props.history}/>      
                 </Container>
             </div>
         );

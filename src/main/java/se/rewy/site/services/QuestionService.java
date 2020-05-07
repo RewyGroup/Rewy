@@ -13,8 +13,6 @@ import se.rewy.site.repository.CategoryRepository;
 import se.rewy.site.repository.QuestionRepository;
 import se.rewy.site.repository.SubCategoryRepository;
 import se.rewy.site.repository.UserRepository;
-
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -71,6 +69,16 @@ public class QuestionService{
         question.setSubCategoryList(subCategoryList);
         question.setCreatedAt(LocalDateTime.now());
         questionRepository.save(question);
+    }
+
+    public Set<Question> findAllQuestionsByCategoryName(String categoryName){
+       Optional<Category> category = categoryRepository.findByTypeName(categoryName);
+       Set<Question> questions = new HashSet<>();
+       if (category.isPresent()) {
+          questions = questionRepository.findQuestionsByCategory_Id(category.get().getId());
+           return questions;
+       }
+       return questions;
     }
 
     public void delete(long id){

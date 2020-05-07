@@ -16,9 +16,11 @@ const questionReducer = ( state = initialState ,action) => {
         case 'CREATE_QUESTION_ERROR':
             return {...state, message: "", error: action.error.message, questionIsCreated:false}
         case 'GET_ALL_QUESTION_SUCCESS':
-            return {...state, message: "", error: "", questionList: action.payload, questionIsCreated: false}
+            return {...state, message: "", error: "", questionList: action.payload, question:null, questionIsCreated: false}
+        case 'GET_ALL_QUESTION_BY_CATEGORY_SUCCESS':
+            return {...state, message: "", error: "", questionList: action.payload, question:null, questionIsCreated: false}  
         case 'GET_QUESTION_SUCCESS':
-            return {...state, message: "", error: "", questionList: [], question:action.payload, questionIsCreated: false}
+            return {...state, message: "", error: "", questionList: [], question:action.payload, questionIsCreated: false}        
         default:
             return {...state, message: "", error:"", questionIsCreated: false}
     }

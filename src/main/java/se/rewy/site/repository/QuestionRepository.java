@@ -8,4 +8,6 @@ import java.util.Set;
 public interface QuestionRepository extends CrudRepository<Question,Long> {
 
     Set<Question>findAll();
+
+    Set<Question> findQuestionsByCategory_Id(Long categoryId);
 }

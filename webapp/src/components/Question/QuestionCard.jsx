@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Row } from "react-bootstrap";
 import "./QuestionCard.css";
 import {useDispatch } from 'react-redux';
@@ -7,9 +7,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const QuestionCard = props => {
     const {question,history} = props;
+    const {answers} = question;
+
+    const [hasCorrectAnswer,setCorrectAnswer]= useState(false);
+   
+    const correctAnswer = answers.length > 0 && 
+    answers.filter(answer=>answer.correct===true);
+
+    useEffect(() => {
+      if(correctAnswer.length > 0 ){
+        setCorrectAnswer(true);
+      }
+  }, [])
+
     const SubCategoryList = question.subCategoryList.length > 0 &&
     question.subCategoryList.map((subCategory,index) =>( <span key={index} className="cardSubCategory">{subCategory.name}</span>));
-    const id = props.location;
+
      const handleOnClick = (e) => {
       e.preventDefault();
       const path = '/question/' + question.id;
@@ -43,10 +56,10 @@ const QuestionCard = props => {
                   <span className="cardInfoTextStat">votes</span>
               </Card.Text>
           </Card.Body>
-          </div>
+          </div>{ hasCorrectAnswer ? 
           <span className="cardNotify">
             <FontAwesomeIcon className="cardIcon" icon={faCheck} />
-          </span>
+          </span>:""}
       </Card>
     </Row>
   );

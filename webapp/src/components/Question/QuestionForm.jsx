@@ -2,70 +2,30 @@ import React, { useState, useEffect } from "react";
 import Select,{components} from 'react-select'
 import { Form, Button, Row, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { stillLoggedIn } from "../../actions/login";
 import { createQuestion } from "../../actions/question";
-import { Cookies } from "react-cookie";
+
 import "./QuestionForm.css";
-import {
-  getAllCategories,
-} from "../../actions/category";
+
 
 const QuestionForm = (props) => {
 
-  const [userId, setUserId] = useState(null);
+  const {userId} = props
+
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState([]);
   const [categoryIndex,setCategoryIndex] = useState(-1);
+
+ 
   const dispatch = useDispatch();
-  const [checker,setChecker] = useState(true);
-  const cookies = new Cookies();
-  const session_token = cookies.get("session_token");
-  const isLoggedIn = useSelector((state) => state.loginReducer.isLoggedIn);
-  const categoryList = useSelector(
-    (state) => state.categoryReducer.categoryList
-  );
-  const questionIsCreated = useSelector(state => state.questionReducer.questionIsCreated);
-  const id = useSelector((state) => state.loginReducer.user.id);
 
-    if(checker){
-      if (session_token) {
-        dispatch(stillLoggedIn(session_token));
-      }
-      setChecker(false)
-    }
-
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      props.history.push("/login");
-    }
-  
-    setUserId(id);
-    dispatch(getAllCategories());
-  }, []);
+  const categoryList = useSelector((state) => state.categoryReducer.categoryList);
 
   useEffect(() => {
     const index = getIndex(category,categoryList,"typeName");
     setCategoryIndex(index);
   }, [category]);
-
-
-  useEffect(() => {
-    if(questionIsCreated){
-      props.history.push({pathname: '/question/all', showSuccessToast: true});
-    }
-  },[questionIsCreated]);
-
-
-  const questionWeb = {
-    userId: userId,
-    title: title,
-    text: text,
-    category: category,
-    subCategory: subCategory,
-  };
 
   function getIndex(category, categoryList, typeName) {
     for(var i = 0; i < categoryList.length; i++) {
@@ -76,6 +36,16 @@ const QuestionForm = (props) => {
     }
     return -1; 
 }
+
+  const questionWeb = {
+    userId: userId,
+    title: title,
+    text: text,
+    category: category,
+    subCategory: subCategory,
+  };
+
+
 
   const categoryOption =
     categoryList.length > 0 &&
@@ -118,7 +88,7 @@ const QuestionForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createQuestion(questionWeb, session_token));
+    dispatch(createQuestion(questionWeb, props.token));
   };
 
   const Option = props => {
@@ -133,6 +103,8 @@ const QuestionForm = (props) => {
     </div>
     );
   }
+  
+  console.log(questionWeb);
   
   
   return (

@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import "./Question.css";
-import { Cookies } from "react-cookie";
-import { faCheck, faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
-import Answer from "../Answer/Answer";
 import AnswerFilterList from "../Answer/AnswerFilterList";
 
 
 const Question = (props) => {
-  const { question } = props
-  const { user, category, subCategoryList, answers } = question
-  const cookies = new Cookies();
-  const isLoggedIn = useSelector((state) => state.loginReducer.isLoggedIn);  
+  const { question} = props
+  const { user, category, subCategoryList, answers } = question;
+  const [isOwner,setIsOwner]= useState(false);  
   const createdAt =question.createdAt.replace("T"," ");
 
   const SubCategoryList = subCategoryList.length > 0 &&
     subCategoryList.map((subCategory, index) => (<span key={index} className="subCategoryBubble">{subCategory.name}</span>));
 
+   const loggedInUser = useSelector((state => state.loginReducer.user));
+  const questionOwner = question.user.id;
+
+  useEffect(() => {
+      if(questionOwner == loggedInUser.id){
+        setIsOwner(true);
+      }
+  
+    }, []);
 
 
   return (
@@ -42,7 +48,7 @@ const Question = (props) => {
           <Col xs={1} className="questionVoteCol">
             <div>
               <FontAwesomeIcon className="questionVoteIcon" icon={faChevronUp}></FontAwesomeIcon>
-              <div>11230</div>
+              <div>{question.votes.length}</div>
               <FontAwesomeIcon className="questionVoteIcon" icon={faChevronDown}></FontAwesomeIcon>
             </div>
           </Col>
@@ -62,7 +68,7 @@ const Question = (props) => {
             </div>
       </Row>
 
-      <AnswerFilterList answers={answers}></AnswerFilterList>
+      <AnswerFilterList answers={answers} isOwner={isOwner}></AnswerFilterList>
 
 
 

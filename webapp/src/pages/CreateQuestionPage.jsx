@@ -4,13 +4,15 @@ import {stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
 import {getAllCategories} from '../actions/category'
 import QuestionForm from '../components/Question/QuestionForm';
+import QuestionFormInfo from '../components/Question/QuestionFormInfo';
+import {Row, Container, Col} from 'react-bootstrap';
 
 
 const CreateQuestionPage = (props) => {
 
     const [checker,setChecker] = useState(true);
     const [userId,setUserId] = useState(null);
-    
+
     const isLoggedIn = useSelector(state => state.loginReducer.isLoggedIn);
     const dispatch = useDispatch();
 
@@ -50,9 +52,18 @@ const CreateQuestionPage = (props) => {
 
 
         return (
-            <div >
+            
+        <Container className="questionContainer">
+        <Row className="questionRow">
+        <Col xs={6} md={3}>
+            <QuestionFormInfo/>
+            </Col>
+            <Col xs={12} md={9}>
             <QuestionForm userId={userId} token={session_token}/>
-            </div>
+            </Col>
+
+            </Row>
+            </Container>
         );
 }
 

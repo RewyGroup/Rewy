@@ -108,12 +108,11 @@ const QuestionForm = (props) => {
   
   
   return (
-    <Container className="questionContainer">
-      <Row className="questionRow">
+
         <Form className="questionForm" onSubmit={handleSubmit}>
           
           <Form.Group controlId="exampleForm.ControlInput1">
-            <Form.Label>Create question</Form.Label>
+            <Form.Label>choose a Title</Form.Label>
             <Form.Control
               type="text"
               placeholder="title"
@@ -121,32 +120,29 @@ const QuestionForm = (props) => {
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>choose category</Form.Label>
-            <Form.Control as="select" onChange={onChangeCategory}>
+            <Form.Label>choose Category</Form.Label>
+            <Form.Control as="select"  onChange={onChangeCategory}>
               <option></option>
               {categoryOption}
             </Form.Control>
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>choose tags</Form.Label>
+            <Form.Label>choose Tags</Form.Label>
             <Select className="questionMultiSelect" placeholder="select a tag..."  isMulti closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false} components={{Option}} options={subCategoryOption} onChange={onChangeSubCategory} />
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>write your question</Form.Label>
-            <Form.Control as="textarea" rows="10" onChange={onChangeText} />
+            <Form.Label>Describe your Question</Form.Label>
+            <Form.Control placeholder="describe..." as="textarea" rows="10" onChange={onChangeText} />
           </Form.Group>
 
           <Form.Group>
             <Button variant="dark" type="submit">
               Create
             </Button>
-          </Form.Group>
-
+         </Form.Group>
         </Form>
-      </Row>
-    </Container>
   );
 };
 

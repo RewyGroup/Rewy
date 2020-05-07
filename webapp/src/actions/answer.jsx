@@ -8,11 +8,26 @@ export const setCorrectAnswer = (answerId,token) =>{
         })
     }
 }
+export const createAnswer = (answerWeb,token) =>{
+    return(dispatch) => {
+        return api.createAnswer(answerWeb,token).then(response => {
+            dispatch(createdAnswer())
+        })
+    }
+}
 
 const setCorrect = () =>{
 
     return{
     type: 'ANSWER_CORRECT'
+    
+}
+};
+
+const createdAnswer = () =>{
+
+    return{
+    type: 'ANSWER_CREATED_SUCCESS'
     
 }
 };

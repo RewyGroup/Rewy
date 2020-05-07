@@ -1,4 +1,4 @@
-.questionRow{
+.questionFormRow{
     justify-content: center;
 }
 
@@ -7,7 +7,6 @@
     padding:60px;
     background-color: #fff;
     box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.1);
-    width: 500px;
 }
 svg{
     color: #343a40;

@@ -28,7 +28,7 @@ const QuestionPage = (props) => {
             dispatch(getQuestionById(id,session_token));    
         }, [])
 
-        const selectedQuestion = question &&  question.category && <Question question={question}></Question>
+        const selectedQuestion = question &&  question.category && <Question token={session_token} question={question}></Question>
         
 
         return (<Container>{selectedQuestion} </Container> );

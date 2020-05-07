@@ -13,7 +13,7 @@ export const api = () => {
          getAllQuestions: () => axios.get(baseURL + "/question/all"),
          getAllCategories: () => axios.get(baseURL + "/category/all"),
          getAllSubCategoriesByCategoryId:(categoryId) => axios.get(baseURL + "/subCategory/all/" + categoryId),
-         
+         setCorrectAnswer:(answerId,token) => axios.post(baseURL+ "/answer/correct/" + answerId , {}, { headers:{'Authorization': 'Bearer '+ token}}),
     }
 
 };

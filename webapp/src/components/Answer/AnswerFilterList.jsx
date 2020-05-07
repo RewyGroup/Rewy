@@ -8,16 +8,16 @@ import './AnswerFilterList.css'
 
 
 const AnswerFilterList = (props) => {
- const {answers} = props;
+ const {answers, isOwner} = props;
  const [isCorrect, setIsCorrect]= useState(false);
 
 const correctAnswer = answers.filter(answer => answer.correct ===true).map(
-    (answer,index) => (<Answer key={index} answer={answer}></Answer>));
+    (answer,index) => (<Answer key={index} answer={answer} hasCorrect={true} ></Answer>));
 
 
 const answersList = answers.length > 0 && 
     answers.filter(answer=>answer.correct===false).map(
-    (answer,index) => (<Answer key={index} answer={answer}></Answer>))
+    (answer,index) => (<Answer key={index} answer={answer} hasCorrect={isCorrect} isOwner={isOwner}></Answer>))
 
 
     useEffect(() => {

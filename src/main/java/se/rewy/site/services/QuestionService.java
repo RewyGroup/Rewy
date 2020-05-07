@@ -13,8 +13,6 @@ import se.rewy.site.repository.CategoryRepository;
 import se.rewy.site.repository.QuestionRepository;
 import se.rewy.site.repository.SubCategoryRepository;
 import se.rewy.site.repository.UserRepository;
-
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDateTime;
 import java.util.*;
 

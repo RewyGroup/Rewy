@@ -9,6 +9,7 @@ import QuestionForm from './components/Question/QuestionForm';
 import QuestionListPage from './pages/QuestionListPage';
 import QuestionPage from './pages/QuestionPage';
 import CreateQuestionPage from './pages/CreateQuestionPage';
+import AnswerForm from './components/Answer/AnswerForm';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/register" component={RegisterPage}/>
       <Route exact path="/" component={HomePage} />
+      <Route exact path="/answerform" component={AnswerForm} />
       <Route exact path="/question/create" component={CreateQuestionPage} />
       <Route exact path="/question/all" component={QuestionListPage} />
       <Route exact path={"/question/category/:category"} component={QuestionListPage}/>

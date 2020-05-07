@@ -38,7 +38,7 @@ const categoryListItems = [
 
   }
 
-const categoryRenderOutput = categoryListItems.map((item)=>(<Col>
+const categoryRenderOutput = categoryListItems.map((item,index)=>(<Col key={index} >
   <Card onClick={handleOnClick} className="categoryListCard" id={item.category}>
     <Card.Body>
     {item.icon}

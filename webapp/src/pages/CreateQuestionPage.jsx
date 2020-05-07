@@ -54,10 +54,10 @@ const CreateQuestionPage = (props) => {
         return (
             
         <Container className="questionContainer">
-        <Row className="questionRow">
+        <Row className="questionFormRow">
         <Col xs={6} md={3}>
             <QuestionFormInfo/>
-            </Col>
+        </Col>
             <Col xs={12} md={9}>
             <QuestionForm userId={userId} token={session_token}/>
             </Col>

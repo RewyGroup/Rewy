@@ -104,9 +104,6 @@ const QuestionForm = (props) => {
     );
   }
   
-  console.log(questionWeb);
-  
-  
   return (
 
         <Form className="questionForm" onSubmit={handleSubmit}>

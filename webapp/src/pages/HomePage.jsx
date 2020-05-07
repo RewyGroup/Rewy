@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import {stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
 import CategoryList from '../components/Category/CategoryList';
-import {Button, Container} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import Description from '../components/Description/Description';
+import AnswerForm from '../components/Answer/AnswerForm';
 
 function HomePage(props) {
 

@@ -1,20 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Row, Container } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {Cookies} from 'react-cookie';
+import {createAnswer} from '../../actions/answer';
 
+import "./AnswerForm.css";
 
 
 const AnswerForm = (props) => {
 
-  const [userId, setUserId] = useState(4);
-  const [questionId,setQuestionId] = useState(49)
+  const {question,token} = props;
+  
+  const [userId, setUserId] = useState(null);
+  const [questionId,setQuestionId] = useState(null);
   const [text, setText] = useState("");
 
-  const cookies = new Cookies();
-  const session_token = cookies.get("session_token");
-  
-console.log(session_token);
+  const id = useSelector(state => state.loginReducer.user.id);
+
+  useEffect(() =>{
+    setUserId(id)
+    setQuestionId(question.id);
+
+},[]);
+
+  const dispatch = useDispatch();
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createAnswer(answerWeb,token));
+  };
+
+  const onChangeText = (event) => {
+    setText(event.target.value);
+  };
 
   const answerWeb = {
     userId: userId,
@@ -22,27 +40,22 @@ console.log(session_token);
     text: text,
   };
 
-  const dispatch = useDispatch;
 
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(createQuestion(answerWeb, session_token));
-  };
   
   
   return (
 
-        <Form className="questionForm" onSubmit={handleSubmit}>
-          <Form.Group controlId="exampleForm.ControlTextarea1">
+        <Form className="answerForm" onSubmit={handleSubmit}>
+          <Form.Group controlId="exampleForm.ControlTextarea2">
             <Form.Label>Answer the Question</Form.Label>
-            <Form.Control placeholder="describe..." as="textarea" rows="10" />
+            <Form.Control placeholder="describe..." as="textarea" rows="10" onChange={onChangeText} />
           </Form.Group>
           <Form.Group>
             <Button variant="dark" type="submit">
               Submit Answer
             </Button>
          </Form.Group>
+
         </Form>
   );
 };

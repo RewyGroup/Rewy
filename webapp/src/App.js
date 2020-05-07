@@ -21,7 +21,6 @@ function App() {
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/register" component={RegisterPage}/>
       <Route exact path="/" component={HomePage} />
-      <Route exact path="/answerform" component={AnswerForm} />
       <Route exact path="/question/create" component={CreateQuestionPage} />
       <Route exact path="/question/all" component={QuestionListPage} />
       <Route exact path={"/question/category/:category"} component={QuestionListPage}/>

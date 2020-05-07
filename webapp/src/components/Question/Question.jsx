@@ -5,10 +5,11 @@ import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import AnswerFilterList from "../Answer/AnswerFilterList";
+import AnswerForm from "../Answer/AnswerForm";
 
 
 const Question = (props) => {
-  const { question} = props
+  const { question, token} = props
   const { user, category, subCategoryList, answers } = question;
   const [isOwner,setIsOwner]= useState(false);  
   const createdAt =question.createdAt.replace("T"," ");
@@ -69,6 +70,7 @@ const Question = (props) => {
       </Row>
 
       <AnswerFilterList answers={answers} isOwner={isOwner}></AnswerFilterList>
+      <AnswerForm token={token} question ={question}/>
 
 
 

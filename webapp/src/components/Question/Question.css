@@ -5,15 +5,7 @@
 .questionRow{
     display: block;
 }
-.answersRow{
-    display: block;
-}
-.answersText{
-    width: 20%;
-    display: inline-block;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
+
 
 .questionHeader{
     border-bottom: solid 1px rgba(17, 17, 17, 0.1);
@@ -23,6 +15,31 @@
 .questionTitle{
     margin: 0;
 }
+
+.questionSubCategory{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    padding:0;
+}
+
+.questionHeaderInfo{
+    display: inline-block;
+    text-align: right;
+}
+
+
+
+.userInfo{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.userInfoText{
+    display: block;
+    font-size: 12px;
+}
+
 
 .questionVoteCol{
     display: flex;
@@ -43,28 +60,9 @@
     display: block;
     margin: 0 auto;
 }
-.questionSubCategory{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: inline-block;
-    padding:0;
-}
 
 
-.questionHeaderInfo{
-    display: inline-block;
-    text-align: right;
-}
 
-.userInfo{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: inline-block;
-}
-.userInfoText{
-    display: block;
-    font-size: 12px;
-}
 
 .subCategoryBubble{
     background-color: rgba(199,209,216,.45);
@@ -85,14 +83,3 @@
     margin-right: 10px;
     margin-bottom: 10px;
 }
-
-.answerIconWrapper{
-    width: 80%;
-    display: inline-block;
-    text-align: right;
-}
-
-.answerIcon{
-    font-size: 32px;
-    color: green;
-} 

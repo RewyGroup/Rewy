@@ -1,0 +1,29 @@
+.answersRow{
+    display: block;
+}
+
+
+.answersCheckerRow{
+    margin-top: 20px;
+}
+.answersText{
+    height: 100%;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+}
+.answersChecker{
+    text-align: right;
+}
+
+
+.answerIconWrapper{
+    width: 80%;
+    display: inline-block;
+    text-align: right;
+}
+
+.answerIcon{
+    font-size: 32px;
+    color: green;
+} 

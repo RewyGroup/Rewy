@@ -6,20 +6,20 @@ import { faCheck, faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
 import Answer from "../Answer/Answer";
+import AnswerFilterList from "../Answer/AnswerFilterList";
 
 
 const Question = (props) => {
   const { question } = props
   const { user, category, subCategoryList, answers } = question
-  console.log(answers);
   const cookies = new Cookies();
-  const isLoggedIn = useSelector((state) => state.loginReducer.isLoggedIn);
-  console.log(question)
-  const [isCorrect, setIsCorrect]= useState(false);
-
+  const isLoggedIn = useSelector((state) => state.loginReducer.isLoggedIn);  
+  const createdAt =question.createdAt.replace("T"," ");
 
   const SubCategoryList = subCategoryList.length > 0 &&
     subCategoryList.map((subCategory, index) => (<span key={index} className="subCategoryBubble">{subCategory.name}</span>));
+
+
 
   return (
     <div className="question">
@@ -33,7 +33,7 @@ const Question = (props) => {
           <Col xs={6} className="questionHeaderInfo">
             <div className="userInfo">
               <div className="userInfoText"> Posted by: {user.username}</div>
-              <div className="userInfoText"> Posted at: {question.createdAt}</div>
+              <div className="userInfoText"> Posted at: {createdAt}</div>
             </div>
           </Col>
         </div>
@@ -46,27 +46,25 @@ const Question = (props) => {
               <FontAwesomeIcon className="questionVoteIcon" icon={faChevronDown}></FontAwesomeIcon>
             </div>
           </Col>
-          <Col xs={11} className="questionDescription" >
+          <Col xs={11}>
             <div className="questionText">
-              <text>{question.text}</text>
+              <div>{question.text}</div>
             </div>
           </Col>
         </Row>
 
       </Row>
+
       <Row className="questionFooter">
         <div className="questionFooterInfo"> 
               <div className="userInfoText"> Posted by: {user.username}</div>
-              <div className="userInfoText"> Last edited: {question.createdAt}</div>
+              <div className="userInfoText"> Last edited: {createdAt}</div>
             </div>
       </Row>
 
+      <AnswerFilterList answers={answers}></AnswerFilterList>
 
-      <Row className="answersRow">
-        <div className="answersText">{answers.length} Answers</div>
-        {isCorrect ? <div className="answerIconWrapper"><FontAwesomeIcon className="answerIcon" icon={faCheck}></FontAwesomeIcon></div>:""}
-        <Answer></Answer>
-      </Row>
+
 
 
 

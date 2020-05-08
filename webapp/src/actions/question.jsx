@@ -15,13 +15,32 @@ export const createQuestion = (questionWeb,token) => {
         })
     }
 }
-export const getAllQuestions = (token) =>{
+export const getAllQuestions = () =>{
     return(dispatch) => {
-        return api.getAllQuestions(token).then(response => {
+        return api.getAllQuestions().then(response => {
             dispatch(allQuestions(response.data))
         })
     }
 }
+
+export const getQuestionById = (id) =>{
+    return(dispatch) => {
+        return api.getQuestionById(id).then(response => {
+            dispatch(selectedQuestion(response.data))
+        })
+    }
+}
+
+export const getAllQuestionsByCategoryName = (categoryName) =>{
+    return(dispatch) => {
+        return api.getAllQuestionsByCategoryName(categoryName).then(response => {
+            dispatch(allQuestionsByCategory(response.data))
+        })
+    }
+}
+
+
+
 
 
 const questionSuccess = (message) =>{
@@ -42,3 +61,22 @@ const allQuestions = (questionList) =>{
     
 }
 };
+
+const allQuestionsByCategory = (questionList) =>{
+
+    return{
+    type: 'GET_ALL_QUESTION_BY_CATEGORY_SUCCESS',
+    payload: questionList
+    
+}
+};
+
+const selectedQuestion = (question) =>{
+
+    return{
+    type: 'GET_QUESTION_SUCCESS',
+    payload: question
+    
+}
+};
+

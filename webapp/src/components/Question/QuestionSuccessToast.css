@@ -1,0 +1,15 @@
+.toastContent{
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    padding: 10px;
+}
+
+.toastContentHeader{
+padding: 0;
+border-bottom: 0;
+}
+
+.toastContentIcon{
+    color: green;
+}

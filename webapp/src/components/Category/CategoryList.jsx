@@ -1,56 +1,66 @@
 import React from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalculator,faBasketballBall,faGlobe,faCode} from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalculator,
+  faBasketballBall,
+  faGlobe,
+  faCode,
+} from "@fortawesome/free-solid-svg-icons";
 import "./CategoryList.css";
 
-function CategoryList() {
+const CategoryList =(props) => {
+
+const categoryListItems = [
+  {category:"Mathematics",icon:<FontAwesomeIcon
+  className="CategoryListCardIcon"
+  icon={faCalculator}
+/>},
+  {category:"Sports",icon:<FontAwesomeIcon
+  className="CategoryListCardIcon"
+  icon={faBasketballBall}
+/>},
+  {category:"Language",icon:<FontAwesomeIcon
+  className="CategoryListCardIcon"
+  icon={faGlobe}
+/>},
+  {category:"Code",icon:<FontAwesomeIcon
+  className="CategoryListCardIcon"
+  icon={faCode}
+/>},
+]
+
+  
+  const handleOnClick = (event) => {
+    
+    const category = event.currentTarget.id.toLowerCase();
+    props.history.push("/question/category/" + category);
+
+  }
+
+const categoryRenderOutput = categoryListItems.map((item,index)=>(<Col key={index} >
+  <Card onClick={handleOnClick} className="categoryListCard" id={item.category}>
+    <Card.Body>
+    {item.icon}
+      <Card.Text className="categoryListCardText">{item.category}</Card.Text>
+    </Card.Body>
+  </Card>
+</Col>)) 
+
+
+
+
   return (
-    <Container>
-      <Row>
-        <Col className="md-5">
-          <h3>Browse Categories</h3>
-        </Col>
+    <div className="categoryList">
+      <Row className="categoryListHeaderRow">
+        <div className="categoryListHeaderWrapper">
+          <h2 className="categoryListHeader">Categories</h2>
+        </div>
       </Row>
-      <Row>
-        <Col className="md-3 category-block">
-          <div>
-            <FontAwesomeIcon
-              className="category-block-svg"
-              icon={faCalculator}
-            />
-          </div>
-          <h5>Math</h5>
-        </Col>
-        <Col className="md-3 category-block">
-          <div>
-            <FontAwesomeIcon
-              className="category-block-svg"
-              icon={faGlobe}
-            />
-          </div>
-          <h5>Language</h5>
-        </Col>
-        <Col className="md-3 category-block">
-          <div>
-            <FontAwesomeIcon
-              className="category-block-svg"
-              icon={faCode}
-            />
-          </div>
-          <h5>Code</h5>
-        </Col>
-        <Col className="md-3 category-block">
-          <div>
-            <FontAwesomeIcon
-              className="category-block-svg"
-              icon={faBasketballBall}
-            />
-          </div>
-          <h5>Sports</h5>
-        </Col>
+      <Row className="categoryListRow">
+        {categoryRenderOutput}
       </Row>
-    </Container>
+    </div>
   );
 }
 export default CategoryList;

@@ -14,6 +14,7 @@ import se.rewy.site.repository.UserRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AnswerService {
@@ -49,5 +50,17 @@ public class AnswerService {
         answer.setCreatedAt(LocalDateTime.now());
         answerRepository.save(answer);
 
+    }
+    public void makeAnswerCorrectByAnswerId(long id) {
+        Optional<Answer> optionalAnswer = answerRepository.findById(id);
+        if(optionalAnswer.isPresent()){
+            Answer answer = optionalAnswer.get();
+            if (!answer.isCorrect()){
+                answer.setCorrect(true);
+                answerRepository.save(answer);
+            }else{
+                throw new UserServiceException("Answer is already correct!");
+            }
+        }
     }
 }

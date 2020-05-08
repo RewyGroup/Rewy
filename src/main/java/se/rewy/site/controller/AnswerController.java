@@ -8,6 +8,8 @@ import se.rewy.site.models.Answer;
 import se.rewy.site.models.web.AnswerWeb;
 import se.rewy.site.services.AnswerService;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/answer")
 public class AnswerController {
@@ -26,6 +28,12 @@ public class AnswerController {
             answerService.create(answerWeb);
             return ResponseEntity.ok().build();
         }
+
+    @PostMapping("/correct/{id}")
+    public ResponseEntity<?> makeAnswerCorrect(@PathVariable long id )throws UserServiceException {
+        answerService.makeAnswerCorrectByAnswerId(id);
+        return ResponseEntity.ok().build();
+    }
 
         @GetMapping("/{id}")
     public ResponseEntity<Answer> findAnswerById(@PathVariable long id){

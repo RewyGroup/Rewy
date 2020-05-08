@@ -1,17 +1,17 @@
 import api from '../api/api';
 
 
-export const getAllCategories = (token) =>{
+export const getAllCategories = () =>{
     return(dispatch) => {
-        return api.getAllCategories(token).then(response => {
+        return api.getAllCategories().then(response => {
             dispatch(allCategories(response.data))
         })
     }
 }
 
-export const getAllSubCategoriesByCategoryId = (categoryId,token) =>{
+export const getAllSubCategoriesByCategoryId = (categoryId) =>{
     return(dispatch) => {
-        return api.getAllSubCategoriesByCategoryId(categoryId,token).then(response => {
+        return api.getAllSubCategoriesByCategoryId(categoryId).then(response => {
             dispatch(allSubCategoriesById(response.data))
         })
     }

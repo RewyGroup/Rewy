@@ -2,6 +2,7 @@ import loginReducer from './loginReducer';
 import registerReducer from './registerReducer';
 import questionReducer from './questionReducer';
 import categoryReducer from './categoryReducer';
+import userReducer from './userReducer';
 import answerReducer from './answerReducer';
 import { combineReducers } from 'redux';
 import {persistReducer} from 'redux-persist';
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     registerReducer: registerReducer,
     questionReducer: questionReducer,
     categoryReducer: categoryReducer,
-    answerReducer:answerReducer
+    answerReducer:answerReducer,
+    userReducer:userReducer
     
 });
 

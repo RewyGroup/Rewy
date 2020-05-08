@@ -19,9 +19,10 @@ function ProfilePage(props) {
     
     
     useEffect(()=>{
+        if(userId!==undefined){
         dispatch(getUserById(userId));
-    
-        },[]);
+        }
+        },[userId]);
     
     if(session_token){
         dispatch(stillLoggedIn(session_token));

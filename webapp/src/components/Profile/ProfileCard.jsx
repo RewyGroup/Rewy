@@ -16,10 +16,6 @@ const ProfileCard = (props) => {
   const [imageSrc,setImageSrc] = useState("/logo.jpg");
   const [changeProfileImage,setChangeProfileImage] = useState(false);
 
-  
-  console.log(user);
-  
-
   function onClose() {
   }
   

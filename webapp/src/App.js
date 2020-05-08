@@ -10,6 +10,7 @@ import QuestionListPage from './pages/QuestionListPage';
 import QuestionPage from './pages/QuestionPage';
 import CreateQuestionPage from './pages/CreateQuestionPage';
 import AnswerForm from './components/Answer/AnswerForm';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
 
@@ -23,8 +24,10 @@ function App() {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/question/create" component={CreateQuestionPage} />
       <Route exact path="/question/all" component={QuestionListPage} />
+      <Route exact path="/profile" component={ProfilePage}/>
       <Route exact path={"/question/category/:category"} component={QuestionListPage}/>
       <Route exact path={"/question/:questionId"} component={QuestionPage}/>
+
     </Switch>
     </Router>
     </div>

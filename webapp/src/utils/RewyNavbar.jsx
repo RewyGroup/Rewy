@@ -29,7 +29,7 @@ function RewyNavbar() {
     </Nav>:
     <NavDropdown alignRight title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
 
-        <NavDropdown.Item href="/">profile</NavDropdown.Item>
+        <NavDropdown.Item href="/profile">profile</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item onClick={() => dispatch(signOut())}>Sign out</NavDropdown.Item>
       </NavDropdown>}

@@ -1,0 +1,25 @@
+.profileCardRow{
+    justify-content: center;
+}
+
+.profileCardEditButtonWrapper{
+   text-align: right;
+}
+
+.profileCardEditButton{
+    font-size: 2rem;
+    color: #fff;
+}
+
+.profileCardEditButton:hover{
+    color: grey;
+}
+
+.profileCardButtonWrapper{
+    text-align: right;
+}
+
+.ProfileCardButton{
+    width: auto;
+
+}

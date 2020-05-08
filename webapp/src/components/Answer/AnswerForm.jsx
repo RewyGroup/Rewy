@@ -27,8 +27,9 @@ const AnswerForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    window.location.reload();
     dispatch(createAnswer(answerWeb,token));
+    window.location.reload();
+
   };
 
   const onChangeText = (event) => {

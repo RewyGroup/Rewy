@@ -18,10 +18,9 @@ const Answer = (props) => {
 
     const createdAt =answer.createdAt.replace("T"," ");
 
-    const handleOnClickCorrect = event =>{
-        console.log(session_token);
-        
+    const handleOnClickCorrect = event =>{        
         dispatch(setCorrectAnswer(answer.id,session_token));
+        window.location.reload();
 
     }
 

@@ -20,6 +20,27 @@ const Question = (props) => {
    const loggedInUser = useSelector((state => state.loginReducer.user));
   const questionOwner = question.user.id;
 
+  const calculateVotes = (votes) =>{
+    var voteCount = 0;
+    for(var i = 0; i < votes.length; i++){
+      switch(votes[i].type){
+        case 'upvote':
+          voteCount += 1;
+          break;
+
+        case 'downvote':
+          voteCount -= 1;
+          break;
+
+        default:
+          voteCount +=0
+      }
+    }
+    return voteCount;
+  }
+
+  const votes = calculateVotes(question.votes);
+
   useEffect(() => {
       if(questionOwner == loggedInUser.id){
         setIsOwner(true);
@@ -49,7 +70,7 @@ const Question = (props) => {
           <Col xs={1} className="questionVoteCol">
             <div>
               <FontAwesomeIcon className="questionVoteIcon" icon={faChevronUp}></FontAwesomeIcon>
-              <div>{question.votes.length}</div>
+              <div>{votes}</div>
               <FontAwesomeIcon className="questionVoteIcon" icon={faChevronDown}></FontAwesomeIcon>
             </div>
           </Col>

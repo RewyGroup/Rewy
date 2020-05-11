@@ -79,18 +79,10 @@ public class AnswerService {
         }
         switch (voteType){
             case  "UPVOTE":
-                if( vote.getType() != null && vote.getType().equals("upvote")){
-                    vote.setType(VoteType.NEUTRAL);
-                    break;
-                }
                 vote.setType(VoteType.UPVOTE);
                 break;
 
             case "DOWNVOTE":
-                if( vote.getType() != null &&  vote.getType().equals("downvote")){
-                    vote.setType(VoteType.NEUTRAL);
-                    break;
-                }
                 vote.setType(VoteType.DOWNVOTE);
                 break;
 

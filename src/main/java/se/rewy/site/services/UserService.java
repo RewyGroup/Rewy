@@ -39,7 +39,6 @@ public class UserService implements UserDetailsService {
             user.setDateOfBirth(user.getDateOfBirth().plusDays(1));
             user.setRole(Role.MEMBER);
             user.setCreatedAt(LocalDateTime.now());
-            System.out.println(LocalDateTime.now());
             String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
             user.setPassword(encodedPassword);
             userRepository.save(user);

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import se.rewy.site.exception.UserServiceException;
 import se.rewy.site.models.Answer;
 import se.rewy.site.models.web.AnswerWeb;
+import se.rewy.site.models.web.QuestionWeb;
 import se.rewy.site.services.AnswerService;
 
 import java.util.Set;
@@ -18,16 +19,16 @@ public class AnswerController {
      private final AnswerService answerService;
 
 
-        @Autowired
-        public AnswerController(AnswerService answerService) {
-            this.answerService= answerService;
-        }
+    @Autowired
+    public AnswerController(AnswerService answerService) {
+        this.answerService= answerService;
+    }
 
-        @PostMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<?> createAnswer(@RequestBody AnswerWeb answerWeb)throws UserServiceException {
             answerService.create(answerWeb);
             return ResponseEntity.ok().build();
-        }
+    }
 
     @PostMapping("/correct/{id}")
     public ResponseEntity<?> makeAnswerCorrect(@PathVariable long id )throws UserServiceException {
@@ -35,8 +36,15 @@ public class AnswerController {
         return ResponseEntity.ok().build();
     }
 
-        @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Answer> findAnswerById(@PathVariable long id){
             return ResponseEntity.ok(answerService.findById(id));
-        }
     }
+
+    @PostMapping("/vote")
+    public ResponseEntity<?>CreateOrUpdateAnswerVote(@RequestBody AnswerWeb answerWeb){
+        answerService.CreateOrUpdateAnswerVote(answerWeb);
+        return ResponseEntity.ok().build();
+    }
+}
+

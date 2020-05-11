@@ -20,3 +20,7 @@
 .navbar {
     margin-bottom: 100px;
 }
+.dropdown-menu{
+    left: auto ;
+    right: 0 ;
+}

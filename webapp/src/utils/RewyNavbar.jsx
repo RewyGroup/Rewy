@@ -27,7 +27,7 @@ function RewyNavbar() {
       <Nav >
       <Nav.Link href="/login"><LoginButton/></Nav.Link>
     </Nav>:
-    <NavDropdown alignRight title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
+    <NavDropdown title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
 
         <NavDropdown.Item href="/profile">profile</NavDropdown.Item>
         <NavDropdown.Divider />

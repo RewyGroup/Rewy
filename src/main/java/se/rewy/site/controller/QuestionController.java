@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.rewy.site.exception.UserServiceException;
 import se.rewy.site.models.Question;
+import se.rewy.site.models.VoteType;
 import se.rewy.site.models.web.QuestionWeb;
 import se.rewy.site.services.QuestionService;
 
@@ -50,5 +51,11 @@ public class QuestionController {
     public ResponseEntity<Set<Question>> findAllQuestions(){
         Set<Question> allQuestions = questionService.findAll();
         return ResponseEntity.ok(allQuestions);
+    }
+
+    @PostMapping("/vote")
+    public ResponseEntity<?>CreateOrUpdateQuestionVote(@RequestBody QuestionWeb questionWeb){
+        questionService.CreateOrUpdateQuestionVote(questionWeb);
+        return ResponseEntity.ok().build();
     }
 }

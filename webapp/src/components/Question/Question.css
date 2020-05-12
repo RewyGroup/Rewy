@@ -48,11 +48,20 @@
         justify-content: center;
 }
 
-.questionVoteIcon{
+.questionVoteIconNeutral{
     margin: 0;
     font-size: 32px;
 }
-
+.questionVoteIconDownVote{
+    color:red;
+    margin: 0;
+    font-size: 32px;
+}
+.questionVoteIconUpVote{
+    color:green;
+    margin: 0;
+    font-size: 32px;
+}
 .questionText{
     min-height: 250px;
     padding: 10px;

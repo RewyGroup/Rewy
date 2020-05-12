@@ -3,60 +3,175 @@ import { Row, Col } from "react-bootstrap";
 import "./Question.css";
 import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AnswerFilterList from "../Answer/AnswerFilterList";
 import AnswerForm from "../Answer/AnswerForm";
-
+import calculateVotes from "../../utils/CalculateVotes";
+import {createQuestionVote} from "../../actions/question";
 
 const Question = (props) => {
-  const { question, token} = props
+  const { question, token , history , isLoggedIn } = props;
   const { user, category, subCategoryList, answers } = question;
-  const [isOwner,setIsOwner]= useState(false);  
-  const createdAt =question.createdAt.replace("T"," ");
+  const [isOwner, setIsOwner] = useState(false);
+  const [voteType, setVoteType] = useState("neutral");
+  const [loggedInUserVote,setLoggedInUserVote] = useState({});
+  const [once,setOnce] = useState(true);
+  const [voteCounter,seVoteCounter] = useState(0);
 
-  const SubCategoryList = subCategoryList.length > 0 &&
-    subCategoryList.map((subCategory, index) => (<span key={index} className="subCategoryBubble">{subCategory.name}</span>));
+  const createdAt = question.createdAt.replace("T", " ");
 
-   const loggedInUser = useSelector((state => state.loginReducer.user));
+  const SubCategoryList =
+    subCategoryList.length > 0 &&
+    subCategoryList.map((subCategory, index) => (
+      <span key={index} className="subCategoryBubble">
+        {subCategory.name}
+      </span>
+    ));
+
+  const loggedInUser = useSelector((state) => state.loginReducer.user);
   const questionOwner = question.user.id;
 
-  const calculateVotes = (votes) =>{
-    var voteCount = 0;
-    for(var i = 0; i < votes.length; i++){
-      switch(votes[i].type){
-        case 'upvote':
-          voteCount += 1;
-          break;
+  const dispatch = useDispatch();
 
-        case 'downvote':
-          voteCount -= 1;
-          break;
 
-        default:
-          voteCount +=0
-      }
-    }
-    return voteCount;
-  }
-
-  const votes = calculateVotes(question.votes);
+  const questionWeb = {
+    userId: loggedInUser.id,
+    id: question.id,
+    voteType: voteType,
+  };
 
   useEffect(() => {
-      if(questionOwner == loggedInUser.id){
-        setIsOwner(true);
+ 
+    if (questionOwner === loggedInUser.id) {
+      setIsOwner(true);
+      if(loggedInUserVote.length > 0){
+      setVoteType(loggedInUserVote[0].type);
       }
+    }
+    const votes = calculateVotes(question.votes);
+    seVoteCounter(votes);
   
-    }, []);
+  }, []);
 
+
+if(once){
+    setLoggedInUserVote(question.votes.filter(vote => vote.user.id === loggedInUser.id));
+    setOnce(false);
+  }
+ 
+
+  const upVote = (votes) => {
+    if(isLoggedIn){
+
+      if(voteType === "downvote"){
+        
+        setVoteType("upvote"); 
+        questionWeb.voteType = "UPVOTE"; 
+        seVoteCounter(voteCounter+2);
+      }  
+      else if (voteType === "upvote") {
+        setVoteType("neutral");
+        questionWeb.voteType = "NEUTRAL";
+        seVoteCounter(voteCounter-1);
+      } else {
+        setVoteType("upvote");
+        questionWeb.voteType = "UPVOTE";
+        seVoteCounter(voteCounter+1);
+      }
+    dispatch(createQuestionVote(questionWeb,token));
+    } else {
+      history.push("/login");
+    }
+  };
+  
+  
+
+  const downVote = (votes) => {   
+    if(isLoggedIn){ 
+      if(voteType === "upvote"){
+        setVoteType("downvote"); 
+        questionWeb.voteType = "DOWNVOTE"; 
+        seVoteCounter(voteCounter-2); 
+      }  
+      else if (voteType === "downvote") {
+        setVoteType("neutral");
+        questionWeb.voteType = "NEUTRAL";
+        seVoteCounter(voteCounter+1);
+
+      } else {
+        setVoteType("downvote"); 
+        questionWeb.voteType = "DOWNVOTE"; 
+        seVoteCounter(voteCounter-1);
+      }
+      dispatch(createQuestionVote(questionWeb,token));
+    }else {
+      history.push("/login");
+    }
+
+  };
+
+
+  const checkVoteType = (voteType) => {
+
+    switch (voteType) {
+      case "upvote":
+        return (
+          <div>
+            <FontAwesomeIcon
+              className="questionVoteIconUpVote"
+              onClick={upVote}
+              icon={faChevronUp}
+            ></FontAwesomeIcon>
+            <div>{voteCounter}</div>
+            <FontAwesomeIcon
+              className="questionVoteIconNeutral"
+              onClick={downVote}
+              icon={faChevronDown}
+            ></FontAwesomeIcon>
+          </div>
+        );
+      case "downvote":
+        return (
+          <div>
+            <FontAwesomeIcon
+              className="questionVoteIconNeutral"
+              onClick={upVote}
+              icon={faChevronUp}
+            ></FontAwesomeIcon>
+            <div>{voteCounter}</div>
+            <FontAwesomeIcon
+              className="questionVoteIconDownVote"
+              onClick={downVote}
+              icon={faChevronDown}
+            ></FontAwesomeIcon>
+          </div>
+        );
+      case "neutral":
+        return (
+          <div>
+            <FontAwesomeIcon
+              className="questionVoteIconNeutral"
+              onClick={upVote}
+              icon={faChevronUp}
+            ></FontAwesomeIcon>
+            <div>{voteCounter}</div>
+            <FontAwesomeIcon
+              className="questionVoteIconNeutral"
+              onClick={downVote}
+              icon={faChevronDown}
+            ></FontAwesomeIcon>
+          </div>
+        );
+    }
+  };
 
   return (
     <div className="question">
-
       <Row className="questionRow">
         <div className="questionHeader">
           <h1 className="questionTitle">{question.title} </h1>
           <Col xs={6} className="questionSubCategory">
-            <div >Tags: {SubCategoryList}</div>
+            <div>Tags: {SubCategoryList}</div>
           </Col>
           <Col xs={6} className="questionHeaderInfo">
             <div className="userInfo">
@@ -68,11 +183,7 @@ const Question = (props) => {
 
         <Row>
           <Col xs={1} className="questionVoteCol">
-            <div>
-              <FontAwesomeIcon className="questionVoteIcon" icon={faChevronUp}></FontAwesomeIcon>
-              <div>{votes}</div>
-              <FontAwesomeIcon className="questionVoteIcon" icon={faChevronDown}></FontAwesomeIcon>
-            </div>
+        {checkVoteType(voteType)}
           </Col>
           <Col xs={11}>
             <div className="questionText">
@@ -80,23 +191,17 @@ const Question = (props) => {
             </div>
           </Col>
         </Row>
-
       </Row>
 
       <Row className="questionFooter">
-        <div className="questionFooterInfo"> 
-              <div className="userInfoText"> Posted by: {user.username}</div>
-              <div className="userInfoText"> Last edited: {createdAt}</div>
-            </div>
+        <div className="questionFooterInfo">
+          <div className="userInfoText"> Posted by: {user.username}</div>
+          <div className="userInfoText"> Last edited: {createdAt}</div>
+        </div>
       </Row>
 
       <AnswerFilterList answers={answers} isOwner={isOwner}></AnswerFilterList>
-      <AnswerForm token={token} question ={question}/>
-
-
-
-
-
+      <AnswerForm token={token} question={question} />
     </div>
   );
 };

@@ -1,7 +1,5 @@
 import React from 'react';
-import { Card,Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { Card } from 'react-bootstrap';
 import './QuestionFormInfo.css'
 
 const QuestionFormInfo = () => {

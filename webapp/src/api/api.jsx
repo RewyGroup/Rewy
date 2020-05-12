@@ -16,6 +16,7 @@ export const api = () => {
          getAllCategories: () => axios.get(baseURL + "/category/all"),
          getAllSubCategoriesByCategoryId:(categoryId) => axios.get(baseURL + "/subCategory/all/" + categoryId),
          createAnswer: (answerWeb,token) => axios.post(baseURL + "/answer/create", answerWeb, { headers:{'Authorization': 'Bearer '+ token}}),
+         createAnswerVote: (answerWeb,token) => axios.post(baseURL +"/answer/vote",answerWeb,{ headers:{'Authorization': 'Bearer '+ token}}),
          setCorrectAnswer:(answerId,token) => axios.post(baseURL+ "/answer/correct/" + answerId , {}, { headers:{'Authorization': 'Bearer '+ token}}),
     }
 

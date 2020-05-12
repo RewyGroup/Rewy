@@ -5,11 +5,9 @@ import RewyNavbar from './utils/RewyNavbar';
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
-import QuestionForm from './components/Question/QuestionForm';
 import QuestionListPage from './pages/QuestionListPage';
 import QuestionPage from './pages/QuestionPage';
 import CreateQuestionPage from './pages/CreateQuestionPage';
-import AnswerForm from './components/Answer/AnswerForm';
 import ProfilePage from './pages/ProfilePage';
 
 function App() {

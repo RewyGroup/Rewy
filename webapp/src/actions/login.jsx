@@ -28,9 +28,11 @@ const signIn = () =>{
 
 export const signOut =() =>{
     cookies.remove("session_token",{path:'/'});
+    window.location.reload();
     return{
         type: 'SIGN_OUT'
     }
+    
 };
 
 

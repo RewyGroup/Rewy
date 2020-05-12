@@ -39,6 +39,13 @@ export const getAllQuestionsByCategoryName = (categoryName) =>{
     }
 }
 
+export const createQuestionVote = (questionWeb,token) =>{
+    return(dispatch) => {
+        return api.createQuestionVote(questionWeb,token)
+    }
+}
+
+
 
 
 
@@ -76,6 +83,14 @@ const selectedQuestion = (question) =>{
     return{
     type: 'GET_QUESTION_SUCCESS',
     payload: question
+    
+}
+};
+
+const createdQuestionVote = () =>{
+
+    return{
+    type: 'QUESTION_VOTE_CREATED_SUCCESS',
     
 }
 };

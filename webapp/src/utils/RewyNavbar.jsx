@@ -16,7 +16,7 @@ function RewyNavbar() {
     return (
 
 <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-  <Navbar.Brand href="/"><img width="20%" src="/RewyIcon.png"/></Navbar.Brand>
+  <Navbar.Brand href="/"><img width="20%" src="/RewyIcon.png" alt=""/></Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
     <FontAwesomeIcon className="dropdown-icon" icon={faSearch} />

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import "./Question.css";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import AnswerFilterList from "../Answer/AnswerFilterList";
 import AnswerForm from "../Answer/AnswerForm";
 import calculateVotes from "../../utils/CalculateVotes";
 import {createQuestionVote} from "../../actions/question";
+import {checkUpVote} from "../../utils/CheckUpVote"
+import { checkDownVote } from "../../utils/CheckDownVote";
+import CheckVoteType from "../../utils/CheckVoteType"
 
 const Question = (props) => {
   const { question, token , history , isLoggedIn } = props;
@@ -16,7 +17,7 @@ const Question = (props) => {
   const [voteType, setVoteType] = useState("neutral");
   const [loggedInUserVote,setLoggedInUserVote] = useState({});
   const [once,setOnce] = useState(true);
-  const [voteCounter,seVoteCounter] = useState(0);
+  const [voteCounter,setVoteCounter] = useState(0);
 
   const createdAt = question.createdAt.replace("T", " ");
 
@@ -41,15 +42,16 @@ const Question = (props) => {
   };
 
   useEffect(() => {
- 
-    if (questionOwner === loggedInUser.id) {
-      setIsOwner(true);
-      if(loggedInUserVote.length > 0){
+    if(loggedInUserVote.length > 0){
       setVoteType(loggedInUserVote[0].type);
       }
+
+    if (questionOwner === loggedInUser.id) {
+      setIsOwner(true);
+
     }
     const votes = calculateVotes(question.votes);
-    seVoteCounter(votes);
+    setVoteCounter(votes);
   
   }, []);
 
@@ -59,25 +61,15 @@ if(once){
     setOnce(false);
   }
  
-
-  const upVote = (votes) => {
+  
+  const upVote = () => {
     if(isLoggedIn){
-
-      if(voteType === "downvote"){
-        
-        setVoteType("upvote"); 
-        questionWeb.voteType = "UPVOTE"; 
-        seVoteCounter(voteCounter+2);
-      }  
-      else if (voteType === "upvote") {
-        setVoteType("neutral");
-        questionWeb.voteType = "NEUTRAL";
-        seVoteCounter(voteCounter-1);
-      } else {
-        setVoteType("upvote");
-        questionWeb.voteType = "UPVOTE";
-        seVoteCounter(voteCounter+1);
-      }
+      
+      const checkedVote = checkUpVote(voteType);
+      setVoteType(checkedVote.voteType);
+      questionWeb.voteType = checkedVote.webVoteType;
+      setVoteCounter(voteCounter+checkedVote.counter);
+      
     dispatch(createQuestionVote(questionWeb,token));
     } else {
       history.push("/login");
@@ -86,23 +78,13 @@ if(once){
   
   
 
-  const downVote = (votes) => {   
+  const downVote = () => {   
     if(isLoggedIn){ 
-      if(voteType === "upvote"){
-        setVoteType("downvote"); 
-        questionWeb.voteType = "DOWNVOTE"; 
-        seVoteCounter(voteCounter-2); 
-      }  
-      else if (voteType === "downvote") {
-        setVoteType("neutral");
-        questionWeb.voteType = "NEUTRAL";
-        seVoteCounter(voteCounter+1);
+      const checkedVote = checkDownVote(voteType);
 
-      } else {
-        setVoteType("downvote"); 
-        questionWeb.voteType = "DOWNVOTE"; 
-        seVoteCounter(voteCounter-1);
-      }
+      setVoteType(checkedVote.voteType);
+      questionWeb.voteType = checkedVote.webVoteType;
+      setVoteCounter(voteCounter+checkedVote.counter);      
       dispatch(createQuestionVote(questionWeb,token));
     }else {
       history.push("/login");
@@ -110,60 +92,6 @@ if(once){
 
   };
 
-
-  const checkVoteType = (voteType) => {
-
-    switch (voteType) {
-      case "upvote":
-        return (
-          <div>
-            <FontAwesomeIcon
-              className="questionVoteIconUpVote"
-              onClick={upVote}
-              icon={faChevronUp}
-            ></FontAwesomeIcon>
-            <div>{voteCounter}</div>
-            <FontAwesomeIcon
-              className="questionVoteIconNeutral"
-              onClick={downVote}
-              icon={faChevronDown}
-            ></FontAwesomeIcon>
-          </div>
-        );
-      case "downvote":
-        return (
-          <div>
-            <FontAwesomeIcon
-              className="questionVoteIconNeutral"
-              onClick={upVote}
-              icon={faChevronUp}
-            ></FontAwesomeIcon>
-            <div>{voteCounter}</div>
-            <FontAwesomeIcon
-              className="questionVoteIconDownVote"
-              onClick={downVote}
-              icon={faChevronDown}
-            ></FontAwesomeIcon>
-          </div>
-        );
-      case "neutral":
-        return (
-          <div>
-            <FontAwesomeIcon
-              className="questionVoteIconNeutral"
-              onClick={upVote}
-              icon={faChevronUp}
-            ></FontAwesomeIcon>
-            <div>{voteCounter}</div>
-            <FontAwesomeIcon
-              className="questionVoteIconNeutral"
-              onClick={downVote}
-              icon={faChevronDown}
-            ></FontAwesomeIcon>
-          </div>
-        );
-    }
-  };
 
   return (
     <div className="question">
@@ -183,7 +111,7 @@ if(once){
 
         <Row>
           <Col xs={1} className="questionVoteCol">
-        {checkVoteType(voteType)}
+        <CheckVoteType voteType={voteType} upVote={upVote} downVote={downVote} voteCounter={voteCounter}/>
           </Col>
           <Col xs={11}>
             <div className="questionText">
@@ -200,7 +128,7 @@ if(once){
         </div>
       </Row>
 
-      <AnswerFilterList answers={answers} isOwner={isOwner}></AnswerFilterList>
+      <AnswerFilterList answers={answers} isOwner={isOwner} isLoggedIn={isLoggedIn} history={history}  token={token}></AnswerFilterList>
       <AnswerForm token={token} question={question} />
     </div>
   );

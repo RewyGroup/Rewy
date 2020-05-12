@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row } from "react-bootstrap";
 import "./QuestionCard.css";
-import {useDispatch } from 'react-redux';
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

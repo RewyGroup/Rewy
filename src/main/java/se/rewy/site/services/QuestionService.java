@@ -104,9 +104,11 @@ public class QuestionService {
             case  "UPVOTE":
                 vote.setType(VoteType.UPVOTE);
                 break;
+
             case "DOWNVOTE":
                 vote.setType(VoteType.DOWNVOTE);
                 break;
+
             default:
                 vote.setType(VoteType.NEUTRAL);
         }

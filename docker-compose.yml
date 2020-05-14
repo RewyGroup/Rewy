@@ -4,9 +4,26 @@ services:
     image: rewygroup/frontend:latest
     ports:
       - '80:80'
+      - '443:443'
+    volumes:
+      - /docker-volumes/data/letsencrypt:/data/letsencrypt
+      - ./dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
+      - /docker-volumes/etc/letsencrypt/live/rewy.se/fullchain.pem:/etc/letsencrypt/live/rewy.se/fullchain.pem
+      - /docker-volumes/etc/letsencrypt/live/rewy.se/privkey.pem:/etc/letsencrypt/live/rewy.se/privkey.pem
+    networks:
+      - docker-network
     depends_on:
       - backend
+
   backend:
     image: rewygroup/backend:latest
     ports:
       - '4000:4000'
+    volumes:
+      - /docker-volumes/etc/letsencrypt/live/rewy.se/keystore.p12:/pem/keystore.p12
+    networks:
+      - docker-network
+
+networks:
+  docker-network:
+    driver: bridge

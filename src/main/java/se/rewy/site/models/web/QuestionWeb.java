@@ -1,6 +1,7 @@
 package se.rewy.site.models.web;
 
 import se.rewy.site.models.Question;
+import se.rewy.site.models.VoteType;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class QuestionWeb {
     private String text;
     private String category;
     private List<String> subCategory;
-
+    private String voteType;
 
     public QuestionWeb(){}
 
@@ -62,5 +63,13 @@ public class QuestionWeb {
 
     public void setSubCategory(List<String> subCategory) {
         this.subCategory = subCategory;
+    }
+
+    public String getVoteType() {
+        return voteType;
+    }
+
+    public void setVoteType(String voteType) {
+        this.voteType = voteType;
     }
 }

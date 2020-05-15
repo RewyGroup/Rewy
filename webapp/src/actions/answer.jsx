@@ -16,6 +16,12 @@ export const createAnswer = (answerWeb,token) =>{
     }
 }
 
+export const createAnswerVote = (answerWeb,token) =>{
+    return(dispatch) => {
+        return api.createAnswerVote(answerWeb,token)
+    }
+}
+
 const setCorrect = () =>{
 
     return{

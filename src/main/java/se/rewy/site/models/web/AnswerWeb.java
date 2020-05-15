@@ -6,7 +6,7 @@ public class AnswerWeb {
     private String text;
     private long userId;
     private long questionId;
-
+    private String voteType;
     public AnswerWeb(){}
 
     public long getId() {
@@ -39,5 +39,13 @@ public class AnswerWeb {
 
     public void setQuestionId(long questionId) {
         this.questionId = questionId;
+    }
+
+    public String getVoteType() {
+        return voteType;
+    }
+
+    public void setVoteType(String voteType) {
+        this.voteType = voteType;
     }
 }

@@ -5,7 +5,7 @@ import {Cookies} from 'react-cookie';
 import CategoryList from '../components/Category/CategoryList';
 import {Container} from 'react-bootstrap';
 import Description from '../components/Description/Description';
-import AnswerForm from '../components/Answer/AnswerForm';
+import 'react-multi-carousel/lib/styles.css';
 
 function HomePage(props) {
 
@@ -27,7 +27,7 @@ function HomePage(props) {
         }else{
             props.history.push("/login");
         }
-      }  
+      }
 
         return (
             <div >

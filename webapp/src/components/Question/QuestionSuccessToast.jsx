@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Row,Toast } from "react-bootstrap";
+import {Toast } from "react-bootstrap";
 import "./QuestionSuccessToast.css";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

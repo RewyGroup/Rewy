@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,6 @@ import "./ProfileCard.css";
 const ProfileCard = (props) => {
 
   const {user} = props;
-  const dispatch = useDispatch();
 
   const [preview,setPreview] = useState(null);
   const [imageSrc,setImageSrc] = useState("/logo.jpg");
@@ -31,7 +30,6 @@ const ProfileCard = (props) => {
   }
 
   const profileImgClick =(event) =>{
-    console.log("hello");
     setChangeProfileImage(true);
     
   }

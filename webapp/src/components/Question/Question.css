@@ -48,11 +48,31 @@
         justify-content: center;
 }
 
-.questionVoteIcon{
+.questionVoteIconNeutral{
+    color: rgba(175, 175, 175, 0.5);
+    margin: 0;
+    font-size: 32px;
+}
+.questionVoteIconNeutral:hover{
+    color: rgba(175, 175, 175, 1);
+}
+.questionVoteIconDownVote{
+    color:rgba(32, 120, 244);
     margin: 0;
     font-size: 32px;
 }
 
+.questionVoteIconDownVote:hover{
+    color:rgb(37, 108, 206);
+}
+.questionVoteIconUpVote{
+    color:rgb(32, 120, 244);
+    margin: 0;
+    font-size: 32px;
+}
+.questionVoteIconUpVote:hover{
+    color:rgb(37, 108, 206);
+}
 .questionText{
     min-height: 250px;
     padding: 10px;

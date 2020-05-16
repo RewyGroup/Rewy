@@ -5,6 +5,7 @@ import {Cookies} from 'react-cookie';
 import {Container} from 'react-bootstrap';
 import {getUserById} from '../actions/user';
 import ProfileCard from '../components/Profile/ProfileCard';
+import CategoryForm from '../components/Category/CategoryForm'
 
 function ProfilePage(props) {
 
@@ -32,6 +33,7 @@ function ProfilePage(props) {
             <div>
                 <Container>
                 {user}
+                <CategoryForm/>
                 </Container>
             </div>
         );

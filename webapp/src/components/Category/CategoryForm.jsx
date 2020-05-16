@@ -7,36 +7,13 @@ class CategoryForm extends Component {
     super(props);
 
     this.state = {
-      typename: "",
-      username:"",
       profileImage: null,
       profileImagePreview: null
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
 
   }
-
-  componentDidMount(){
-    this.getUser();
-}
-    handleSubmit = event =>{
-        const url = "http://localhost:4000";
-        const postbody = {typeName: this.state.typename};
-        axios.post(url + "/category",postbody);
-        event.preventDefault();      
-}
-    handleChange = event =>{
-        const value = event.target.value;
-        this.setState({typename : value});
-    }
-
-    getUser(){
-        const url = "http://localhost:4000";
-        axios.get(url + "/user/1").then(response => this.setState({username:response.data.username}));
-    }
 
     handleFileChange = event =>{
     
@@ -52,23 +29,16 @@ class CategoryForm extends Component {
       const url = "http://localhost:4000";
       axios.post(url + "/upload", formdata, {
         headers: {
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb29va3UiLCJleHAiOjE1ODk2Njc5MzYsInVzZXIiOnsiaWQiOjIyLCJ1c2VybmFtZSI6ImRvb29rdSIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJtZW1iZXIifV19LCJpYXQiOjE1ODk2MzE5MzZ9.443mGrMXWYDXS0dM1RFOVcvcKBTaXQtb_btsgttZkyI',
           'Content-Type': 'multipart/form-data'}}).then(response => console.log(response.data)
           )
     }
-
+  
   render() {
-
+    
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>{this.state.username}</Form.Label>
-            <Form.Control onChange={this.handleChange} placeholder="Category"/>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+ 
 
         <Form onSubmit={this.handleFileSubmit}>
           <Form.Group>

@@ -12,18 +12,21 @@ const ProfileCard = (props) => {
 
   const {user} = props;
 
-  const [preview,setPreview] = useState(null);
-  const [text,setText] = useState(defaultImage);
+  const [preview,setPreview] = useState(defaultImage);
   const [imageSrc,setImageSrc] = useState("/logo.jpg");
   const [changeProfileImage,setChangeProfileImage] = useState(false);
   const [show,setShow] = useState(false);
 
-  function onClose() {
-    setChangeProfileImage(false);
+
+  function onClose(saveImage) {
+    if(!saveImage){
+      setPreview(defaultImage)
+    }
   }
   
-  function onCrop(preview) {
-    setText(preview);
+  function onCrop(image) {
+    setPreview(image);
+
   }
 
   function onBeforeFileLoad(elem) {
@@ -39,12 +42,13 @@ const ProfileCard = (props) => {
       return(
       <Avatar width={300} height={300} 
       onCrop={onCrop} onClose={onClose}
+      label={"Choose an image"}
       onBeforeFileLoad={onBeforeFileLoad} src={imageSrc}/>
       )
     };
   }
 
-  const profileImgClick =(event) =>{
+  const profileImgClick =() =>{
     handleShow();
     setChangeProfileImage(true);
     
@@ -52,17 +56,22 @@ const ProfileCard = (props) => {
 
   const handleClose = () => {
     setShow(false);
-    onClose();
+    onClose(false);
   } 
+
+  const handleUpdate = () => {
+    setShow(false);
+    onClose(true);
+  } 
+
   const handleShow = () => setShow(true);
 
 
   useEffect(() =>{
     var fd = new FormData()
-    if(text){
-      console.log(preview);
+    if(preview){
 
-      var url = text;
+      var url = preview;
 
       fetch(url)
       .then(res => res.blob())
@@ -76,7 +85,7 @@ const ProfileCard = (props) => {
       })
      
     }
-},[text]);
+},[preview]);
 
   return (
     <Row className="profileCardRow">
@@ -96,7 +105,7 @@ const ProfileCard = (props) => {
         </Card>
 
         <Card className="profileCardInfo">
-        <img className="profileImage" src={text} onClick={profileImgClick} alt="Preview" />
+        <img className="profileImage" src={preview} onClick={profileImgClick} alt="Preview" />
           <Card.Body>
             <div className="profileInfoHeader">
             <Card.Title>firstname</Card.Title>
@@ -108,7 +117,7 @@ const ProfileCard = (props) => {
             <Card.Text>{user.email}</Card.Text>
           </Card.Body>
         </Card>
-        <ProfileModal show={show} handleClose={handleClose} handleShow={handleShow} showAvatar={showAvatar()}/>
+        <ProfileModal show={show} handleUpdate={handleUpdate} handleClose={handleClose} handleShow={handleShow} showAvatar={showAvatar()}/>
          </div>
       </Col>
     </Row>

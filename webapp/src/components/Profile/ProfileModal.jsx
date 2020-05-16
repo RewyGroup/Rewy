@@ -5,7 +5,7 @@ function ProfileModal(props) {
 
     
 
-    const {show, handleClose, handleShow} = props
+    const {show,handleUpdate, handleClose, handleShow} = props
 
 
         return (
@@ -15,7 +15,7 @@ function ProfileModal(props) {
               </Modal.Header>
               <Modal.Body className="profileModalBody">{props.showAvatar}</Modal.Body>
               <Modal.Footer>
-                <Button variant="success" onClick={handleClose}>
+                <Button variant="success" onClick={handleUpdate}>
                   Save Changes
                 </Button>
               </Modal.Footer>

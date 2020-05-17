@@ -9,6 +9,7 @@ import {createQuestionVote} from "../../actions/question";
 import {checkUpVote} from "../../utils/CheckUpVote"
 import { checkDownVote } from "../../utils/CheckDownVote";
 import CheckVoteType from "../../utils/CheckVoteType"
+import {Editor, EditorState,convertFromRaw} from 'draft-js';
 
 const Question = (props) => {
   const { question, token , history , isLoggedIn } = props;
@@ -18,9 +19,9 @@ const Question = (props) => {
   const [loggedInUserVote,setLoggedInUserVote] = useState({});
   const [once,setOnce] = useState(true);
   const [voteCounter,setVoteCounter] = useState(0);
-
+  const[isWYSIWYG, setIsWYSIWYG] = useState(false);
   const createdAt = question.createdAt.replace("T", " ");
-
+  const [textState,setTextState] = useState(EditorState.createEmpty(),);
   const SubCategoryList =
     subCategoryList.length > 0 &&
     subCategoryList.map((subCategory, index) => (
@@ -33,7 +34,7 @@ const Question = (props) => {
   const questionOwner = question.user.id;
 
   const dispatch = useDispatch();
-
+  
 
   const questionWeb = {
     userId: loggedInUser.id,
@@ -52,7 +53,14 @@ const Question = (props) => {
     }
     const votes = calculateVotes(question.votes);
     setVoteCounter(votes);
-  
+    
+    if(question.text.startsWith("{")){
+      setIsWYSIWYG(true);
+      const raw = JSON.parse(question.text);
+      const myjson = convertFromRaw(raw);
+      setTextState(EditorState.createWithContent(myjson))
+            
+    }
   }, []);
 
 
@@ -114,9 +122,14 @@ if(once){
         <CheckVoteType voteType={voteType} upVote={upVote} downVote={downVote} voteCounter={voteCounter}/>
           </Col>
           <Col xs={11}>
+            {isWYSIWYG ?  <div>
+                    <div className ="questionTextView">
+                <Editor placeholder="" editorState={textState} readOnly={true} /> 
+                </div>
+                </div>:
             <div className="questionText">
               <div>{question.text}</div>
-            </div>
+            </div>}
           </Col>
         </Row>
       </Row>

@@ -45,7 +45,7 @@ const CreateQuestionPage = (props) => {
   
     useEffect(() => {
       if(questionIsCreated){
-        props.history.push({pathname: '/question/all', showSuccessToast: true});
+        props.history.push({pathname: '/question/all', showSuccessToast: true,message:"Question successfully created!"});
       }
     },[questionIsCreated]);
 

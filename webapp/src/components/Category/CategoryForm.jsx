@@ -7,40 +7,18 @@ class CategoryForm extends Component {
     super(props);
 
     this.state = {
-      typename: "",
-      username:"",
       profileImage: null,
       profileImagePreview: null
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
 
   }
 
-  componentDidMount(){
-    this.getUser();
-}
-    handleSubmit = event =>{
-        const url = "http://localhost:4000";
-        const postbody = {typeName: this.state.typename};
-        axios.post(url + "/category",postbody);
-        event.preventDefault();      
-}
-    handleChange = event =>{
-        const value = event.target.value;
-        this.setState({typename : value});
-    }
-
-    getUser(){
-        const url = "http://localhost:4000";
-        axios.get(url + "/user/1").then(response => this.setState({username:response.data.username}));
-    }
-
     handleFileChange = event =>{
     
       this.setState({profileImagePreview: URL.createObjectURL(event.target.files[0]), profileImage : event.target.files[0]});
+
     }
 
 
@@ -52,23 +30,17 @@ class CategoryForm extends Component {
       const url = "http://localhost:4000";
       axios.post(url + "/upload", formdata, {
         headers: {
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGbGFrYW4iLCJleHAiOjE1ODk3NTkyODEsInVzZXIiOnsiaWQiOjQsInVzZXJuYW1lIjoiRmxha2FuIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6Im1lbWJlciJ9XX0sImlhdCI6MTU4OTcyMzI4MX0.o9U-OFDskMXPQdZAgjlJ85ZD7TTU5CaksvqOrrhtGgw',
           'Content-Type': 'multipart/form-data'}}).then(response => console.log(response.data)
           )
     }
 
+  
   render() {
 
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>{this.state.username}</Form.Label>
-            <Form.Control onChange={this.handleChange} placeholder="Category"/>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+ 
 
         <Form onSubmit={this.handleFileSubmit}>
           <Form.Group>

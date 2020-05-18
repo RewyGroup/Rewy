@@ -12,6 +12,9 @@ import se.rewy.site.models.Role;
 import se.rewy.site.models.User;
 import se.rewy.site.models.UserCredentials;
 import se.rewy.site.repository.UserRepository;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -57,6 +60,20 @@ public class UserService implements UserDetailsService {
 
 
     }
+    public ResponseEntity<?> updateProfileImageUrl(long id, String encodedProfileImageUrl){
+        //the image we get from frontend is encoded.
+        String decodedProfileImageUrl = decode(encodedProfileImageUrl);
+        //the image is also 1 character too long
+        String profileImageUrl = decodedProfileImageUrl.substring(0, decodedProfileImageUrl.length() -1);
+
+        Optional<User> optionalUser = userRepository.findById(id);
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setProfileImageUrl(profileImageUrl);
+            userRepository.save(user);
+        }
+        return ResponseEntity.ok().build();
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -65,6 +82,23 @@ public class UserService implements UserDetailsService {
         user.orElseThrow(() -> new UsernameNotFoundException("Not found:" + username));
 
         return user.map(UserCredentials::new).get();
+    }
+
+
+    public static String decode(String url)
+    {
+        try {
+            String prevURL="";
+            String decodeURL=url;
+            while(!prevURL.equals(decodeURL))
+            {
+                prevURL=decodeURL;
+                decodeURL= URLDecoder.decode( decodeURL, "UTF-8" );
+            }
+            return decodeURL;
+        } catch (UnsupportedEncodingException e) {
+            return "Issue while decoding" +e.getMessage();
+        }
     }
 
 }

@@ -44,4 +44,6 @@
 .profileInfoHeader{
     margin-top:75px;
 }
-
+.profileModalBody> div > div{
+ width: auto !important;
+}

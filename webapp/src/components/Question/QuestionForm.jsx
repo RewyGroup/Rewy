@@ -3,14 +3,16 @@ import Select,{components} from 'react-select'
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createQuestion } from "../../actions/question";
-
+import {EditorState,convertToRaw} from 'draft-js';
+import "../../utils/TextEditor.css"
 import "./QuestionForm.css";
-
+import TextEditor from "../../utils/TextEditor";
+import TextEditorToolbar from "../../utils/TextEditorToolbar";
 
 const QuestionForm = (props) => {
 
   const {userId} = props
-
+  const [editorState,setEditorState] = useState(EditorState.createEmpty(),);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [category, setCategory] = useState("");
@@ -26,6 +28,14 @@ const QuestionForm = (props) => {
     const index = getIndex(category,categoryList,"typeName");
     setCategoryIndex(index);
   }, [category]);
+
+  useEffect(() => {
+    const raw =  convertToRaw(editorState.getCurrentContent())
+    const rawString = JSON.stringify(raw);
+    var res  = rawString.replace(/"/g, "\"")
+    setText(res);
+    
+  }, [editorState]);
 
   function getIndex(category, categoryList, typeName) {
     for(var i = 0; i < categoryList.length; i++) {
@@ -61,9 +71,7 @@ const QuestionForm = (props) => {
       
   
 
-  const onChangeText = (event) => {
-    setText(event.target.value);
-  };
+
 
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -88,6 +96,7 @@ const QuestionForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(questionWeb)
     dispatch(createQuestion(questionWeb, props.token));
   };
 
@@ -131,8 +140,9 @@ const QuestionForm = (props) => {
 
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Describe your Question</Form.Label>
-            <Form.Control placeholder="describe..." as="textarea" rows="10" onChange={onChangeText} />
-          </Form.Group>
+            <TextEditorToolbar editorState={editorState} setEditorState={setEditorState} ></TextEditorToolbar>
+                <TextEditor editorState={editorState} setEditorState={setEditorState}></TextEditor>
+                </Form.Group>
 
           <Form.Group>
             <Button variant="dark" type="submit">

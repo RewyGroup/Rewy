@@ -10,7 +10,7 @@ function ProfileModal(props) {
 
         return (
             <>
-            <Modal lg show={show} onHide={handleClose} centered>
+            <Modal show={show} onHide={handleClose} centered>
               <Modal.Header closeButton>
               </Modal.Header>
               <Modal.Body className="profileModalBody">{props.showAvatar}</Modal.Body>

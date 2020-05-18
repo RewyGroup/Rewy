@@ -9,6 +9,23 @@ export const getUserById = (id) =>{
     }
 }
 
+
+export const uploadProfileImage = (image,token) =>{
+    return(dispatch) => {
+        return api.uploadProfileImage(image,token).then(response => {
+            dispatch(uploadProfileImageUrl(response.data))
+        })
+    }
+}
+
+export const updateProfileImageUrlByUserId = (id,imageUrl,token) =>{
+    return(dispatch) => {
+        return api.updateProfileImageUrlByUserId(id,imageUrl,token).then(response => {
+            dispatch(updateProfileImageUrl(response.data))
+        })
+    }
+}
+
 const getUser = (user) =>{
 
     return{
@@ -17,5 +34,25 @@ const getUser = (user) =>{
     
 }
 };
+
+
+const uploadProfileImageUrl = (imageUrl) =>{
+
+    return{
+    type: 'UPLOAD_IMAGE_SUCCESS',
+    payload: imageUrl
+    
+}
+};
+
+const updateProfileImageUrl = (imageUrl) =>{
+
+    return{
+    type: 'UPDATE_IMAGE_SUCCESS',
+    payload: imageUrl
+    
+}
+};
+
 
 

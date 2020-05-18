@@ -33,6 +33,12 @@ public class UserController {
         return ResponseEntity.ok().build();
         }
 
+    @PostMapping("/{id}/update/profileImage")
+    public ResponseEntity<?> updateProfileImageUrlByUserId(@PathVariable long id, @RequestBody String profileImageUrl){
+        userService.updateProfileImageUrl(id,profileImageUrl);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("{id}")
     ResponseEntity<User> findUserById(@PathVariable long id){
         User user =userService.findById(id);

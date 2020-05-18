@@ -12,7 +12,7 @@ import storage from 'redux-persist/lib/storage'
 const persistConfig = {
     key:'root',
     storage,
-    whitelist:['questionReducer']
+    whitelist:['userReducer']
 }
 
 const rootReducer = combineReducers({

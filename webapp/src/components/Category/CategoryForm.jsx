@@ -18,6 +18,7 @@ class CategoryForm extends Component {
     handleFileChange = event =>{
     
       this.setState({profileImagePreview: URL.createObjectURL(event.target.files[0]), profileImage : event.target.files[0]});
+
     }
 
 
@@ -29,13 +30,14 @@ class CategoryForm extends Component {
       const url = "http://localhost:4000";
       axios.post(url + "/upload", formdata, {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb29va3UiLCJleHAiOjE1ODk2Njc5MzYsInVzZXIiOnsiaWQiOjIyLCJ1c2VybmFtZSI6ImRvb29rdSIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJtZW1iZXIifV19LCJpYXQiOjE1ODk2MzE5MzZ9.443mGrMXWYDXS0dM1RFOVcvcKBTaXQtb_btsgttZkyI',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGbGFrYW4iLCJleHAiOjE1ODk3NTkyODEsInVzZXIiOnsiaWQiOjQsInVzZXJuYW1lIjoiRmxha2FuIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6Im1lbWJlciJ9XX0sImlhdCI6MTU4OTcyMzI4MX0.o9U-OFDskMXPQdZAgjlJ85ZD7TTU5CaksvqOrrhtGgw',
           'Content-Type': 'multipart/form-data'}}).then(response => console.log(response.data)
           )
     }
+
   
   render() {
-    
+
     return (
       <div>
  

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {createAnswer} from '../../actions/answer';
-import {Editor, EditorState,convertToRaw} from 'draft-js';
+import {EditorState,convertToRaw} from 'draft-js';
+import TextEditor from "../../utils/TextEditor";
+import TextEditorToolbar from "../../utils/TextEditorToolbar";
 
 
 import "./AnswerForm.css";
@@ -56,11 +58,8 @@ useEffect(() => {
         <Form className="answerForm" onSubmit={handleSubmit}>
           <Form.Group controlId="exampleForm.ControlTextarea2">
             <Form.Label>Answer the Question</Form.Label>
-            <div className="textEditorWrapper">
-                    <div className ="textEditor">
-                <Editor placeholder=" " editorState={editorState} onChange={setEditorState} /> 
-                </div>
-                </div>
+            <TextEditorToolbar editorState={editorState} setEditorState={setEditorState} ></TextEditorToolbar>
+                <TextEditor editorState={editorState} setEditorState={setEditorState}></TextEditor>
           </Form.Group>
           <Form.Group>
             <Button variant="dark" type="submit">

@@ -3,10 +3,11 @@ import Select,{components} from 'react-select'
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createQuestion } from "../../actions/question";
-import {Editor, EditorState,convertToRaw} from 'draft-js';
-
+import {EditorState,convertToRaw} from 'draft-js';
+import "../../utils/TextEditor.css"
 import "./QuestionForm.css";
-
+import TextEditor from "../../utils/TextEditor";
+import TextEditorToolbar from "../../utils/TextEditorToolbar";
 
 const QuestionForm = (props) => {
 
@@ -33,6 +34,7 @@ const QuestionForm = (props) => {
     const rawString = JSON.stringify(raw);
     var res  = rawString.replace(/"/g, "\"")
     setText(res);
+    
   }, [editorState]);
 
   function getIndex(category, categoryList, typeName) {
@@ -138,11 +140,8 @@ const QuestionForm = (props) => {
 
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Describe your Question</Form.Label>
-            <div className="textEditorWrapper">
-                    <div className ="textEditor">
-                <Editor placeholder=" " editorState={editorState} onChange={setEditorState} /> 
-                </div>
-                </div>
+            <TextEditorToolbar editorState={editorState} setEditorState={setEditorState} ></TextEditorToolbar>
+                <TextEditor editorState={editorState} setEditorState={setEditorState}></TextEditor>
                 </Form.Group>
 
           <Form.Group>

@@ -6,10 +6,7 @@ import se.rewy.site.exception.UserServiceException;
 import se.rewy.site.models.*;
 import se.rewy.site.models.web.AnswerWeb;
 import se.rewy.site.models.web.QuestionWeb;
-import se.rewy.site.repository.AnswerRepository;
-import se.rewy.site.repository.QuestionRepository;
-import se.rewy.site.repository.UserRepository;
-import se.rewy.site.repository.VoteRepository;
+import se.rewy.site.repository.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,13 +20,16 @@ public class AnswerService {
     private final UserRepository userRepository;
     private final QuestionRepository questionRepository;
     private final VoteRepository voteRepository;
-
+    private final NotificationRepository notificationRepository;
+    private final NotifyUserRepository notifyUserRepository;
     @Autowired
-    public AnswerService(AnswerRepository answerRepository,UserRepository userRepository,QuestionRepository questionRepository, VoteRepository voteRepository) {
+    public AnswerService(AnswerRepository answerRepository,UserRepository userRepository,QuestionRepository questionRepository, VoteRepository voteRepository,NotificationRepository notificationRepository,NotifyUserRepository notifyUserRepository) {
         this.answerRepository = answerRepository;
         this.userRepository = userRepository;
         this.questionRepository = questionRepository;
         this.voteRepository = voteRepository;
+        this.notificationRepository = notificationRepository;
+        this.notifyUserRepository = notifyUserRepository;
     }
     public Answer findById(long id){
         return answerRepository.findById(id).get();
@@ -38,11 +38,25 @@ public class AnswerService {
     public void create(AnswerWeb answerWeb){
         Answer answer = new Answer();
 
-        Optional<User> user = userRepository.findById(answerWeb.getUserId());
-        Optional<Question> question = questionRepository.findById(answerWeb.getQuestionId());
-        if (user.isPresent() && question.isPresent()){
-            answer.setUser(user.get());
-            answer.setQuestion(question.get());
+        Optional<User> optionalUser = userRepository.findById(answerWeb.getUserId());
+        Optional<Question> optionalQuestion = questionRepository.findById(answerWeb.getQuestionId());
+        if (optionalUser.isPresent() && optionalQuestion.isPresent()){
+            User user = optionalUser.get();
+            Question question = optionalQuestion.get();
+            answer.setUser(user);
+            answer.setQuestion(question);
+            Notification notification = new Notification();
+            notification.setType("answer");
+            notification.setUser(user);
+            notification.setNotificationText(user.getUsername() +" has answered your question " + question.getTitle());
+            notificationRepository.save(notification);
+
+            User userToNotify = question.getUser();
+            NotifyUser notifyUser = new NotifyUser();
+            notifyUser.setNotification(notification);
+            notifyUser.setUser(userToNotify);
+            notifyUserRepository.save(notifyUser);
+
         }else{
             throw new UserServiceException("Something went wrong!");
         }

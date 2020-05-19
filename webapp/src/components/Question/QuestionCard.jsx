@@ -35,9 +35,7 @@ const QuestionCard = props => {
       <div className="cardContent">
           <Card.Body className="cardBody">
             <Card.Title>{question.title}</Card.Title>
-            <Card.Text>
-            {question.text}
-            </Card.Text>
+
             <Card.Footer className="cardFooter">
             <span className="cardCategory">{question.category.typeName}:</span>
             {SubCategoryList}

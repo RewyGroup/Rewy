@@ -60,8 +60,6 @@ function ProfileEditModal(props) {
         
         },[updatedProfile]);
     
-      
-    console.log(updatedUser);
     
     function userInformation() {
 
@@ -69,9 +67,9 @@ function ProfileEditModal(props) {
     
         for(let[key,value] of Object.entries(user)){
             if(key !== "id" && key !== "profileImageUrl" && key !== "role" && key !== "createdAt" && key !== "gender" && key !== "dateOfBirth" && key !== "username"  ){
-        list.push(<Form.Group>
+        list.push(<Form.Group key={key}>
         <Form.Label className="profileEditModalFormLabel">{key}</Form.Label>
-        <Form.Control name={key} onChange={handleChange} type="text" placeholder={value} />
+        <Form.Control  name={key} onChange={handleChange} type="text" placeholder={value} />
       </Form.Group>);
             }   
         }

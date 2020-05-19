@@ -12,7 +12,7 @@ const loginReducer = ( state = initialState ,action) => {
         case 'SIGN_IN':
             return {...state, isLoggedIn: initialState.isLoggedIn = true}
         case 'SIGN_IN_ERROR':
-            return {...state, isLoggedIn: initialState.isLoggedIn = false, error: action.error.message}
+            return {...state, isLoggedIn: initialState.isLoggedIn = false, error: action.error}
         case 'SIGN_OUT':
             return {...state, isLoggedIn: initialState.isLoggedIn = false, user: {}}
         case 'STILL_LOGGED_IN':

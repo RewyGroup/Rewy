@@ -5,14 +5,14 @@ import {getAllQuestions,getAllQuestionsByCategoryName} from '../actions/question
 import {Cookies} from 'react-cookie';
 import {Container} from 'react-bootstrap';
 import QuestionCard from '../components/Question/QuestionCard';
-import QuestionSuccessToast from '../components/Question/QuestionSuccessToast';
+import SuccessToast from '../utils/SuccessToast';
 
 const QuestionListPage = (props) => {
     const dispatch = useDispatch();
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
     const questionlist = useSelector(state => state.questionReducer.questionList);
-    const {showSuccessToast} = props.location;
+    const {showSuccessToast,message} = props.location;
     var parts = props.location.pathname.split('/');
     const location = parts[parts.length - 1];   
     
@@ -34,7 +34,7 @@ const QuestionListPage = (props) => {
 
         return (
 <Container>
-<QuestionSuccessToast showSuccessToast={showSuccessToast}/>
+<SuccessToast message={message} showSuccessToast={showSuccessToast}/>
 {questions}
 </Container>
         );

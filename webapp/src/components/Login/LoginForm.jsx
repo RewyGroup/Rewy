@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Container } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { checkLoggedIn } from '../../actions/login';
 
 import './LoginForm.css';
@@ -12,6 +12,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
+  const errorMessage = useSelector(state => state.loginReducer.error);
 
   const onChangeUsername = event => {
     setUsername(event.target.value);
@@ -56,6 +57,7 @@ function LoginForm() {
           <Form.Group>
             <Form.Label className="loginForm-label">Don't have an account? <a href="/register" >Sign up</a></Form.Label>
           </Form.Group>
+          {errorMessage ? <div className="loginErrorMessage">{errorMessage}</div> : <div></div>}
         </Form>
       </Row>
     </Container>

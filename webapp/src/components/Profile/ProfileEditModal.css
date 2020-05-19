@@ -1,0 +1,16 @@
+.profileEditMoldalHeader{
+border: none;
+}
+.profileEditModalFormLabel{
+    color:black;
+}
+.profileEditMoldalFooter{
+    border: none;
+}
+
+
+.profileEditMoldalError{
+    color: red;
+    text-align: center;
+    padding-bottom: 20px;
+}

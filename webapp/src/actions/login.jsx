@@ -11,9 +11,9 @@ export const checkLoggedIn = (user) => {
             cookies.set("session_token",response.data.jwt);
             dispatch(signIn())
         })
-        .catch(error =>{
+        .catch(error =>{           
             dispatch({
-                type: 'SIGN_IN_ERROR',error:error.response.data
+                type: 'SIGN_IN_ERROR',error:error.response.data.message
             })
         })
     }

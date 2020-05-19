@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +28,10 @@ import java.util.Objects;
 public class BucketService {
 
     private final String bucketName = "rewy";
-
+    @Value("${access_key_id}")
+    private String access_key_id;
+    @Value("${secret_access_key}")
+    private String secret_access_key;
 
     private File convertMultiPartToFile(MultipartFile multipartFile) throws IOException {
         File file = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
@@ -39,7 +43,7 @@ public class BucketService {
 
     public String uploadFile(MultipartFile multipartFile) throws IOException {
 
-        BasicAWSCredentials creds = new BasicAWSCredentials(Credentials.access_key_id, Credentials.secret_access_key);
+        BasicAWSCredentials creds = new BasicAWSCredentials(access_key_id, secret_access_key);
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(creds))
                 .withRegion(Regions.EU_WEST_1).build();

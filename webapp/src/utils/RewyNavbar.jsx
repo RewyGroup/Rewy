@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {signOut} from '../actions/login';
 import './RewyNavbar.css'
 import LoginButton from '../components/Login/LoginButton'
-
+import NotificationDropdownList from '../components/Notification/NotificationDropdownList';
 
 function RewyNavbar() {
 
@@ -21,18 +21,20 @@ function RewyNavbar() {
   <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
     <FontAwesomeIcon className="dropdown-icon" icon={faSearch} />
     <Nav>
-    <Nav.Link href="/question/all">Browse Questions</Nav.Link>
+    <Nav.Link className="dropdownQuestion" href="/question/all">Browse Questions</Nav.Link>
     </Nav>
     {!isLoggedIn ? 
       <Nav >
       <Nav.Link href="/login"><LoginButton/></Nav.Link>
     </Nav>:
-    <NavDropdown title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
+    <div>
+      <NotificationDropdownList/>
+    <NavDropdown className="dropdown-list" title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
 
         <NavDropdown.Item href="/profile">profile</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item onClick={() => dispatch(signOut())}>Sign out</NavDropdown.Item>
-      </NavDropdown>}
+      </NavDropdown></div>}
   </Navbar.Collapse>
 </Navbar>
     ); 

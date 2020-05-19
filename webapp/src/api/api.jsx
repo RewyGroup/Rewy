@@ -10,6 +10,7 @@ export const api = () => {
          updateProfileInformation:(user,token) => axios.post(baseURL+"/user/update/profileInformation",user,{ headers:{'Authorization': 'Bearer '+ token}}),
          updateProfileImageUrlByUserId:(id,imageUrl,token) => axios.post(baseURL + "/user/"+ id +"/update/profileImage",imageUrl,{ headers:{'Authorization': 'Bearer '+ token}}),
          createQuestionVote: (questionWeb,token) => axios.post(baseURL +"/question/vote",questionWeb,{ headers:{'Authorization': 'Bearer '+ token}}),
+         createNotification: (targetUserId,type,token) => axios.post(baseURL+"/create/notification",targetUserId,type,{ headers:{'Authorization': 'Bearer '+ token}}),
          uploadProfileImage: (formdata,token) => axios.post(baseURL + "/upload", formdata, { headers: {'Content-Type': 'multipart/form-data','Authorization': 'Bearer '+ token}}),    
          createQuestion: (questionWeb,token) => axios.post(baseURL + "/question/create", questionWeb, { headers:{'Authorization': 'Bearer '+ token}}),
          getQuestionById:(id) => axios.get(baseURL+ "/question/" +id),

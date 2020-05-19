@@ -1,0 +1,50 @@
+.notificationCounter{
+    color:white;
+    font-size: 12px;
+    display: inline;
+    position: relative;
+    padding: 0px 4px;
+    left:24px;
+    top:-9px;
+    background-color: red;
+}
+.notification-list{
+    display: inline-block;
+    padding: 0 8px 0 0;
+    margin-right: 5px;
+}
+
+.notificationPopover{
+    max-width: 400px;
+}
+
+
+.notificationCard{
+    border-radius: 0;
+    border-top: none;
+    background-color: lightgrey;
+}
+.notificationText{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notificationCard:hover{
+    background-color:green;
+}
+
+.notificationCardShown{
+    border-top: none;
+    border-radius: 0;
+    background-color: white;
+}
+
+.notificationCardShown:hover{
+    background-color:green;
+}
+
+.notificationFooter{
+    text-align: center;
+}
+

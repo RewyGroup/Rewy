@@ -12,18 +12,22 @@ function ProfilePage(props) {
 
     const dispatch = useDispatch();
 
-    const[showSuccessToast, setShowSuccessToast] = useState(false);
+    const[showImageSuccessToast, setShowImageSuccessToast] = useState(false);
+    const[showInfoSuccessToast, setShowInfoSuccessToast] = useState(false);
 
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
     const userId = useSelector(state => state.loginReducer.user.id);
     const optionalUser = useSelector(state => state.userReducer.user);
     const updatedImage = useSelector(state => state.userReducer.updatedImage);
-    const message = "Profile image successfully changed!"
-    
+    const updatedProfile = useSelector(state => state.userReducer.updatedProfile);
+
+    const profileImageMessage = "Profile image successfully changed!"
+    const profileInfoMessage = "Profile successfully updated!"
+
     const user = optionalUser && optionalUser.id && <ProfileCard token={session_token} user={optionalUser}/>;
-    const successToast = showSuccessToast && <SuccessToast message={message} showSuccessToast={showSuccessToast} />
-   
+    const ImageSuccessToast = showImageSuccessToast && <SuccessToast message={profileImageMessage} showSuccessToast={showImageSuccessToast} />
+    const InfoSuccessToast = showInfoSuccessToast && <SuccessToast message={profileInfoMessage} showSuccessToast={showInfoSuccessToast} />
     
     
     useEffect(()=>{
@@ -35,15 +39,29 @@ function ProfilePage(props) {
     useEffect(()=>{
         if(updatedImage){
             dispatch(getUserById(userId));
-            setShowSuccessToast(true)
+            setShowImageSuccessToast(true)
         }else{
             setTimeout( () => {  
-                setShowSuccessToast(false); 
+                setShowImageSuccessToast(false); 
             }, 5000);
         }
 
 
      },[updatedImage]);
+
+
+     useEffect(()=>{
+        if(updatedProfile){
+            dispatch(getUserById(userId));
+            setShowInfoSuccessToast(true)
+        }else{
+            setTimeout( () => {  
+                setShowInfoSuccessToast(false); 
+            }, 5000);
+        }
+
+
+     },[updatedProfile]);
  
 
     if(session_token){
@@ -53,7 +71,8 @@ function ProfilePage(props) {
         return (
             <div>
                 <Container>
-                {successToast}
+                {ImageSuccessToast}
+                {InfoSuccessToast}
                 {user}
                 </Container>
             </div>

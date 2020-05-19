@@ -39,6 +39,20 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/update/profileInformation")
+    public ResponseEntity<?> updateProfile(@RequestBody User user){
+
+        try {
+            userService.updateProfileInformation(user);
+        }
+        catch (Exception e){
+            throw new UserServiceException(e.getMessage());
+        }
+        return ResponseEntity.ok().build();
+    }
+
+
+
     @GetMapping("{id}")
     ResponseEntity<User> findUserById(@PathVariable long id){
         User user =userService.findById(id);

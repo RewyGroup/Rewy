@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit,faEnvelope,faMapMarkerAlt,faVenusMars } from '@fortawesome/free-solid-svg-icons';
 import Avatar from 'react-avatar-edit';
 import './ProfileCard.css';
-import ProfileModal from'./ProfileModal';
+import ProfileImageModal from'./ProfileImageModal';
 import {defaultImage} from '../../utils/DefaultImage';
 import { uploadProfileImage,updateProfileImageUrlByUserId } from '../../actions/user';
+import ProfileEditModal from './ProfileEditModal';
 
 const ProfileCard = (props) => {
 
@@ -18,10 +19,10 @@ const ProfileCard = (props) => {
   const [preview,setPreview] = useState(defaultImage);
   const [imageSrc,setImageSrc] = useState(null);
   const [changeProfileImage,setChangeProfileImage] = useState(false);
-  const [show,setShow] = useState(false);
+  const [showImageModal,setShowImageModal] = useState(false);
   const [baseName,setBaseName]= useState(null)
   const [croppedImage,setCroppedImage] = useState(null);
-
+  const [showEditModal,setShowEditModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -49,6 +50,7 @@ const ProfileCard = (props) => {
     if(elem.target.files[0].size > 100680){
       alert("File is too big!");
       elem.target.value = "";
+      setImageSrc(null);
     };
   }
 
@@ -65,22 +67,35 @@ const ProfileCard = (props) => {
   }
 
   const profileImgClick =() =>{
-    handleShow();
+    handleShowImageModal();
     setChangeProfileImage(true);
     
   }
+  const handleShowImageModal = () => setShowImageModal(true);
 
-  const handleClose = () => {
-    setShow(false);
+  const handleCloseImageModal = () => {
+    setShowImageModal(false);
     onClose(false);
   } 
 
-  const handleUpdate = () => {
-    setShow(false);
+  const handleUpdateImageModal = () => {
+    setShowImageModal(false);
     onClose(true);
   } 
 
-  const handleShow = () => setShow(true);
+  
+
+
+
+  const handleShowEditModal = () => setShowEditModal(true);
+
+  const handleCloseEditModal = () => setShowEditModal(false);
+
+  const handleUpdateEditModal = () =>{
+    setShowEditModal(false);
+
+  } 
+
 
 
   useEffect(() =>{
@@ -132,7 +147,7 @@ const ProfileCard = (props) => {
             <div className="profileCardEditButtonWrapper">
               <FontAwesomeIcon
                 className="profileCardEditButton"
-                icon={faEdit}
+                icon={faEdit} onClick={handleShowEditModal}
               />
             </div>
           </Card.ImgOverlay>
@@ -140,20 +155,33 @@ const ProfileCard = (props) => {
         </Card>
 
         <Card className="profileCardInfo">
-        <img className="profileImage" src={preview} onClick={profileImgClick} alt="Preview" />
+        
 
           <Card.Body>
+            <Row>
+            <Col md={4} className="profileInfoLeft">
+            <img className="profileImage" src={preview} onClick={profileImgClick} alt="Preview" />
             <div className="profileInfoHeader">
-            <Card.Title>firstname</Card.Title>
+            <Card.Text className="profileFullname"><span>{user.firstName}</span><span>{user.lastName}</span></Card.Text>
+            <Card.Text className="profileUsername"><span>@</span><span>{user.username}</span></Card.Text>
             </div>
-            <Card.Text>{user.firstName}</Card.Text>
-            <Card.Title>lastname</Card.Title>
-            <Card.Text>{user.lastName}</Card.Text>
-            <Card.Title>mail</Card.Title>
-            <Card.Text>{user.email}</Card.Text>
+            </Col>
+            <Col md={8} className="profileInfoRight">
+            <Card.Text>{user.email}<FontAwesomeIcon className="profileInfoIcon"
+                icon={faEnvelope} 
+              /></Card.Text>
+            <Card.Text>{user.occupation}<FontAwesomeIcon className="profileInfoIcon"
+                icon={faMapMarkerAlt} 
+              /></Card.Text>
+                          <Card.Text>{user.gender}<FontAwesomeIcon className="profileInfoIcon"
+                icon={faVenusMars} 
+              /></Card.Text>
+            </Col>
+            </Row>
           </Card.Body>
         </Card>
-        <ProfileModal show={show} handleUpdate={handleUpdate} handleClose={handleClose} handleShow={handleShow} showAvatar={showAvatar()}/>
+        <ProfileImageModal show={showImageModal} handleUpdate={handleUpdateImageModal} handleClose={handleCloseImageModal} showAvatar={showAvatar()}/>
+        <ProfileEditModal token={token} show={showEditModal} handleUpdate={handleUpdateEditModal} handleClose={handleCloseEditModal} user={user}/>
          </div>
       </Col>
     </Row>

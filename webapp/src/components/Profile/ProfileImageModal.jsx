@@ -1,11 +1,11 @@
 import React, {useState,useEffect} from 'react';
 import {Modal,Button} from 'react-bootstrap';
 
-function ProfileModal(props) {
+function ProfileImageModal(props) {
 
     
 
-    const {show,handleUpdate, handleClose, handleShow} = props
+    const {show,handleUpdate, handleClose} = props
 
 
         return (
@@ -24,4 +24,4 @@ function ProfileModal(props) {
         );
 }
 
-export default ProfileModal;
+export default ProfileImageModal;

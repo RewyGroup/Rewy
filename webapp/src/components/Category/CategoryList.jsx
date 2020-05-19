@@ -3,7 +3,7 @@ import { Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalculator,
-  faBasketballBall,
+  faFlask,
   faGlobe,
   faCode,
 } from "@fortawesome/free-solid-svg-icons";
@@ -16,15 +16,15 @@ const categoryListItems = [
   className="CategoryListCardIcon"
   icon={faCalculator}
 />},
-  {category:"Sports",icon:<FontAwesomeIcon
+  {category:"Chemestry",icon:<FontAwesomeIcon
   className="CategoryListCardIcon"
-  icon={faBasketballBall}
+  icon={faFlask}
 />},
   {category:"Language",icon:<FontAwesomeIcon
   className="CategoryListCardIcon"
   icon={faGlobe}
 />},
-  {category:"Code",icon:<FontAwesomeIcon
+  {category:"Programming",icon:<FontAwesomeIcon
   className="CategoryListCardIcon"
   icon={faCode}
 />},

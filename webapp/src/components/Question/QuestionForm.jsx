@@ -96,7 +96,6 @@ const QuestionForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(questionWeb)
     dispatch(createQuestion(questionWeb, props.token));
   };
 

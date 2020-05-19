@@ -1,6 +1,9 @@
 package se.rewy.site.models;
 
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class Notification {
@@ -16,6 +19,7 @@ public class Notification {
 
         private String type;
 
+        private LocalDateTime createdAt;
 
         public Notification() {}
 
@@ -49,5 +53,13 @@ public class Notification {
 
         public void setType(String type) {
                 this.type = type;
+        }
+
+        public LocalDateTime getCreatedAt() {
+                return createdAt;
+        }
+
+        public void setCreatedAt(LocalDateTime createdAt) {
+                this.createdAt = createdAt;
         }
 }

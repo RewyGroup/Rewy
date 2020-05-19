@@ -10,8 +10,7 @@ public class NotifyUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    private User user;
+    private Long userId;
 
     @OneToOne
     private Notification notification;
@@ -30,12 +29,12 @@ public class NotifyUser {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Notification getNotification() {

@@ -48,13 +48,14 @@ public class AnswerService {
             Notification notification = new Notification();
             notification.setType("answer");
             notification.setUser(user);
+            notification.setCreatedAt(LocalDateTime.now());
             notification.setNotificationText(user.getUsername() +" has answered your question " + question.getTitle());
             notificationRepository.save(notification);
 
-            User userToNotify = question.getUser();
+            long userToNotify = question.getUser().getId();
             NotifyUser notifyUser = new NotifyUser();
             notifyUser.setNotification(notification);
-            notifyUser.setUser(userToNotify);
+            notifyUser.setUserId(userToNotify);
             notifyUserRepository.save(notifyUser);
 
         }else{

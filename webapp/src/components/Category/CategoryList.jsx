@@ -16,7 +16,7 @@ const categoryListItems = [
   className="CategoryListCardIcon"
   icon={faCalculator}
 />},
-  {category:"Chemestry",icon:<FontAwesomeIcon
+  {category:"Chemistry",icon:<FontAwesomeIcon
   className="CategoryListCardIcon"
   icon={faFlask}
 />},

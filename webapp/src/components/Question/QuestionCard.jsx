@@ -3,6 +3,7 @@ import { Card, Row } from "react-bootstrap";
 import "./QuestionCard.css";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import calculateVotes from "../../utils/CalculateVotes";
 
 const QuestionCard = props => {
     const {question,history} = props;
@@ -49,7 +50,7 @@ const QuestionCard = props => {
           </Card.Body>
           <Card.Body className="cardInfo">
               <Card.Text className="cardInfoText">
-        <span className="cardInfoTextStat">{question.votes.length}</span>
+        <span className="cardInfoTextStat">{calculateVotes(question.votes)}</span>
                   <span className="cardInfoTextStat">votes</span>
               </Card.Text>
           </Card.Body>

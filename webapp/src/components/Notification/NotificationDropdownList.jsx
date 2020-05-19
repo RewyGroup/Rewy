@@ -4,14 +4,22 @@ import {Overlay,Popover} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import Notification from './Notification';
+import {getUserById} from '../../actions/user';
 
 function NotificationDropdownList() {
 
-
-    const dispatch = useDispatch();
-
     const [show, setShow] = useState(false);
     const [target, setTarget] = useState(null);
+
+    const dispatch = useDispatch();
+    const userId = useSelector(state => state.loginReducer.user.id)
+
+
+   useEffect(() =>{
+
+    dispatch(getUserById(userId));
+        
+    },[userId]);
 
   
     const handleClick = (event) => {

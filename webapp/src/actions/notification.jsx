@@ -2,20 +2,20 @@
 import api from '../api/api';
 
 
-export const createNotification = (targetUserId,type,token) => {  
+export const getNotificationById = (id,token) => {  
     return (dispatch) => {
         
-    return api.createNotification(targetUserId,type,token).then(response => {
-        dispatch(notificationSuccess())
+    return api.getNotificationById(id,token).then(response => {
+        dispatch(notificationFetchSuccess(response.data))
     })
 }
 };
 
-const notificationSuccess = () =>{
+const notificationFetchSuccess = (notifications) =>{
 
 
     return{
-        type: 'CREATE_NOTIFICATION_SUCCESS'
-        
+        type: 'FETCH_NOTIFICATION_SUCCESS',
+        action: notifications
     }
 }

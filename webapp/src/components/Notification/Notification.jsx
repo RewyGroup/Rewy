@@ -7,8 +7,16 @@ import './Notification.css';
 function Notification() {
 
 
+const user = useSelector(state => state.userReducer.user);
+const notificationCard = user && user.profileImageUrl;
+
+useEffect(() =>{
 
     
+    
+},[user]);
+
+
 
         return (
 
@@ -17,7 +25,7 @@ function Notification() {
     <Card.Body>This is some text within a card body.</Card.Body>
     </Card>
     <Card className="notificationCardShown">
-    <Card.Body>This is some text within a card body.</Card.Body>
+    <Card.Body> {user ? <img className="notificationCardImage" src={notificationCard} alt="profile" />:<div></div>}This is some text within a card body.</Card.Body>
     </Card>
     <Card className="notificationCard">
     <Card.Body className="notificationText">This is some text within a card body. This is some text within a card body.This is some text within a card bodThis is some text within a card bod</Card.Body>
@@ -25,7 +33,7 @@ function Notification() {
     <Card className="notificationCard">
     <Card.Body>This is some text within a card body.</Card.Body>
     </Card>
-
+            
     </div>
         );
 }

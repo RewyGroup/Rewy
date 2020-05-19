@@ -1,15 +1,14 @@
 
 const initialState = {
     notifications : [],
-    notificationCreated: false
 };
 
 
 
 const notificationReducer = ( state = initialState ,action) => {
     switch(action.type){
-        case 'CREATE_NOTIFICATION_SUCCESS':
-            return {...state, notificationCreated: true}    
+        case 'FETCH_NOTIFICATION_SUCCESS':
+            return {...state, notifications: action.notifications}    
         default:
             return {...state}
     }

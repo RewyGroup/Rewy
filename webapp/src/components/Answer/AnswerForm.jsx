@@ -39,7 +39,6 @@ useEffect(() => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(createAnswer(answerWeb,token));
-    window.location.reload();
 
   };
 

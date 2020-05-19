@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import se.rewy.site.models.NotifyUser;
 import se.rewy.site.repository.NotifyUserRepository;
 
+import java.util.Set;
+
 @Service
 public class NotifyUserService {
 
@@ -18,5 +20,10 @@ public class NotifyUserService {
 
     public void createNotifyUser(NotifyUser notifyUser){
         notifyUserRepository.save(notifyUser);
+    }
+
+
+    public Set<NotifyUser> getAllNotificationsByUserId(long id){
+        return notifyUserRepository.findAllByUserId(id);
     }
 }

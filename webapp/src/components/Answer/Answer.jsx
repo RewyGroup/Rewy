@@ -9,6 +9,7 @@ import { checkDownVote } from "../../utils/CheckDownVote";
 import CheckVoteType from "../../utils/CheckVoteType"
 import calculateVotes from "../../utils/CalculateVotes";
 import {createAnswerVote} from "../../actions/answer";
+import {Editor, EditorState,convertToRaw,convertFromRaw, ContentState} from 'draft-js';
 
 
 const Answer = (props) => {
@@ -18,7 +19,8 @@ const Answer = (props) => {
     const [loggedInUserVote,setLoggedInUserVote] = useState({});
     const [voteCounter,setVoteCounter] = useState(0);
     const loggedInUser = useSelector((state) => state.loginReducer.user);
-
+    const[isWYSIWYG, setIsWYSIWYG] = useState(false);
+    const [textState,setTextState] = useState(EditorState.createEmpty(),);
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
     const dispatch = useDispatch();
@@ -48,6 +50,15 @@ const Answer = (props) => {
         }
       const votes = calculateVotes(answer.votes);
       setVoteCounter(votes);
+
+
+      if(answer.text.startsWith("{")){
+        setIsWYSIWYG(true);
+        const raw = JSON.parse(answer.text);
+        const myjson = convertFromRaw(raw);
+        setTextState(EditorState.createWithContent(myjson))
+              
+      }
     }, []);
 
 
@@ -97,7 +108,12 @@ const Answer = (props) => {
                 <Col xs={11} className="answerDescription" >
 
                     <Row className="answerText">
-                        <div>{answer.text} </div>
+                      {isWYSIWYG ?  <div>
+                    <div className ="answerTextView">
+                <Editor placeholder="" editorState={textState} readOnly={true} /> 
+                </div>
+                </div>:
+                        <div>{answer.text} </div>}
 
                     </Row>
 

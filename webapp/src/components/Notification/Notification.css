@@ -8,6 +8,15 @@
     top:-9px;
     background-color: red;
 }
+.notificationCounterOff{
+    color:white;
+    font-size: 12px;
+    display: inline;
+    position: relative;
+    padding: 0px 4px;
+    left:24px;
+    top:-9px;   
+}
 .notification-list{
     display: inline-block;
     padding: 0 8px 0 0;
@@ -15,7 +24,7 @@
 }
 
 .notificationPopover{
-    max-width: 400px;
+    max-width: 450px;
 }
 
 
@@ -25,13 +34,14 @@
     background-color: lightgrey;
 }
 .notificationText{
+    padding: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .notificationCard:hover{
-    background-color:green;
+    background-color:rgba(15,15,15, 0.1);
 }
 
 .notificationCardShown{
@@ -41,15 +51,23 @@
 }
 
 .notificationCardShown:hover{
-    background-color:green;
+    background-color:rgba(15,15,15, 0.1);
 }
 
 .notificationCardImage{
-    width:30px;
-    height:30px;
+    width:40px;
+    height:40px;
+    margin-right:5px;
 }
 
 .notificationFooter{
     text-align: center;
 }
 
+ .arrow::before{
+    right:5px;
+}
+
+ .arrow::after{
+    right:5px;
+}

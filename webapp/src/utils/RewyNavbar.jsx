@@ -7,11 +7,16 @@ import {signOut} from '../actions/login';
 import './RewyNavbar.css'
 import LoginButton from '../components/Login/LoginButton'
 import NotificationDropdownList from '../components/Notification/NotificationDropdownList';
+import {Cookies} from 'react-cookie';
 
 function RewyNavbar() {
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state=>state.loginReducer.isLoggedIn);
+
+  const cookies = new Cookies();
+  const session_token = cookies.get("session_token");
+
 
     return (
 
@@ -28,7 +33,7 @@ function RewyNavbar() {
       <Nav.Link href="/login"><LoginButton/></Nav.Link>
     </Nav>:
     <div>
-      <NotificationDropdownList/>
+      <NotificationDropdownList token={session_token}/>
     <NavDropdown className="dropdown-list" title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
 
         <NavDropdown.Item href="/profile">profile</NavDropdown.Item>

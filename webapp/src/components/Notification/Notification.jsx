@@ -4,36 +4,27 @@ import {Card} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import './Notification.css';
-function Notification() {
+function Notification(props) {
+
+    const {notificationList} = props;
 
 
-const user = useSelector(state => state.userReducer.user);
-const notificationCard = user && user.profileImageUrl;
 
-useEffect(() =>{
+const notificationCardList = notificationList && notificationList.map((notification,index) => <Card key={index}
+className={`${notification.shown ?  "notificationCardShown" : "notificationCard"}`}>
+<Card.Body className="notificationText">
+    <img className="notificationCardImage" src={notification.notification.user.profileImageUrl} alt="profile" />
+{notification.notification.notificationText}
+</Card.Body>
+</Card>);
 
-    
-    
-},[user]);
-
+console.log(notificationList);
 
 
         return (
 
         <div>
-    <Card className="notificationCardShown">
-    <Card.Body>This is some text within a card body.</Card.Body>
-    </Card>
-    <Card className="notificationCardShown">
-    <Card.Body> {user ? <img className="notificationCardImage" src={notificationCard} alt="profile" />:<div></div>}This is some text within a card body.</Card.Body>
-    </Card>
-    <Card className="notificationCard">
-    <Card.Body className="notificationText">This is some text within a card body. This is some text within a card body.This is some text within a card bodThis is some text within a card bod</Card.Body>
-    </Card>
-    <Card className="notificationCard">
-    <Card.Body>This is some text within a card body.</Card.Body>
-    </Card>
-            
+            {notificationCardList}           
     </div>
         );
 }

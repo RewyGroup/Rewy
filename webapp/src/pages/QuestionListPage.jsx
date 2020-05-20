@@ -14,14 +14,19 @@ const QuestionListPage = (props) => {
     const questionlist = useSelector(state => state.questionReducer.questionList);
     const {showSuccessToast,message} = props.location;
     var parts = props.location.pathname.split('/');
-    const location = parts[parts.length - 1];   
+    const location = parts[parts.length - 1];
+
     
     useEffect(() => {
+        if(!questionlist.length > 0){    
+            
         if(location === "all"){
+            
             dispatch(getAllQuestions());
         }else{
             dispatch(getAllQuestionsByCategoryName(location));
         }
+    }
     }, [])
 
     if(session_token){

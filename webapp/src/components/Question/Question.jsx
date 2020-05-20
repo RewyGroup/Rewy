@@ -43,6 +43,8 @@ const Question = (props) => {
   };
 
   useEffect(() => {
+
+    
     if(loggedInUserVote.length > 0){
       setVoteType(loggedInUserVote[0].type);
       }

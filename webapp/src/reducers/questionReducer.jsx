@@ -4,7 +4,8 @@ const initialState = {
     error : "",
     questionList:[],
     question:{} ,
-    questionIsCreated :false
+    questionIsCreated :false,
+    questionLoaded: false
 };
 
 
@@ -16,15 +17,15 @@ const questionReducer = ( state = initialState ,action) => {
         case 'CREATE_QUESTION_ERROR':
             return {...state, message: "", error: action.error.message, questionIsCreated:false}
         case 'GET_ALL_QUESTION_SUCCESS':
-            return {...state, message: "", error: "", questionList: action.payload, question:null, questionIsCreated: false}
+            return {...state, message: "", error: "", questionList: action.payload, questionIsCreated: false,questionLoaded:true}
         case 'GET_ALL_QUESTION_BY_CATEGORY_SUCCESS':
             return {...state, message: "", error: "", questionList: action.payload, question:null, questionIsCreated: false}  
         case 'GET_QUESTION_SUCCESS':
-            return {...state, message: "", error: "", questionList: [], question:action.payload, questionIsCreated: false}     
+            return {...state, message: "", error: "", question:action.payload, questionIsCreated: false}     
         case 'QUESTION_VOTE_CREATED_SUCCESS':
             return {...state,  message: "", error: "", questionList: [], question:{}, questionIsCreated: false}
         default:
-            return {...state, message: "", error:"", questionIsCreated: false}
+            return {...state, message: "", error:"", questionIsCreated: false,questionLoaded:false}
     }
 };
 

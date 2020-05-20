@@ -1,0 +1,73 @@
+.notificationCounter{
+    color:white;
+    font-size: 12px;
+    display: inline;
+    position: relative;
+    padding: 0px 4px;
+    left:24px;
+    top:-9px;
+    background-color: red;
+}
+.notificationCounterOff{
+    color:white;
+    font-size: 12px;
+    display: inline;
+    position: relative;
+    padding: 0px 4px;
+    left:24px;
+    top:-9px;   
+}
+.notification-list{
+    display: inline-block;
+    padding: 0 8px 0 0;
+    margin-right: 5px;
+}
+
+.notificationPopover{
+    max-width: 450px;
+}
+
+
+.notificationCard{
+    border-radius: 0;
+    border-top: none;
+    background-color: lightgrey;
+}
+.notificationText{
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notificationCard:hover{
+    background-color:rgba(15,15,15, 0.1);
+}
+
+.notificationCardShown{
+    border-top: none;
+    border-radius: 0;
+    background-color: white;
+}
+
+.notificationCardShown:hover{
+    background-color:rgba(15,15,15, 0.1);
+}
+
+.notificationCardImage{
+    width:40px;
+    height:40px;
+    margin-right:5px;
+}
+
+.notificationFooter{
+    text-align: center;
+}
+
+ .arrow::before{
+    right:5px;
+}
+
+ .arrow::after{
+    right:5px;
+}

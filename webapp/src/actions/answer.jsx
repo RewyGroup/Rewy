@@ -11,7 +11,7 @@ export const setCorrectAnswer = (answerId,token) =>{
 export const createAnswer = (answerWeb,token) =>{
     return(dispatch) => {
         return api.createAnswer(answerWeb,token).then(response => {
-            dispatch(createdAnswer())
+            dispatch(createdAnswer()).then(window.location.reload());
         })
     }
 }

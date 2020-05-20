@@ -4,6 +4,7 @@ import questionReducer from './questionReducer';
 import categoryReducer from './categoryReducer';
 import userReducer from './userReducer';
 import answerReducer from './answerReducer';
+import notificationReducer from './notificationReducer';
 import { combineReducers } from 'redux';
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     questionReducer: questionReducer,
     categoryReducer: categoryReducer,
     answerReducer:answerReducer,
-    userReducer:userReducer
+    userReducer:userReducer,
+    notificationReducer:notificationReducer,
     
 });
 

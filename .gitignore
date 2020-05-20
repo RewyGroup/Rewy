@@ -32,3 +32,5 @@ build/
 
 #ignore URL
 /webapp/src/api/URL.jsx
+
+/src/main/java/se/rewy/site/aws/Credentials.java

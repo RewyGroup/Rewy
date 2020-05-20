@@ -8,6 +8,7 @@
 
 .dropdown-icon{
     color: rgba(255,255,255,0.5);
+    font-size: 20px;
 }
 .dropdown-icon:hover{
     color: rgba(255,255,255,0.75);
@@ -16,6 +17,9 @@
 .dropdown > a:hover .dropdown-icon{
     color: rgba(255,255,255,0.75);
 }
+.nav-link{
+    padding:0;
+}
 
 .navbar {
     margin-bottom: 100px;
@@ -23,4 +27,11 @@
 .dropdown-menu{
     left: auto ;
     right: 0 ;
+}
+.dropdown-list{
+    display: inline-block;
+    padding: 8px;
+}
+.dropdownQuestion{
+    padding-right: 0px !important;
 }

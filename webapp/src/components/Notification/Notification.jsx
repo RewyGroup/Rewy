@@ -18,8 +18,6 @@ className={`${notification.shown ?  "notificationCardShown" : "notificationCard"
 </Card.Body>
 </Card>);
 
-console.log(notificationList);
-
 
         return (
 

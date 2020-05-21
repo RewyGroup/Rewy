@@ -5,13 +5,10 @@ import org.springframework.stereotype.Service;
 import se.rewy.site.exception.UserServiceException;
 import se.rewy.site.models.*;
 import se.rewy.site.models.web.AnswerWeb;
-import se.rewy.site.models.web.QuestionWeb;
 import se.rewy.site.repository.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class AnswerService {
@@ -22,14 +19,17 @@ public class AnswerService {
     private final VoteRepository voteRepository;
     private final NotificationRepository notificationRepository;
     private final NotifyUserRepository notifyUserRepository;
+    private final VoteService voteService;
     @Autowired
-    public AnswerService(AnswerRepository answerRepository,UserRepository userRepository,QuestionRepository questionRepository, VoteRepository voteRepository,NotificationRepository notificationRepository,NotifyUserRepository notifyUserRepository) {
+    public AnswerService(AnswerRepository answerRepository, UserRepository userRepository, QuestionRepository questionRepository, VoteRepository voteRepository,
+                         NotificationRepository notificationRepository, NotifyUserRepository notifyUserRepository, VoteService voteService) {
         this.answerRepository = answerRepository;
         this.userRepository = userRepository;
         this.questionRepository = questionRepository;
         this.voteRepository = voteRepository;
         this.notificationRepository = notificationRepository;
         this.notifyUserRepository = notifyUserRepository;
+        this.voteService = voteService;
     }
     public Answer findById(long id){
         return answerRepository.findById(id).get();
@@ -43,20 +43,23 @@ public class AnswerService {
         if (optionalUser.isPresent() && optionalQuestion.isPresent()){
             User user = optionalUser.get();
             Question question = optionalQuestion.get();
+            User questionOwner = question.getUser();
             answer.setUser(user);
             answer.setQuestion(question);
-            Notification notification = new Notification();
-            notification.setType("answer");
-            notification.setUser(user);
-            notification.setCreatedAt(LocalDateTime.now());
-            notification.setNotificationText(user.getUsername() +" has answered your question " + question.getTitle());
-            notificationRepository.save(notification);
+            if(user.getId() != questionOwner.getId()) {
+                Notification notification = new Notification();
+                notification.setType("answer");
+                notification.setUser(user);
+                notification.setCreatedAt(LocalDateTime.now());
+                notification.setNotificationText(user.getUsername() + " has answered your question " + question.getTitle());
+                notificationRepository.save(notification);
 
-            long userToNotify = question.getUser().getId();
-            NotifyUser notifyUser = new NotifyUser();
-            notifyUser.setNotification(notification);
-            notifyUser.setUserId(userToNotify);
-            notifyUserRepository.save(notifyUser);
+                long userToNotify = questionOwner.getId();
+                NotifyUser notifyUser = new NotifyUser();
+                notifyUser.setNotification(notification);
+                notifyUser.setUserId(userToNotify);
+                notifyUserRepository.save(notifyUser);
+            }
 
         }else{
             throw new UserServiceException("Something went wrong!");
@@ -87,25 +90,10 @@ public class AnswerService {
 
         Answer answer = answerRepository.findById(answerId).get();
         Vote vote = findVoteByAnswerAndUserId(answer,userId);
-        if(vote == null){
-            vote = new Vote();
-            User user = userRepository.findById(userId).get();
-            vote.setUser(user);
-        }
-        switch (voteType){
-            case  "UPVOTE":
-                vote.setType(VoteType.UPVOTE);
-                break;
 
-            case "DOWNVOTE":
-                vote.setType(VoteType.DOWNVOTE);
-                break;
-
-            default:
-                vote.setType(VoteType.NEUTRAL);
-        }
-        voteRepository.save(vote);
-        answer.getVotes().add(vote);
+        Vote newVote = voteService.setVoteType(vote,userId,voteType);
+        voteRepository.save(newVote);
+        answer.getVotes().add(newVote);
         answerRepository.save(answer);
 
 

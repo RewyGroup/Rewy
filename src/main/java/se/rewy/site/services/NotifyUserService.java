@@ -23,17 +23,18 @@ public class NotifyUserService {
         notifyUserRepository.save(notifyUser);
     }
 
+    public NotifyUser findById(long id){
+        return notifyUserRepository.findById(id).get();
+    }
 
     public Set<NotifyUser> getAllNotificationsByUserId(long id){
         return notifyUserRepository.findAllByUserId(id);
     }
 
 
-    public void setToShown(long id){
+    public void setToShown(Set<NotifyUser> notifyUsers){
 
-      Set<NotifyUser> notifyUserSet = notifyUserRepository.findALlByUserIdAndShownFalse(id);
-
-      for(NotifyUser notifyUser: notifyUserSet){
+      for(NotifyUser notifyUser: notifyUsers){
           notifyUser.setShown(true);
           notifyUserRepository.save(notifyUser);
       }

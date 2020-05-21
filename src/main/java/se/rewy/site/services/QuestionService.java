@@ -18,14 +18,17 @@ public class QuestionService {
     private final CategoryRepository categoryRepository;
     private final SubCategoryRepository subCategoryRepository;
     private final VoteRepository voteRepository;
+    private final VoteService voteService;
 
     @Autowired
-    public QuestionService(QuestionRepository questionRepository, UserRepository userRepository, CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository, VoteRepository voteRepository) {
+    public QuestionService(QuestionRepository questionRepository, UserRepository userRepository, CategoryRepository categoryRepository,
+                           SubCategoryRepository subCategoryRepository, VoteRepository voteRepository,VoteService voteService) {
         this.questionRepository = questionRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.subCategoryRepository = subCategoryRepository;
         this.voteRepository = voteRepository;
+        this.voteService = voteService;
     }
 
     public Question findById(long id) {
@@ -36,33 +39,21 @@ public class QuestionService {
         Question question = new Question();
         long userId = questionWeb.getUserId();
         Optional<User> user = userRepository.findById(userId);
-        if (user.isPresent()) {
-            question.setUser(user.get());
-        } else {
-            throw new UserServiceException("User not found");
-        }
+
+        question.setUser(user.get());
         question.setTitle(questionWeb.getTitle());
         question.setText(questionWeb.getText());
 
         String categoryName = questionWeb.getCategory();
         Optional<Category> category = categoryRepository.findByTypeName(categoryName);
-        if (category.isPresent()) {
-            question.setCategory(category.get());
-
-        } else {
-            throw new UserServiceException("Category " + categoryName + " not found");
-        }
+        question.setCategory(category.get());
 
         Set<SubCategory> subCategoryList = new HashSet<>();
         for (String s : questionWeb.getSubCategory()) {
             Optional<SubCategory> subCategory = subCategoryRepository.findByName(s);
-            if (subCategory.isPresent()) {
                 subCategoryList.add(subCategory.get());
-
-            } else {
-                throw new UserServiceException("SubCategory " + s + " not found");
             }
-        }
+
         question.setSubCategoryList(subCategoryList);
         question.setCreatedAt(LocalDateTime.now());
         questionRepository.save(question);
@@ -95,25 +86,9 @@ public class QuestionService {
         Question question = questionRepository.findById(questionId).get();
         Vote vote = findVoteByQuestionAndUserId(question,userId);
 
-        if(vote == null){
-            vote = new Vote();
-            User user = userRepository.findById(userId).get();
-            vote.setUser(user);
-        }
-        switch (voteType){
-            case  "UPVOTE":
-                vote.setType(VoteType.UPVOTE);
-                break;
-
-            case "DOWNVOTE":
-                vote.setType(VoteType.DOWNVOTE);
-                break;
-
-            default:
-                vote.setType(VoteType.NEUTRAL);
-        }
-        voteRepository.save(vote);
-        question.getVotes().add(vote);
+        Vote newVote = voteService.setVoteType(vote,userId,voteType);
+        voteRepository.save(newVote);
+        question.getVotes().add(newVote);
         questionRepository.save(question);
 
 

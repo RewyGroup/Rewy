@@ -41,7 +41,7 @@ const QuestionPage = (props) => {
 
         useEffect(() => {
 
-          if(activeQuestion === null && newQuestion.category){
+          if(activeQuestion === null && newQuestion && newQuestion.category){
               
             setActiveQuestion(newQuestion);
             }

@@ -1,0 +1,79 @@
+
+.categoryBanner {
+    margin-top: 100px;
+    background-color: #FFECEC;
+    text-align: right;
+    border-radius: 30px;
+}
+.categoryBanner > .categoryBannerHeader {
+    text-align: left;
+}
+.categoryBannerHeader{
+    padding: 40px;
+}
+.categoryBannerHeader > h1{
+    margin-top:24px;
+    color: #22243B;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-size: 3.5rem;
+}
+.categoryBannerHeader > h2{
+    margin-top: 24px;
+    font-size: 1.125rem;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+    color: #285273;
+}
+
+.categoryBannerImg{
+    padding: 40px;
+    width: 80%;
+    height: auto;
+}
+
+@media (max-width:768px){
+    .categoryBanner{
+        display: block;
+        text-align: center;
+        margin-left: 10px;
+        margin-right:10px;
+    }
+    .categoryBanner > .categoryBannerHeader {
+        text-align: center;
+    }
+}
+
+.categoryBoxSize{
+    padding:0px 25px;
+}
+
+.categoryListRow{
+    margin-top: 30px;
+    text-align: center;
+}
+.categoryListCard{
+    font-family: "Roboto",sans-serif;
+    font-weight: 500;
+    margin-top: 30px;
+    border:none;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 0;
+    color:#292D48;
+    background-color:  #ffffff;
+    height: 80%;
+    width: auto;
+}
+
+.categoryListCard:hover{
+    box-shadow: 0 1px 4px rgba(0,0,0,0.18), 0 3px 8px rgba(0,0,0,0.18), 0 4px 13px rgba(0,0,0,0.26);
+}
+.categoryListCardText{
+    padding-bottom:20px;
+}
+
+.CategoryListCardIcon{
+    font-size:40px;
+    margin-bottom:10px;
+    margin-top: 20px;
+}

@@ -16,10 +16,7 @@ const categoryListItems = [
   className="CategoryListCardIcon"
   icon={faCalculator}
 />},
-  {category:"Chemistry",icon:<FontAwesomeIcon
-  className="CategoryListCardIcon"
-  icon={faFlask}
-/>},
+  {category:"KEMI",icon:<img className="CategoryListCardIcon" src="/kategorier/kemi.png" alt="kemi" />},
   {category:"Language",icon:<FontAwesomeIcon
   className="CategoryListCardIcon"
   icon={faGlobe}
@@ -38,7 +35,7 @@ const categoryListItems = [
 
   }
 
-const categoryRenderOutput = categoryListItems.map((item,index)=>(<Col key={index} >
+const categoryRenderOutput = categoryListItems.map((item,index)=>(<Col className="categoryBoxSize" xs={6} lg={3} key={index}>
   <Card onClick={handleOnClick} className="categoryListCard" id={item.category}>
     <Card.Body>
     {item.icon}
@@ -51,12 +48,15 @@ const categoryRenderOutput = categoryListItems.map((item,index)=>(<Col key={inde
 
 
   return (
-    <div className="categoryList">
-      <Row className="categoryListHeaderRow">
-        <div className="categoryListHeaderWrapper">
-          <h2 className="categoryListHeader">Categories</h2>
-        </div>
-      </Row>
+    <div>
+      <Row className="categoryBanner">
+        <Col className="categoryBannerHeader"><h1>Kategorier</h1>
+        <h2>bläddra bland alla kategorier</h2>
+        </Col>
+        <Col>
+          <img className="categoryBannerImg" src="/choose.png" alt="fråga" />
+        </Col>
+        </Row>
       <Row className="categoryListRow">
         {categoryRenderOutput}
       </Row>

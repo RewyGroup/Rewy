@@ -1,5 +1,5 @@
 .dropdown > a {
-    color: rgba(255,255,255,0.5);
+    color: #A4A4A4;
 }
 
 .dropdown > a:hover {
@@ -7,7 +7,7 @@
 }
 
 .dropdown-icon{
-    color: rgba(255,255,255,0.5);
+    color: #A4A4A4;
     font-size: 20px;
 }
 .dropdown-icon:hover{
@@ -20,9 +20,17 @@
 .nav-link{
     padding:0;
 }
+.navbar-brand{
+    margin-right:0;
+    margin-left: 20px;
+    text-align: end;
+    padding: 0;
+}
 
-.navbar {
+.rewyNavbar {
+    background-color:#ffffff;
     margin-bottom: 100px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .dropdown-menu{
     left: auto ;
@@ -35,3 +43,18 @@
 .dropdownQuestion{
     padding-right: 0px !important;
 }
+.dropdownQuestion > h3{
+    margin: 0;
+    font-size: 1.125rem;
+    font-family: "Roboto",sans-serif;
+    font-weight: 500;
+    color: #A4A4A4;
+    margin-right: 20px;
+}
+
+@media (max-width:768px){
+    .dropdownQuestion > h3{
+        margin-bottom: 20px;
+    }
+}
+

@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.rewy.site.models.*;
-import se.rewy.site.services.CategoryService;
-import se.rewy.site.services.QuestionService;
-import se.rewy.site.services.SubCategoryService;
-import se.rewy.site.services.UserService;
+import se.rewy.site.services.*;
+
+import javax.mail.MessagingException;
 
 
 @RestController
@@ -17,14 +16,16 @@ public class HomeController {
     private final QuestionService questionService;
     private final CategoryService categoryService;
     private final SubCategoryService subCategoryService;
+    private final MailService mailService;
 
 
     @Autowired
-    public HomeController(UserService userService,QuestionService questionService,CategoryService categoryService,SubCategoryService subCategoryService){
+    public HomeController(UserService userService, QuestionService questionService, CategoryService categoryService, SubCategoryService subCategoryService, MailService mailService){
         this.userService = userService;
         this.questionService = questionService;
         this.categoryService = categoryService;
         this.subCategoryService = subCategoryService;
+        this.mailService = mailService;
     }
 
 
@@ -50,4 +51,10 @@ public class HomeController {
          SubCategory subCategory = subCategoryService.findById(id);
          return  ResponseEntity.ok(subCategory);
      }
+     @PostMapping("send/mail")
+    ResponseEntity<?> sendMail() throws MessagingException {
+        mailService.sendEmail();
+        return ResponseEntity.ok().build();
+     }
 }
+

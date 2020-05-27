@@ -6,7 +6,7 @@ import './LoginButton.css'
 
 function LoginButton() {
         return (
-            <Button className="loginButton"><FontAwesomeIcon className="loginButtonIcon" icon={faUser}/>LOGIN</Button>
+            <Button className="loginButton">LOGGA IN</Button>
         );
 }
 

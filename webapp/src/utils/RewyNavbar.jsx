@@ -20,13 +20,14 @@ function RewyNavbar() {
 
     return (
 
-<Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-  <Navbar.Brand href="/"><img width="20%" src="/RewyIcon.png" alt=""/></Navbar.Brand>
+<Navbar sticky="top" collapseOnSelect expand="md" className="rewyNavbar" >
+  <Navbar.Brand href="/"><img width="65%" src="/RewyIcon.png" alt=""/></Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+  <Navbar.Collapse id="responsive-navbar-nav" className="rewyNavbarContent justify-content-end">
     <FontAwesomeIcon className="dropdown-icon" icon={faSearch} />
     <Nav>
-    <Nav.Link className="dropdownQuestion" href="/question/all">Browse Questions</Nav.Link>
+    <Nav.Link className="dropdownQuestion" href="/question/all"><h3>Kategorier</h3></Nav.Link>
+    <Nav.Link className="dropdownQuestion" href="/question/all"><h3>Frågor</h3></Nav.Link>
     </Nav>
     {!isLoggedIn ? 
       <Nav >

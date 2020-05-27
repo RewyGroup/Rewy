@@ -1,0 +1,64 @@
+.information{
+    margin-top: 300px;
+    justify-content: center;
+}
+.informationCol{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.informationCard{
+    text-align: center;
+    padding: 80px 20px;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+    height: 90%;
+    width: auto;
+}
+@media (max-width:1024px){
+
+.informationCol {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+}
+@media (max-width:768px){
+    .informationCard{
+        margin-top: 80px;
+    }
+}
+
+.informationCard > h2 {
+    color: #22243B;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-size: 2rem;
+}
+.informationCard > p {
+    margin-top: 24px;
+    font-size: 1.125rem;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+    color: #285273;
+}
+.informationCardImg{
+    width: 80%;
+    height: auto;
+
+}
+.informationButtonWrapper{
+    margin-top: 100px;
+    text-align: center;
+}
+.informationButton{
+    background-color: #ffffff;
+    color:#292D48;
+    border-radius: 0;
+    border: 3px solid #292D48;
+    font-family: "Roboto",sans-serif;
+    font-weight: 500;
+}
+.informationButton:hover{
+    border: 3px solid #FF9838;
+    background-color: #FF9838;
+}
+ 
+

@@ -13,6 +13,7 @@ import se.rewy.site.models.User;
 import se.rewy.site.models.UserCredentials;
 import se.rewy.site.repository.UserRepository;
 
+import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.time.LocalDateTime;
@@ -21,10 +22,12 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final MailService mailService;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, MailService mailService) {
         this.userRepository = userRepository;
+        this.mailService = mailService;
     }
 
 
@@ -34,7 +37,7 @@ public class UserService implements UserDetailsService {
 
     public Optional<User> findByEmail(String email) { return userRepository.findUserByEmail(email);}
 
-    public ResponseEntity<?> saveUser (User user) throws UserServiceException {
+    public ResponseEntity<?> saveUser (User user) throws UserServiceException, MessagingException {
         Optional<User> optionalUser = findByUsername(user.getUsername());
         Optional<User> optionalUserByEmail = findByEmail(user.getEmail());
 
@@ -45,6 +48,7 @@ public class UserService implements UserDetailsService {
             String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
             user.setPassword(encodedPassword);
             userRepository.save(user);
+            mailService.sendRegisterEmail(user.getEmail());
         }else{
         if(optionalUser.isPresent() && optionalUserByEmail.isPresent()){
             throw new UserServiceException("Username and Email is already in use!");

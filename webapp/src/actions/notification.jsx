@@ -11,10 +11,10 @@ export const getNotificationById = (id,token) => {
 }
 };
 
-export const setNotificationsToShown = (userId,token) => {  
+export const setNotificationsToShown = (notShownNotifications,token) => {  
     return (dispatch) => {
         
-    return api.setNotificationsToShown(userId,token).then(response => {
+    return api.setNotificationsToShown(notShownNotifications,token).then(response => {
         dispatch(notificationSetToShown())
     })
 }

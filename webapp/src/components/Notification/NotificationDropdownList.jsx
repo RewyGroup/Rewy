@@ -19,6 +19,16 @@ function NotificationDropdownList(props) {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.loginReducer.user.id);
     const optionalNotifications = useSelector(state => state.notificationReducer.notifications);
+    const notShownNotifications = optionalNotifications.filter(notification => notification.shown === false);
+
+   useEffect(() =>{
+    if(notShownNotifications.length> 0){
+      notShownNotifications.forEach(function (notification){
+      notification.notification.user.role =  notification.notification.user.role.toUpperCase();      
+
+      })       
+    }
+    },[notShownNotifications]);
 
    useEffect(() =>{
 
@@ -31,7 +41,7 @@ function NotificationDropdownList(props) {
     const handleClick = (event) => {
       setShow(!show);
       setTarget(event.target);
-      dispatch(setNotificationsToShown(userId,token));
+      dispatch(setNotificationsToShown(notShownNotifications,token));
       setNotifierWarning(false);
     };
 
@@ -43,7 +53,6 @@ function NotificationDropdownList(props) {
     useEffect(() =>{
 
        if(optionalNotifications.length > 0){
-           console.log(optionalNotifications);
            
         var counter = optionalNotifications.filter(notification => notification.shown===false).length;
         if(counter > 0){

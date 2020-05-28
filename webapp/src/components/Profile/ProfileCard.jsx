@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Tabs,Tab } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit,faEnvelope,faMapMarkerAlt,faVenusMars } from '@fortawesome/free-solid-svg-icons';
 import Avatar from 'react-avatar-edit';
@@ -138,53 +138,47 @@ const ProfileCard = (props) => {
 
 
   return (
-    <Row className="profileCardRow">
-      <Col xs={6} md={12}>
-        <div className="profileCardWrapper">
-        <Card className="profileCardBanner">
-          <Card.Img className="profileCardImg" src="/banner.jpg" alt="Card image" />
-          <Card.ImgOverlay className="profileImgOverlay">
-            <div className="profileCardEditButtonWrapper">
-              <FontAwesomeIcon
-                className="profileCardEditButton"
+
+      <Row className="mr-0 ml-0 profileCard">
+        <Col className="profileCardWrapper" xs={12}>
+          <img  className="profileCardBanner" src="/banner.png" alt="banner" />
+        </Col>
+        <Col className="profileCardInfoWrapper" xs={12}>
+        <img className="profileImage" src={preview} onClick={profileImgClick} alt="Preview" />
+        <div className="profileCardInfoEditIcon">
+        <FontAwesomeIcon className="profileCardInfoEditIconSvg"
                 icon={faEdit} onClick={handleShowEditModal}
               />
-            </div>
-          </Card.ImgOverlay>
-
-        </Card>
-
-        <Card className="profileCardInfo">
-        
-
-          <Card.Body>
-            <Row>
-            <Col md={4} className="profileInfoLeft">
-            <img className="profileImage" src={preview} onClick={profileImgClick} alt="Preview" />
-            <div className="profileInfoHeader">
-            <Card.Text className="profileFullname"><span>{user.firstName}</span><span>{user.lastName}</span></Card.Text>
-            <Card.Text className="profileUsername"><span>@</span><span>{user.username}</span></Card.Text>
-            </div>
-            </Col>
-            <Col md={8} className="profileInfoRight">
-            <Card.Text>{user.email}<FontAwesomeIcon className="profileInfoIcon"
-                icon={faEnvelope} 
-              /></Card.Text>
-            <Card.Text>{user.occupation}<FontAwesomeIcon className="profileInfoIcon"
-                icon={faMapMarkerAlt} 
-              /></Card.Text>
-                          <Card.Text>{user.gender}<FontAwesomeIcon className="profileInfoIcon"
-                icon={faVenusMars} 
-              /></Card.Text>
-            </Col>
-            </Row>
-          </Card.Body>
-        </Card>
-        <ProfileImageModal show={showImageModal} handleUpdate={handleUpdateImageModal} handleClose={handleCloseImageModal} showAvatar={showAvatar()}/>
-        <ProfileEditModal token={token} show={showEditModal} handleUpdate={handleUpdateEditModal} handleClose={handleCloseEditModal} user={user}/>
-         </div>
+              </div>
+      <div className="profileCardInfoName">{user.firstName} {user.lastName}</div>
+      <div className="profileCardInfoUsername">@{user.username}</div>
       </Col>
-    </Row>
+      <Col className="profileCardWrapper" xs={12}>
+    <Tabs className="profileCardTabs" fill defaultActiveKey="info" id="uncontrolled-tab-example">
+  
+    <Tab  className="profileCardTab" eventKey="points" title="Poäng">
+
+    </Tab>
+    <Tab className="profileCardTab" eventKey="info" title="Information">
+        <div className="profileCardInformation"><FontAwesomeIcon className="profileInfoIcon"
+                icon={faEnvelope} 
+              />{user.email}</div>
+        <div className="profileCardInformation"><FontAwesomeIcon className="profileInfoIcon"
+                icon={faMapMarkerAlt} 
+              />{user.occupation}</div>
+        <div className="profileCardInformation"><FontAwesomeIcon className="profileInfoIcon"
+                icon={faVenusMars} 
+              />{user.gender}</div>
+    </Tab>
+    <Tab className="profileCardTab" eventKey="questions" title="Dina frågor">
+
+    </Tab>
+  </Tabs>
+  </Col>
+  <ProfileImageModal show={showImageModal} handleUpdate={handleUpdateImageModal} handleClose={handleCloseImageModal} showAvatar={showAvatar()}/>
+  <ProfileEditModal token={token} show={showEditModal} handleUpdate={handleUpdateEditModal} handleClose={handleCloseEditModal} user={user}/>
+  </Row>
+
   );
 };
 

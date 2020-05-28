@@ -2,10 +2,13 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
-import CategoryList from '../components/Category/CategoryList';
+import CategoryList from '../components/Home/Category/CategoryList';
 import {Container} from 'react-bootstrap';
-import Description from '../components/Description/Description';
 import 'react-multi-carousel/lib/styles.css';
+import Landing from '../components/Home/Landing/Landing';
+import Information from '../components/Home/Information/Information';
+import FooterCard from '../components/Home/Footer/FooterCard';
+import Footer from '../components/Home/Footer/Footer';
 
 function HomePage(props) {
 
@@ -29,12 +32,23 @@ function HomePage(props) {
         }
       }
 
+    const login = () => {
+        props.history.push("/login");
+    }
+      
+
         return (
             <div >
+
+
                 <Container>
-                    <Description createQuestion={createQuestion}/>
-                <CategoryList history={props.history}/>      
+                <Landing login={login} isLoggedIn={isLoggedIn}/>
+                    <Information createQuestion={createQuestion}/>
+                <CategoryList history={props.history}/> 
+                <FooterCard/>     
                 </Container>
+                <Footer/>   
+        
             </div>
         );
 }

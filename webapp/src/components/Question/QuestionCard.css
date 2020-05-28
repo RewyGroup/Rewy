@@ -1,6 +1,11 @@
 .cardRow{
-    justify-content: center;
     margin-bottom: 10px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    transition: transform .2s;
+}
+.cardRow:hover{
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+    transform: scale(1.01);
 }
 
 .cardCard{
@@ -19,14 +24,15 @@ box-shadow: 0 0 7px 0 rgba(37,67,92,0.2), 0 0 10px 2px rgba(37,67,92,0.3) ;
 }
 
 .cardNotify{
-    background-color: green;
+    background-color: #3AC271;;
     height: 2.4rem;
     width: 2.4rem;
     position: absolute;
-    left: -20px;
+    right: -20px;
     text-align: center;
-    top: 40px;
+    top: 35px;
     border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .cardIcon{
@@ -74,3 +80,103 @@ box-shadow: 0 0 7px 0 rgba(37,67,92,0.2), 0 0 10px 2px rgba(37,67,92,0.3) ;
     display: inline-block;
     margin:0px;
 }
+
+.questionCardVotes{
+padding: 0px;
+font-family: "Roboto";
+font-style: normal;
+font-weight: 500;
+font-size: 1rem;
+color:#285273;
+padding-bottom: 30px;
+padding-top: 30px;
+text-align: center;
+background-color: #F4F3F1;
+}
+.questionCardInfo{
+    background-color: #FFFFFF;
+    margin-top:10px;
+    
+}
+.questionCardCreatedInfo > div{
+    display: inline-block;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #BDBEC0;
+    padding:0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+ 
+}
+
+.questionCardCreatedByTime{
+    text-align: end;
+}
+.questionCardComments{
+    
+    text-align: end;
+}
+.questionCardCreatedByName{
+    font-weight: 500;
+    margin-left: 10px;
+    color: #22243B;
+}
+.questionCardComments{
+    text-align: end;
+    color:#285273 !important;
+}
+.questionCardCommentIcon{
+    margin-right: 5px;
+    color:#285273 !important;
+}
+
+.questionCardTitle{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+.questionCardCategory{
+    margin-bottom: 10px;
+}
+.questionCardCategory > div{
+    display: inline-block;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.85rem;
+    color: #BDBEC0;
+    padding:0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.questionCardCategoryName{
+    text-transform: uppercase;
+    
+
+}
+.questionCardCategoryNameWrapper{
+    color:#ffffff !important;
+    font-size: 0.7rem;
+    padding:5px 10px;
+    background: linear-gradient(90deg, #FF9838 0%, #FB6161 100%);
+}
+
+.questionCardSubCategory{
+    margin-left:5px;
+    margin-bottom: 5px;
+    color: #285273 !important;
+}
+
+@media (max-width:768px){
+    .cardRow{
+    margin-left: 20px;
+    }
+}
+

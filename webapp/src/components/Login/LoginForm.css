@@ -8,20 +8,27 @@
     padding:60px;
     background-color: #fff;
     box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.1);
-    width: 500px;
+    width: 525px;
 } 
 .loginForm-control{
+    padding-left: 0px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 300;
+    margin-bottom: 36px;
     box-shadow: none;
     border: 0;
     border-radius: 0;
-    border-bottom: 0.1rem solid	rgba(65,74,76,0.5);
+    border-bottom:2px solid #E6E6E6;
 }
 .loginForm-control:focus{
+    color:#295374;
     box-shadow: none;
-    border-bottom: 0.1rem solid rgba(14,17,17,0.75);
+    border-bottom: 2px solid #295374;
 
 }
 .loginForm-label{
+    margin-top: 10px;
 margin-bottom: 0;
 color:rgba(14,17,17,0.5);
 }
@@ -33,15 +40,18 @@ color:rgba(14,17,17,0.5);
     font-family: Arial, Helvetica, sans-serif;
     color: rgba(14,17,17,0.75);
 }
-
-
-.btn {
-    width: 100%;
+.loginFormButton{
     margin-top: 10px;
-    margin-bottom: 10px;
-    padding:10px;
 
+    border-radius: 0px;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    padding:10px 20px 10px 20px;
+    background-color: #FF9838;
+    border: none;
 }
+
 .loginErrorMessage{
     color: red;
     text-align: center;

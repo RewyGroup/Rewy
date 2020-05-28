@@ -1,81 +1,143 @@
 .profileCardRow{
     justify-content: center;
 }
+.profileCard{
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+}
+.profileCardInfoWrapper{
+    padding: 0px;
+    text-align: center;
+}
 
 .profileCardWrapper{
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.06), 0 3px 8px rgba(0,0,0,0.09);
+    padding: 0;
 }
 
 .profileCardBanner{
     border: 0;
     border-radius: 0;
+    width: 100%;
 }
-.profileCardImg{
-    border-radius: 0;
+.profileCardInfoEditIcon{
+    padding:5px;
+    font-size: 1.5rem;
+    text-align: end;
+    margin-top: -180px;
+}
+.profileCardInfoEditIconSvg{
+    color: #292D48;
+}
+.profileCardInfoEditIconSvg:hover{
+    color:#295374;
 }
 
-.profileCardEditButtonWrapper{
-   text-align: right;
+.profileCardInfoName{
+    color:#292D48;
+    font-family: "Roboto";
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    margin-top: 70px;
+}
+.profileCardInfoUsername{
+    font-family: "Roboto";
+    font-size: 1.25rem;
+    font-style: normal;
+    color:#BDBEC0;
+}
+.profileCardTabs{
+    margin-top:100px;
+    font-family: "Roboto";
+    font-size: 1.25rem;
+    font-style: normal;
+    
+}
+.profileCardTabs > a{
+    color:#BDBEC0;
+}
+.profileCardTabs > .nav-link.active{
+    color:#295374;
+    border:none;
+    border-bottom: 2px solid #295374;
+}
+.profileCardTabs > .nav-link.active:hover{
+    color:#295374;
+    border:none;
+    border-bottom: 2px solid #295374;
+}
+.profileCardTabs > .nav-link:hover{
+    color:#295374;
+    border:none;
 }
 
-.profileCardEditButton{
-    font-size: 2rem;
-    color: #fff;
+.nav-fill > .nav-item{
+    flex: 1;
 }
 
+.profileCardInformation{
+    font-family: "Roboto";
+    font-size: 1rem;
+    font-style: normal;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #292D48;
+}
 
-.profileCardEditButton:hover{
-    color: grey;
-}
-.profileCardInfo{
-    background-color: white;
-    border-radius: 0;
-    border: 0;
-}
 
 
 .profileImage{
     width: 180px;
     height: 180px;
     position: relative;
-    top: -110px;
+    top: -90px;
     border-radius: 90px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.06), 0 3px 8px rgba(0,0,0,0.09)
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.06), 0 3px 8px rgba(0,0,0,0.09);
+    transition: transform .2s;
 }
-.profileFullname{
-    margin: 0;
-}
-.profileFullname > span{
- margin-right: 10px;
- font-size: 20px;
- font-weight: 600;
- text-transform: uppercase;
-}
-.profileUsername > span{
-    font-size: 16px;
-    color: #777;
-   }
 
 .profileImage:hover{
-    opacity: 0.98;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.14), 0 2px 6px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.20)
-    
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.14), 0 2px 6px rgba(0,0,0,0.14), 0 3px 8px rgba(0,0,0,0.20);
+    transform: scale(1.05);
 }
-.profileInfoHeader{
-    margin-top:-90px;
-}
+
 .profileModalBody> div > div{
  width: auto !important;
 }
-.profileInfoLeft{
-    text-align: center;
-}
-.profileInfoRight{
-    text-align: right;
-    padding-top: 20px;
-}
+
 .profileInfoIcon{
-    color: grey;
-    margin-left: 10px;
+    color: #BDBEC0;
+    margin:0px 15px 0px 20px;
     font-size: 26px;
+}
+@media (max-width:767px){
+    .profileImage{
+        width: 30%;
+        height: auto;
+    }
+
+}
+@media (max-width:414px){
+    .profileImage{
+        top: -55px;
+    }
+    .profileCardInfoEditIcon{
+        margin-top: -120px
+    }
+}
+@media (max-width:375px){
+    .profileImage{
+        top: -55px;
+    }
+    .profileCardInfoEditIcon{
+        margin-top: -110px
+    }
+}
+@media (max-width:320px){
+    .profileImage{
+        top: -45px;
+    }
+    .profileCardInfoEditIcon{
+        margin-top: -100px
+    }
 }

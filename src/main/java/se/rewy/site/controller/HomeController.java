@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.rewy.site.models.*;
-import se.rewy.site.services.CategoryService;
-import se.rewy.site.services.QuestionService;
-import se.rewy.site.services.SubCategoryService;
-import se.rewy.site.services.UserService;
+import se.rewy.site.services.*;
+
+import javax.mail.MessagingException;
 
 
 @RestController
@@ -20,7 +19,7 @@ public class HomeController {
 
 
     @Autowired
-    public HomeController(UserService userService,QuestionService questionService,CategoryService categoryService,SubCategoryService subCategoryService){
+    public HomeController(UserService userService, QuestionService questionService, CategoryService categoryService, SubCategoryService subCategoryService){
         this.userService = userService;
         this.questionService = questionService;
         this.categoryService = categoryService;
@@ -50,4 +49,6 @@ public class HomeController {
          SubCategory subCategory = subCategoryService.findById(id);
          return  ResponseEntity.ok(subCategory);
      }
+
 }
+

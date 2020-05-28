@@ -1,0 +1,49 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.landing{
+    margin-top: 150px;
+}
+.landingTitle {
+margin-top:100px;    
+}
+.landingTitle > h1{
+color: #22243B;
+font-family: 'Roboto', sans-serif;
+font-style: normal;
+font-size: 3.5rem;
+}
+
+.landingTitle > h2{
+
+    margin-top: 32px;
+    font-size: 1.5rem;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+    color: #285273;
+}
+
+.landingButton{
+    margin-top:75px;
+    border-radius: 0px;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    padding:10px 20px 10px 20px;
+    background-color: #FF9838;
+    border: none;
+}    
+@media (max-width:1024px){
+    .landingTitle{
+        text-align: center;
+    }
+    .landingImg{
+        display:none;
+    }
+}
+.landingImgWrapper{
+    padding-right: 0px;
+}
+.landingImg{
+    width:700px;
+}

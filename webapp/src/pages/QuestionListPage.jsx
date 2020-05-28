@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import {stillLoggedIn} from '../actions/login';
 import {getAllQuestions,getAllQuestionsByCategoryName} from '../actions/question';
 import {Cookies} from 'react-cookie';
-import {Container} from 'react-bootstrap';
+import {Col,Row} from 'react-bootstrap';
 import QuestionCard from '../components/Question/QuestionCard';
 import SuccessToast from '../utils/SuccessToast';
+import Sidebar from '../utils/Sidebar';
 
 const QuestionListPage = (props) => {
     const dispatch = useDispatch();
@@ -36,12 +37,19 @@ const QuestionListPage = (props) => {
     const questions = questionlist && questionlist.length > 0 &&  
     questionlist.map((question,index)=>(<QuestionCard key={index} question={question} history={props.history}/>)) 
     
-
+    
         return (
-<Container>
+
+    <Row className="mr-0">
+    <Col className="sidebarWrapper" xs={12} lg={2}>
+        <Sidebar/>
+    </Col>
+    <Col xs={{span:10, offset:1}} lg={{span:7, offset:1}}>
 <SuccessToast message={message} showSuccessToast={showSuccessToast}/>
 {questions}
-</Container>
+</Col>
+</Row>
+
         );
 }
 

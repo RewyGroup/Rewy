@@ -63,10 +63,13 @@
     background-color:  #ffffff;
     height: 80%;
     width: auto;
+    transition: transform .2s;
+    
 }
 
 .categoryListCard:hover{
-    box-shadow: 0 1px 4px rgba(0,0,0,0.18), 0 3px 8px rgba(0,0,0,0.18), 0 4px 13px rgba(0,0,0,0.26);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 3px 8px rgba(0,0,0,0.12), 0 4px 13px rgba(0,0,0,0.13);
+    transform: scale(1.03);
 }
 .categoryListCardText{
     padding-bottom:20px;

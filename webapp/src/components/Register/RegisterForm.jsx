@@ -107,11 +107,11 @@ function RegisterForm() {
 
 
             <Form.Group  className="register-form-group">
-      <Form.Label className ="registerForm-label">Gender</Form.Label >
+      <Form.Label className ="registerForm-label">Kön</Form.Label >
       <div>
         <Form.Check inline required
           type="radio"
-          label="Male"
+          label="Man"
           value="Male"
           name="Gender"
           id="formHorizontalRadios1"
@@ -120,7 +120,7 @@ function RegisterForm() {
         />
         <Form.Check inline
           type="radio"
-          label="Female"
+          label="Kvinna"
           value="Female"
           name="Gender"
           id="formHorizontalRadios2"
@@ -128,7 +128,7 @@ function RegisterForm() {
         />
         <Form.Check inline
           type="radio"
-          label="Other"
+          label="Annat"
           value="Other"
           name="Gender"
           id="formHorizontalRadios3"
@@ -138,7 +138,7 @@ function RegisterForm() {
         </Form.Group>
 
         <Form.Group className="register-form-group">
-          <Form.Label className ="registerForm-label">Date of birth</Form.Label>
+          <Form.Label className ="registerForm-label">Födelsedatum</Form.Label>
           <Form.Control type="date" onChange={onChangeDateOfBirth}  required/>
         </Form.Group>
 

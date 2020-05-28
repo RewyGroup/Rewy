@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navbar,Nav,NavDropdown} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faUser,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux';
 import {signOut} from '../actions/login';
 import './RewyNavbar.css'
@@ -37,9 +37,9 @@ function RewyNavbar() {
       <NotificationDropdownList token={session_token}/>
     <NavDropdown className="dropdown-list" title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
 
-        <NavDropdown.Item href="/profile">profile</NavDropdown.Item>
+        <NavDropdown.Item href="/profile"><FontAwesomeIcon className="dropdownShown-icon"  icon={faUser} />profil</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item onClick={() => dispatch(signOut())}>Sign out</NavDropdown.Item>
+        <NavDropdown.Item onClick={() => dispatch(signOut())}><FontAwesomeIcon className="dropdownShown-icon"  icon={faSignOutAlt} />logga ut</NavDropdown.Item>
       </NavDropdown></div>}
   </Navbar.Collapse>
 </Navbar>

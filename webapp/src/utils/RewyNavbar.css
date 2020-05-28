@@ -36,6 +36,21 @@
     left: auto ;
     right: 0 ;
 }
+.dropdown-menu.show{
+
+    color:white;
+    border-radius: 2px;
+    margin-left:10px;
+}
+.dropdownShown-icon{
+    color:#A4A4A4;
+    margin-right: 10px;
+}
+.dropdown-item{
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+    color: #A4A4A4;
+}
 .dropdown-list{
     display: inline-block;
     padding: 8px;

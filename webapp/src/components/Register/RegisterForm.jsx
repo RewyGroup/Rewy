@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Container } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch,useSelector } from 'react-redux';
 import './RegisterForm.css';
 import { register } from '../../actions/register';
+import Footer from '../Home/Footer/Footer'
 
 function RegisterForm() {
 
@@ -62,40 +63,46 @@ function RegisterForm() {
 
 
   return (
-    <Container className="registerContainer">
-      <Row className="registerRow">
+<div>
+      <Row className="registerRow mr-0">
+        <Col xs={12}  lg={{span:4, offset:1}} xl={5} >
+          <div className="registerImgWrapper">
+        <img className="registerImg" src="/registrera.png" alt="registrera" />
+        </div>
+        </Col>
+        <Col className="registerFormPlacement" xs={12} lg={{span:6, offset:-1}} xl={5} >
         <Form className="registerForm" onSubmit={handleSubmit}>
           <div id="header">
-            <h2>Register</h2>
+            <h2>Registrera</h2>
           </div>
           <Form.Group className="register-form-group" controlId="formBasicUsername">
-            <Form.Label className ="registerForm-label">Username</Form.Label>
-            <Form.Control className="registerForm-control" type="text" onChange={onChangeUsername} required />
+
+            <Form.Control placeholder="Användarnamn" className="registerForm-control" type="text" onChange={onChangeUsername} required />
           </Form.Group>
 
           <Form.Group className="register-form-group" controlId="formBasicPassword">
-            <Form.Label className ="registerForm-label">Password</Form.Label>
-            <Form.Control className="registerForm-control" type="password" onChange={onChangePassword}  required/>
+
+            <Form.Control placeholder="Lösenord" className="registerForm-control" type="password" onChange={onChangePassword}  required/>
           </Form.Group>
 
             <Form.Group className="register-form-group" controlId="formBasicEmail">
-              <Form.Label className ="registerForm-label">Email</Form.Label>
-              <Form.Control className="registerForm-control" type="email" onChange={onChangeEmail}  required/>
+
+              <Form.Control placeholder="E-post" className="registerForm-control" type="email" onChange={onChangeEmail}  required/>
             </Form.Group>
 
             <Form.Group className="register-form-group" controlId="formBasicFirstName">
-              <Form.Label className ="registerForm-label">First name</Form.Label>
-              <Form.Control className="registerForm-control" type="text" onChange={onChangeFirstName}required />
+
+              <Form.Control placeholder="Förnamn" className="registerForm-control" type="text" onChange={onChangeFirstName}required />
             </Form.Group>
 
             <Form.Group className="register-form-group" controlId="formBasicLastName">
-              <Form.Label className ="registerForm-label">Last name</Form.Label>
-              <Form.Control className="registerForm-control" type="text" onChange={onChangeLastName}required />
+
+              <Form.Control placeholder="Efternamn" className="registerForm-control" type="text" onChange={onChangeLastName}required />
             </Form.Group>
 
             <Form.Group className="register-form-group" controlId="formBasicOccupation">
-              <Form.Label className ="registerForm-label">Occupation</Form.Label>
-              <Form.Control className="registerForm-control" type="text" onChange={onChangeOccupation}  required/>
+
+              <Form.Control placeholder="Sysselsättning" className="registerForm-control" type="text" onChange={onChangeOccupation}  required/>
             </Form.Group>
 
 
@@ -138,13 +145,14 @@ function RegisterForm() {
 
 
 
-            <Button variant="dark" type="submit">
-                Register
+            <Button className="registerButton" type="submit">
+            REGISTRERA
             </Button>
             {errorMessage ? <div>{errorMessage}</div> : <div></div>}
         </Form>
+        </Col>
       </Row>
-    </Container>
+</div>
 
 
   );

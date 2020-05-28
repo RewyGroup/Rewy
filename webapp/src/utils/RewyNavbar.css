@@ -3,7 +3,7 @@
 }
 
 .dropdown > a:hover {
-    color: rgba(255,255,255,0.75);
+    color:#285273 ;
 }
 
 .dropdown-icon{
@@ -11,11 +11,11 @@
     font-size: 20px;
 }
 .dropdown-icon:hover{
-    color: rgba(255,255,255,0.75);
+    color:#285273;
 }
 
 .dropdown > a:hover .dropdown-icon{
-    color: rgba(255,255,255,0.75);
+    color:#285273;
 }
 .nav-link{
     padding:0;
@@ -47,9 +47,12 @@
     margin: 0;
     font-size: 1.125rem;
     font-family: "Roboto",sans-serif;
-    font-weight: 500;
+    font-weight: 300;
     color: #A4A4A4;
     margin-right: 20px;
+}
+.dropdownQuestion > h3:hover{
+    color:#285273;
 }
 
 @media (max-width:768px){

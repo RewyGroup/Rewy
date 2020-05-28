@@ -38,24 +38,22 @@ function LoginForm() {
       <Row className="loginRow">
         <Form className="loginForm" onSubmit={handleSubmit}>
          <div id="header">
-          <h2>Login</h2>
+          <h2>Logga in</h2>
           </div>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label className="loginForm-label">Username</Form.Label>
-            <Form.Control className="loginForm-control" type="text" onChange={onChangeUsername}/>
+            <Form.Control placeholder="Användarnamn" className="loginForm-control" type="text" onChange={onChangeUsername}/>
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label className="loginForm-label">Password</Form.Label>
-            <Form.Control className="loginForm-control" type="password" onChange={onChangePassword} />
+            <Form.Control placeholder="Lösenord" className="loginForm-control" type="password" onChange={onChangePassword} />
           </Form.Group>
           <Form.Group>
-            <Button variant="dark" type="submit">
-              Sign in
+            <Button className="loginFormButton" type="submit">
+              LOGGA IN
             </Button>
           </Form.Group>
           <Form.Group>
-            <Form.Label className="loginForm-label">Don't have an account? <a href="/register" >Sign up</a></Form.Label>
+            <Form.Label className="loginForm-label">Har du inte redan ett konto? <a href="/register" >Registrera</a></Form.Label>
           </Form.Group>
           {errorMessage ? <div className="loginErrorMessage">{errorMessage}</div> : <div></div>}
         </Form>

@@ -32,12 +32,17 @@ function HomePage(props) {
         }
       }
 
+    const login = () => {
+        props.history.push("/login");
+    }
+      
+
         return (
             <div >
 
 
                 <Container>
-                <Landing/>
+                <Landing login={login} isLoggedIn={isLoggedIn}/>
                     <Information createQuestion={createQuestion}/>
                 <CategoryList history={props.history}/> 
                 <FooterCard/>     

@@ -16,16 +16,14 @@ public class HomeController {
     private final QuestionService questionService;
     private final CategoryService categoryService;
     private final SubCategoryService subCategoryService;
-    private final MailService mailService;
 
 
     @Autowired
-    public HomeController(UserService userService, QuestionService questionService, CategoryService categoryService, SubCategoryService subCategoryService, MailService mailService){
+    public HomeController(UserService userService, QuestionService questionService, CategoryService categoryService, SubCategoryService subCategoryService){
         this.userService = userService;
         this.questionService = questionService;
         this.categoryService = categoryService;
         this.subCategoryService = subCategoryService;
-        this.mailService = mailService;
     }
 
 
@@ -51,10 +49,6 @@ public class HomeController {
          SubCategory subCategory = subCategoryService.findById(id);
          return  ResponseEntity.ok(subCategory);
      }
-     @PostMapping("send/mail")
-    ResponseEntity<?> sendMail() throws MessagingException {
-        mailService.sendEmail();
-        return ResponseEntity.ok().build();
-     }
+
 }
 

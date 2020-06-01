@@ -25,7 +25,7 @@ const questionReducer = ( state = initialState ,action) => {
         case 'QUESTION_VOTE_CREATED_SUCCESS':
             return {...state,  message: "", error: "", questionList: [], question:{}, questionIsCreated: false}
         default:
-            return {...state, message: "", error:"", questionIsCreated: false,questionLoaded:false}
+            return {...state, message: "", error:"", questionIsCreated: false}
     }
 };
 

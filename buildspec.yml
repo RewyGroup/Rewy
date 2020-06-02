@@ -1,31 +1,25 @@
-
 version: 0.2
+
+
 phases:
-  install:
-    runtime-versions:
-      java: openjdk11
-    commands:
-      - apt-get update -y
   pre_build:
     commands:
-      - echo Inside pre build...
+      - echo Logging in to Amazon ECR...
       - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=154871086071.dkr.ecr.eu-west-1.amazonaws.com/rewygroup
   build:
     commands:
       - echo Build started on `date`
-      - echo Building jar file...
-      - mvn clean install -DskipTests
       - echo Building the Docker image...
-      - ARG BUILD_DB_USER
-        ARG BUILD_DB_PASSWORD
-        ARG BUILD_ACCESS_KEY_ID
-        ARG BUILD_SECRET_ACCESS_KEY
-      - docker build --build-arg BUILD_DB_USER=$DB_USER --build-arg BUILD_DB_PASSWORD=$DB_PASSWORD --build-arg BUILD_ACCESS_KEY_ID=$ACCESS_KEY_ID --build-arg BUILD_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY -t rewygroup/backend:latest .
+      - docker build -t $REPOSITORY_URI:latest .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push rewygroup/backend:latest
+      - docker push $REPOSITORY_URI:latest
       - echo Writing image definitions file...
+      - printf '[{"name":"rewygroup","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+      - cat imagedefinitions.json
 artifacts:
   files: imagedefinitions.json

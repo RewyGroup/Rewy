@@ -16,7 +16,10 @@ phases:
       - echo Building jar file...
       - mvn clean install -DskipTests
       - echo Building the Docker image...
-      - docker build --build-arg BUILD_MAIL_USER=$MAIL_USER --build-arg BUILD_MAIL_PASSWORD=$MAIL_PASSWORD --build-arg BUILD_DB_USER=$DB_USER --build-arg BUILD_DB_PASSWORD=$DB_PASSWORD --build-arg BUILD_ACCESS_KEY_ID=$ACCESS_KEY_ID --build-arg BUILD_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY -t rewygroup/backend:latest .
+      - docker build --build-arg BUILD_DB_USER=$DB_USER --build-arg BUILD_DB_PASSWORD=$DB_PASSWORD
+        --build-arg BUILD_ACCESS_KEY_ID=$ACCESS_KEY_ID --build-arg BUILD_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY
+        --build-arg BUILD_MAIL_USER=$MAIL_USER --build-arg BUILD_MAIL_PASSWORD=$MAIL_PASSWORD
+        -t rewygroup/backend:latest .
   post_build:
     commands:
       - echo Build completed on `date`

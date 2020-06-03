@@ -9,9 +9,9 @@ phases:
     commands:
       - echo Build started on `date`
       - echo cd into the webapp...
-      - cd webapp
+      - cd /webapp
       - echo Building the Docker image...
-      - build -f Dockerfile -t rewygroup/frontend:latest .
+      - docker build -f Dockerfile -t rewygroup/frontend:latest .
   post_build:
     commands:
       - echo Build completed on `date`

@@ -1,0 +1,24 @@
+
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Inside pre build...
+      - aws --version
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo cd into the webapp...
+      - cd webapp
+      - echo Building the Docker image...
+      - build -f Dockerfile -t rewygroup/frontend:latest .
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Logging in to Docker Hub...
+      - docker login --username=$DOCKER_USER --password=$DOCKER_PASSWORD
+      - echo Pushing the Docker images...
+      - docker push rewygroup/frontend:latest
+      - echo Writing image definitions file...
+artifacts:
+  files: imagedefinitions.json

@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -156,6 +157,9 @@ public class UserService implements UserDetailsService {
         } catch (UnsupportedEncodingException e) {
             return "Issue while decoding" +e.getMessage();
         }
+    }
+    public Set<User> findAllUsers(){
+        return userRepository.findAll();
     }
 
 }

@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { Row,Col } from "react-bootstrap";
+import { Card, Row,Col,Accordion } from "react-bootstrap";
 import "./QuestionCard.css";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import calculateVotes from "../../utils/CalculateVotes";
+import {Editor, EditorState,convertFromRaw} from 'draft-js';
 
 
 const QuestionCard = props => {
     const {question,history} = props;
     const {answers} = question;
-
     const [hasCorrectAnswer,setCorrectAnswer]= useState(false);
+    const[isWYSIWYG, setIsWYSIWYG] = useState(false);
+    const [textState,setTextState] = useState(EditorState.createEmpty(),);
    
     const correctAnswer = answers.length > 0 && 
     answers.filter(answer=>answer.correct===true);
-
     useEffect(() => {
       if(correctAnswer.length > 0 ){
+        
+        if(correctAnswer[0].text.startsWith("{")){
+          setIsWYSIWYG(true);
+          const raw = JSON.parse(correctAnswer[0].text);
+          const myjson = convertFromRaw(raw);
+          setTextState(EditorState.createWithContent(myjson))
+                
+        }
         setCorrectAnswer(true);
       }
   }, [])
@@ -29,6 +38,20 @@ const QuestionCard = props => {
       const path = '/question/' + question.id;
       history.push({pathname:path, question:question});
     }
+
+    const handleButtonClick =(e) => {
+      e.stopPropagation();
+      e.preventDefault();      
+      document.getElementById(e.target.value).click();
+    }
+
+    const handleAccordionClick =(e) =>{
+      e.stopPropagation();
+      e.preventDefault();
+    }
+
+
+ 
 
   return (
     
@@ -48,14 +71,30 @@ const QuestionCard = props => {
         <Col xs={3} className="questionCardCreatedByTime">{question.createdAt.replace("T", " ")}</Col>
         </div>
       <div className="questionCardTitle">{question.title}</div>
-      <div className="questionCardCategory">
-      <div className="questionCardCategoryName"><div className="questionCardCategoryNameWrapper">{question.category.typeName}</div></div>
-      <div className="questionCardSubCategory">{SubCategoryList}</div>
+
+      <Row>
+      <Col xs={6} sm={9}>
+        <div className="questionCardCategory">
+          <div className="questionCardCategoryName"><div className="questionCardCategoryNameWrapper">{question.category.typeName}</div></div>
+          <div className="questionCardSubCategory">{SubCategoryList}</div>
         </div>
+      </Col>
+     {hasCorrectAnswer ? <Col xs={6} sm={3}><button className="questionCardAccordionButton" value={question.id} onClick={handleButtonClick}>Rätt svar</button>
+      </Col>:""}
+      <Accordion  className="questionCardCorrectAnswerAccordion">
+  <Card className="questionCardCorrectAnswerCard" >
+      <Accordion.Toggle className="questionCardAccordionToggle" id={question.id} onClick={handleAccordionClick}  variant="link" eventKey={question.id}>
+      </Accordion.Toggle>
+    <Accordion.Collapse eventKey={question.id}>
+  <Card.Body>{hasCorrectAnswer && isWYSIWYG? <Editor editorState={textState} readOnly></Editor>: hasCorrectAnswer ? correctAnswer[0].text : ""}</Card.Body>
+    </Accordion.Collapse>
+  </Card></Accordion>
+      </Row>
         { hasCorrectAnswer ? 
-          <span className="cardNotify">
+        <span className="cardNotify">
             <FontAwesomeIcon className="cardIcon" icon={faCheck} />
-          </span>:""}
+          </span>
+                :""}
       </Col>
     </Row>
   );

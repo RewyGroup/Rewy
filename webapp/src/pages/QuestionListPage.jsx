@@ -20,17 +20,23 @@ const QuestionListPage = (props) => {
 
     
     useEffect(() => {
-        if(!questionlist.length > 0){    
+        if(questionlist.length === 0){    
             
             if(location === "all"){
                 dispatch(getAllQuestions());
             }
+
+            else if(selectedCategory === "" || selectedCategory === location){
+                dispatch(getAllQuestionsByCategoryName(location))
+            }
+
+        }else{
+            if(selectedCategory === location){
+                dispatch(getAllQuestionsByCategoryName(location))
+            }
         }
     }, [])
     
-    useEffect (()=>{
-        dispatch(getAllQuestionsByCategoryName(location))    
-    },[selectedCategory])
 
     if(session_token){
         dispatch(stillLoggedIn(session_token));

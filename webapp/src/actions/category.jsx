@@ -36,3 +36,13 @@ const allSubCategoriesById = (subCategoryList) =>{
     
 }
 };
+
+
+export const selectedCategory = (category) =>{
+
+    return{
+    type: 'GET_SELECTED_CATEGORY_SUCCESS',
+    payload: category
+    
+}
+};

@@ -3,14 +3,16 @@ import { Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalculator,
-  faFlask,
   faGlobe,
   faCode,
 } from "@fortawesome/free-solid-svg-icons";
 import "./CategoryList.css";
+import { useDispatch } from 'react-redux';
+import {selectedCategory} from '../../../actions/category'
+
 
 const CategoryList =(props) => {
-
+const dispatch = useDispatch();
 const categoryListItems = [
   {category:"Mathematics",icon:<FontAwesomeIcon
   className="CategoryListCardIcon"
@@ -31,6 +33,7 @@ const categoryListItems = [
   const handleOnClick = (event) => {
     
     const category = event.currentTarget.id.toLowerCase();
+    dispatch(selectedCategory(category))
     props.history.push("/question/category/" + category);
 
   }

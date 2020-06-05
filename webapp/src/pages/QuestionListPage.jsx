@@ -13,6 +13,7 @@ const QuestionListPage = (props) => {
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
     const questionlist = useSelector(state => state.questionReducer.questionList);
+    const selectedCategory = useSelector(state => state.categoryReducer.selectedCategory);
     const {showSuccessToast,message} = props.location;
     var parts = props.location.pathname.split('/');
     const location = parts[parts.length - 1];
@@ -21,14 +22,15 @@ const QuestionListPage = (props) => {
     useEffect(() => {
         if(!questionlist.length > 0){    
             
-        if(location === "all"){
-            
-            dispatch(getAllQuestions());
-        }else{
-            dispatch(getAllQuestionsByCategoryName(location));
+            if(location === "all"){
+                dispatch(getAllQuestions());
+            }
         }
-    }
     }, [])
+    
+    useEffect (()=>{
+        dispatch(getAllQuestionsByCategoryName(location))    
+    },[selectedCategory])
 
     if(session_token){
         dispatch(stillLoggedIn(session_token));

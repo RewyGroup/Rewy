@@ -15,7 +15,7 @@ function Landing(props) {
                 }
                     </Col>
                 <Col className="landingImgWrapper" xs={5}>
-                <img className="landingImg" src="/girl_study.png" alt="Card image" />
+                <img className="landingImg" src="/girl_study.png" alt="Study" />
                 </Col>
                 </Row>
         );

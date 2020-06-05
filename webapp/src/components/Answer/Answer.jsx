@@ -9,7 +9,7 @@ import { checkDownVote } from "../../utils/CheckDownVote";
 import CheckVoteType from "../../utils/CheckVoteType"
 import calculateVotes from "../../utils/CalculateVotes";
 import {createAnswerVote} from "../../actions/answer";
-import {Editor, EditorState,convertToRaw,convertFromRaw, ContentState} from 'draft-js';
+import {Editor, EditorState,convertFromRaw} from 'draft-js';
 
 
 const Answer = (props) => {

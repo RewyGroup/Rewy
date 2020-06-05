@@ -17,8 +17,7 @@ function LoginPage(props) {
         if(isLoggedIn){ 
             props.history.push("/");  
         }
-        
-    },[isLoggedIn]);
+    },[isLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     if(session_token){

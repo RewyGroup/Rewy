@@ -13,7 +13,8 @@ const SuccessToast = (props) => {
     useEffect(()=>{
         if(showSuccessToast)
         setShow(showSuccessToast)
-    },[])
+      },[]);
+
     return (
 
           <Toast className="toastContent" animation onClose={() => setShow(false)} show={show} delay={5000} autohide>

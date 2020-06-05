@@ -13,7 +13,7 @@ import {Editor, EditorState,convertFromRaw} from 'draft-js';
 
 const Question = (props) => {
   const { question, token , history , isLoggedIn } = props;
-  const { user, category, subCategoryList, answers } = question;
+  const { user, subCategoryList, answers } = question;
   const [isOwner, setIsOwner] = useState(false);
   const [voteType, setVoteType] = useState("neutral");
   const [loggedInUserVote,setLoggedInUserVote] = useState({});

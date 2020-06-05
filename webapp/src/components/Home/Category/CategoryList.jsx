@@ -1,36 +1,24 @@
 import React from "react";
 import { Row, Col, Card } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalculator,
-  faFlask,
-  faGlobe,
-  faCode,
-} from "@fortawesome/free-solid-svg-icons";
 import "./CategoryList.css";
+import { useDispatch } from 'react-redux';
+import {selectedCategory} from '../../../actions/category'
+
 
 const CategoryList =(props) => {
-
+const dispatch = useDispatch();
 const categoryListItems = [
-  {category:"Mathematics",icon:<FontAwesomeIcon
-  className="CategoryListCardIcon"
-  icon={faCalculator}
-/>},
+  {category:"MATEMATIK",icon:<img className="CategoryListCardIcon" src="/kategorier/matematik.png" alt="matematik" />},
   {category:"KEMI",icon:<img className="CategoryListCardIcon" src="/kategorier/kemi.png" alt="kemi" />},
-  {category:"Language",icon:<FontAwesomeIcon
-  className="CategoryListCardIcon"
-  icon={faGlobe}
-/>},
-  {category:"Programming",icon:<FontAwesomeIcon
-  className="CategoryListCardIcon"
-  icon={faCode}
-/>},
+  {category:"SPRÅK",icon:<img className="CategoryListCardIcon" src="/kategorier/sprak.png" alt="språk" />},
+  {category:"PROGRAMMERING",icon:<img className="CategoryListCardIcon" src="/kategorier/programmering.png" alt="programmering" />},
 ]
 
   
   const handleOnClick = (event) => {
     
     const category = event.currentTarget.id.toLowerCase();
+    dispatch(selectedCategory(category))
     props.history.push("/question/category/" + category);
 
   }

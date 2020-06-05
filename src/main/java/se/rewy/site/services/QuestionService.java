@@ -103,4 +103,7 @@ public class QuestionService {
         }
         return null;
     }
+    public Set<Question> findQuestionsByUserId(long userId){
+     return questionRepository.findAllByUser_Id(userId);
+    }
 }

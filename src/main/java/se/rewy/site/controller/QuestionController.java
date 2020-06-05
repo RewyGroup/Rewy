@@ -58,4 +58,10 @@ public class QuestionController {
         questionService.CreateOrUpdateQuestionVote(questionWeb);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("user/{userId}")
+    public  ResponseEntity<Set<Question>>getAllQuestionsByUserId(@PathVariable Long userId){
+        Set <Question> allQuestions = questionService.findQuestionsByUserId(userId);
+        return ResponseEntity.ok(allQuestions);
+    }
 }

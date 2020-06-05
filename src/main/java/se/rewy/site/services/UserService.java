@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -47,6 +48,7 @@ public class UserService implements UserDetailsService {
             user.setCreatedAt(LocalDateTime.now());
             String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
             user.setPassword(encodedPassword);
+            user.setProfileImageUrl("https://rewy.s3-eu-west-1.amazonaws.com/DefaultIcon.png1591195801680");
             userRepository.save(user);
             mailService.sendRegisterEmail(user.getEmail());
         }else{
@@ -156,6 +158,9 @@ public class UserService implements UserDetailsService {
         } catch (UnsupportedEncodingException e) {
             return "Issue while decoding" +e.getMessage();
         }
+    }
+    public Set<User> findAllUsers(){
+        return userRepository.findAll();
     }
 
 }

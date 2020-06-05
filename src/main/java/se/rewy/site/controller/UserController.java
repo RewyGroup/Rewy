@@ -9,6 +9,7 @@ import se.rewy.site.models.User;
 import se.rewy.site.services.UserService;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
@@ -59,5 +60,9 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-
+    @GetMapping("/all")
+    ResponseEntity<Set<User>> findAllUsers(){
+        Set<User> allUsers = userService.findAllUsers();
+       return ResponseEntity.ok(allUsers);
+    }
 }

@@ -6,7 +6,6 @@ import { faEdit,faEnvelope,faMapMarkerAlt,faVenusMars } from '@fortawesome/free-
 import Avatar from 'react-avatar-edit';
 import './ProfileCard.css';
 import ProfileImageModal from'./ProfileImageModal';
-import {defaultImage} from '../../utils/DefaultImage';
 import { uploadProfileImage,updateProfileImageUrlByUserId } from '../../actions/user';
 import ProfileEditModal from './ProfileEditModal';
 
@@ -16,7 +15,7 @@ const ProfileCard = (props) => {
 
   const imageUrl = useSelector(state => state.userReducer.imageUrl);
 
-  const [preview,setPreview] = useState(defaultImage);
+  const [preview,setPreview] = useState(null);
   const [imageSrc,setImageSrc] = useState(null);
   const [changeProfileImage,setChangeProfileImage] = useState(false);
   const [showImageModal,setShowImageModal] = useState(false);
@@ -35,7 +34,7 @@ const ProfileCard = (props) => {
     }else if(user.profileImageUrl){
       setPreview(user.profileImageUrl)
     }else{
-    setPreview(defaultImage)
+    setPreview(null)
     }
   }
   

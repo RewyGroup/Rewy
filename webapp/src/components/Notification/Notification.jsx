@@ -1,8 +1,5 @@
-import React, {useState,useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import {Card} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell } from '@fortawesome/free-solid-svg-icons'
 import './Notification.css';
 function Notification(props) {
 

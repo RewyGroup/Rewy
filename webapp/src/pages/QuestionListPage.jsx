@@ -32,6 +32,7 @@ const QuestionListPage = (props) => {
 
         }else{
             if(selectedCategory === location){
+                window.location.reload();
                 dispatch(getAllQuestionsByCategoryName(location))
             }
         }
@@ -42,7 +43,7 @@ const QuestionListPage = (props) => {
         dispatch(stillLoggedIn(session_token));
     }
 
-    const questions = questionlist && questionlist.length > 0 &&  
+    const questions = questionlist && questionlist.length > 0 &&
     questionlist.map((question,index)=>(<QuestionCard key={index} question={question} history={props.history}/>)) 
     
     

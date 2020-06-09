@@ -25,8 +25,8 @@ const Question = (props) => {
   const SubCategoryList =
     subCategoryList.length > 0 &&
     subCategoryList.map((subCategory, index) => (
-      <span key={index} className="subCategoryBubble">
-        {subCategory.name}
+      <span key={index} className="subCategory">
+        #{subCategory.name}
       </span>
     ));
 
@@ -105,21 +105,21 @@ if(once){
 
   return (
     <div className="question">
-      <Row className="questionRow">
+      <Row className="questionRow m-0">
         <div className="questionHeader">
           <h1 className="questionTitle">{question.title} </h1>
           <Col xs={6} className="questionSubCategory">
-            <div>Tags: {SubCategoryList}</div>
+            <div>Taggar: {SubCategoryList}</div>
           </Col>
           <Col xs={6} className="questionHeaderInfo">
             <div className="userInfo">
-              <div className="userInfoText"> Posted by: {user.username}</div>
-              <div className="userInfoText"> Posted at: {createdAt}</div>
+              <div className="userInfoText"> Skapad av:<span className="userInfoCreatedBy"><img className="questionCardThumbnail" src={user.profileImageUrl} alt="thumbnail" /> {user.username}</span></div>
+              <div className="userInfoText"> skapad: {createdAt}</div>
             </div>
           </Col>
         </div>
 
-        <Row>
+        <Row className="m-0">
           <Col xs={1} className="questionVoteCol">
         <CheckVoteType voteType={voteType} upVote={upVote} downVote={downVote} voteCounter={voteCounter}/>
           </Col>
@@ -136,10 +136,9 @@ if(once){
         </Row>
       </Row>
 
-      <Row className="questionFooter">
+      <Row className="questionFooter m-0">
         <div className="questionFooterInfo">
-          <div className="userInfoText"> Posted by: {user.username}</div>
-          <div className="userInfoText"> Last edited: {createdAt}</div>
+          <div className="userInfoText"> Senast ändrad: {createdAt}</div>
         </div>
       </Row>
 

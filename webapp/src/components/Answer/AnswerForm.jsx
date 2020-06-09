@@ -56,13 +56,13 @@ useEffect(() => {
 
         <Form className="answerForm" onSubmit={handleSubmit}>
           <Form.Group controlId="exampleForm.ControlTextarea2">
-            <Form.Label>Answer the Question</Form.Label>
+            <Form.Label className="answerFormLabel">Skriv ditt svar</Form.Label>
             <TextEditorToolbar editorState={editorState} setEditorState={setEditorState} ></TextEditorToolbar>
                 <TextEditor editorState={editorState} setEditorState={setEditorState}></TextEditor>
           </Form.Group>
-          <Form.Group>
-            <Button variant="dark" type="submit">
-              Submit Answer
+          <Form.Group className="answerFormSubmitButtonWrapper">
+            <Button className="answerFormSubmitButton" type="submit">
+              Svara
             </Button>
          </Form.Group>
 

@@ -22,7 +22,7 @@ function App() {
       <Route exact path="/" component={HomePage} />
       <Route exact path="/question/create" component={CreateQuestionPage} />
       <Route exact path="/question/all" component={QuestionListPage} />
-      <Route exact path="/profile" component={ProfilePage}/>
+      <Route exact path="/user/:username" component={ProfilePage}/>
       <Route exact path={"/question/category/:category"} component={QuestionListPage}/>
       <Route exact path={"/question/:questionId"} component={QuestionPage}/>
 

@@ -2,9 +2,14 @@
     margin-top: -90px;
     border-right: 2px solid #C4C4C4;
     padding: 0px;
+    min-height: 900px;
 }
 .sidebar{
     padding: 0;
+}
+
+.sideBarNav{
+    display: block;
 }
 .sidebarIcon{
     margin-right: 5px;
@@ -21,18 +26,6 @@
 .sidebarIconActive > path{
     fill: #295374;
 }
-.sidebarElementActive{
-    font-size:1rem;
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 500;
-    color: #295374;
-    margin-left: 50px;
-    text-align: start;
-    padding:20px 10px;
-    border-right: 3px solid #295374 ;
-    
-}
 
 .sidebarElement{
     font-family: "Roboto";
@@ -42,6 +35,34 @@
     margin-left: 50px;
     text-align: start;
     padding:20px 10px;
+    display: block;
+}
+ .active.sidebarElement{
+    font-size:1rem;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    color: #295374;
+    margin-left: 50px;
+    text-align: start;
+    padding:20px 10px;
+    border-right: 3px solid #295374 ;
+    display: block;
+    pointer-events: none;
+    cursor: default;
+    
+}
+.sidebarElement:hover{
+    text-decoration: none;
+    color: #295374;
+
+}
+.sidebarElement:hover > .sidebarIcon > path{
+    fill: #295374;
+
+}
+.active > .sidebarIcon > path{
+    fill: #295374;
 }
 
 @media (max-width:1090px){

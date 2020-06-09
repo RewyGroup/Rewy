@@ -6,6 +6,7 @@ import {getAllCategories} from '../actions/category'
 import QuestionForm from '../components/Question/QuestionForm';
 import QuestionFormInfo from '../components/Question/QuestionFormInfo';
 import {Row, Container, Col} from 'react-bootstrap';
+import Sidebar from '../utils/Sidebar';
 
 
 const CreateQuestionPage = (props) => {
@@ -53,17 +54,15 @@ const CreateQuestionPage = (props) => {
 
         return (
             
-        <Container className="questionContainer">
-        <Row className="questionFormRow">
-        <Col xs={6} md={3}>
-            <QuestionFormInfo/>
+        <Row className="m-0">
+        <Col className="sidebarWrapper" xs={12} lg={2}>
+            <Sidebar active={"ASK"}/>
         </Col>
-            <Col xs={12} md={9}>
+            <Col xs={12} lg={{span:7, offset:1}}>
             <QuestionForm userId={userId} token={session_token}/>
             </Col>
 
             </Row>
-            </Container>
         );
 }
 

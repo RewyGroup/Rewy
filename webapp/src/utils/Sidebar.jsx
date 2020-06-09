@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
 import {Col,Row,Nav} from 'react-bootstrap';
 import './Sidebar.css'
-import $ from 'jquery';
 import { useEffect } from 'react';
 
 function Sidebar(props) {

@@ -13,10 +13,10 @@ function RewyNavbar() {
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state=>state.loginReducer.isLoggedIn);
-
+  const user = useSelector(state => state.loginReducer.user)
   const cookies = new Cookies();
   const session_token = cookies.get("session_token");
-
+  const profileURL = ("/user/" +user.username)
 
     return (
 
@@ -37,7 +37,7 @@ function RewyNavbar() {
       <NotificationDropdownList token={session_token}/>
     <NavDropdown className="dropdown-list" title={ <FontAwesomeIcon className="dropdown-icon" icon={faUser} />} id="collasible-nav-dropdown">
 
-        <NavDropdown.Item href="/profile"><FontAwesomeIcon className="dropdownShown-icon"  icon={faUser} />profil</NavDropdown.Item>
+        <NavDropdown.Item href={profileURL} ><FontAwesomeIcon className="dropdownShown-icon"  icon={faUser} />profil</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item onClick={() => dispatch(signOut())}><FontAwesomeIcon className="dropdownShown-icon"  icon={faSignOutAlt} />logga ut</NavDropdown.Item>
       </NavDropdown></div>}

@@ -49,9 +49,9 @@ const QuestionListPage = (props) => {
     
         return (<div>
 <SuccessToast message={message} showSuccessToast={showSuccessToast}/>
-    <Row className="mr-0">
+    <Row className="m-0">
     <Col className="sidebarWrapper" xs={12} lg={2}>
-        <Sidebar/>
+        <Sidebar active={"EXPLORE"}/>
     </Col>
     <Col xs={{span:10, offset:1}} lg={{span:7, offset:1}}>
 {questions}

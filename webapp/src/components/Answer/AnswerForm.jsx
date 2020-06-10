@@ -3,9 +3,9 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {createAnswer} from '../../actions/answer';
 import {EditorState,convertToRaw} from 'draft-js';
-import TextEditor from "../../utils/TextEditor";
-import TextEditorToolbar from "../../utils/TextEditorToolbar";
-
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import "../../utils/TextEditor.css"
 
 import "./AnswerForm.css";
 
@@ -57,8 +57,14 @@ useEffect(() => {
         <Form className="answerForm" onSubmit={handleSubmit}>
           <Form.Group controlId="exampleForm.ControlTextarea2">
             <Form.Label className="answerFormLabel">Skriv ditt svar</Form.Label>
-            <TextEditorToolbar editorState={editorState} setEditorState={setEditorState} ></TextEditorToolbar>
-                <TextEditor editorState={editorState} setEditorState={setEditorState}></TextEditor>
+  
+                <Editor
+           editorState={editorState}
+           toolbarClassName=""
+         wrapperClassName="textEditorWrapper"
+         editorClassName="textEditor"
+           onEditorStateChange={setEditorState}
+           />
           </Form.Group>
           <Form.Group className="answerFormSubmitButtonWrapper">
             <Button className="answerFormSubmitButton" type="submit">

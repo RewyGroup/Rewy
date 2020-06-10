@@ -28,6 +28,14 @@ border: 2px solid #C4C4C4;
     border-right: 2px solid #C4C4C4;
  
 }
+.textEditorToolbar > div > div{
+    display: inline-block;
+    margin-right: 5px;
+}
+.textEditorToolbar  > div{
+    display: inline-block;
+    margin-right: 5px;
+}
 
 .answerTextView{
 display: block;
@@ -89,7 +97,7 @@ padding: 10px;
     margin-right: 5px;
     text-align: center;
 
-    background-color: rgba(244,128,36,1);;
+    background-color: rgba(244,128,36,1);
     font-size: 16px;
     font-family: Oxygen, sans-serif;
     transition: all 250ms ease-in-out;
@@ -98,4 +106,25 @@ padding: 10px;
 .styleButtonsActive > svg{
     color: #fff;
     vertical-align: middle;
+}
+
+.rdw-option-wrapper.rdw-option-active {
+    background-color: rgba(244,128,36,1) !important;
+    border: 1px solid rgba(244,128,36,1) !important;
+    box-shadow: none;
+}
+.rdw-option-wrapper {
+    border: 1px solid  #292D48 !important;
+    width: 30px !important;
+    height: 28px !important;
+    border-radius: 0 !important;
+}
+
+.rdw-editor-toolbar{
+    border-radius: 0;
+    border: 2px solid #c4c4c4 !important;
+}
+.rdw-editor-toolbar > div > div{
+    border-radius: 0 !important;
+    border: 1px solid  #292D48 !important;
 }

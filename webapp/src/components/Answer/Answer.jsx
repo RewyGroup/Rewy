@@ -9,7 +9,8 @@ import { checkDownVote } from "../../utils/CheckDownVote";
 import CheckVoteType from "../../utils/CheckVoteType"
 import calculateVotes from "../../utils/CalculateVotes";
 import {createAnswerVote} from "../../actions/answer";
-import {Editor, EditorState,convertFromRaw} from 'draft-js';
+import {EditorState,convertFromRaw} from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 
 
 const Answer = (props) => {
@@ -110,7 +111,10 @@ const Answer = (props) => {
                     <Row className="m-0" className="answerText">
                       {isWYSIWYG ?  <div>
                     <div className ="answerTextView">
-                <Editor placeholder="" editorState={textState} readOnly={true} /> 
+                    <Editor
+                     toolbarHidden={true}
+                     editorState={textState}
+                     readOnly={true}/> 
                 </div>
                 </div>:
                         <div>{answer.text} </div>}

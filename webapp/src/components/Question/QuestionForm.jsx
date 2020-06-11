@@ -6,8 +6,7 @@ import { createQuestion } from "../../actions/question";
 import {EditorState,convertToRaw} from 'draft-js';
 import "../../utils/TextEditor.css"
 import "./QuestionForm.css";
-import TextEditor from "../../utils/TextEditor";
-import TextEditorToolbar from "../../utils/TextEditorToolbar";
+import { Editor } from 'react-draft-wysiwyg';
 import QuestionFormInfo from "../Question/QuestionFormInfo";
 
 const QuestionForm = (props) => {
@@ -23,6 +22,7 @@ const QuestionForm = (props) => {
   const [categoryState,setCategoryState] = useState("NEUTRAL");
   const [subCategoryState,setSubCategoryState] = useState("NEUTRAL");
   const [descriptionState,setDescriptionState] = useState("NEUTRAL");
+  const [editorFocused,setEditorFocused] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -116,6 +116,24 @@ const QuestionForm = (props) => {
       
     }
 
+    const onFocusEditor = (event) => {
+      
+      setDescriptionState("ACTIVE")
+      setEditorFocused(true);
+    };
+    const onblurEditor = (event) => {
+      if(text.length > 132){
+        setDescriptionState("CORRECT")
+      }
+      else{
+        setDescriptionState("NEUTRAL")
+      }
+      setEditorFocused(false);
+      
+    }
+
+    
+
 
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
@@ -183,7 +201,7 @@ const QuestionForm = (props) => {
   return (
     <Row className="m-0 QuestionFormAndStepsWrapper">
               <Col xs={12} sm={4} className="questionFormStepsWrapper">
-         <QuestionFormInfo titleState={titleState} categoryState={categoryState} subCategoryState={subCategoryState} descriptionState={text}/>
+         <QuestionFormInfo titleState={titleState} categoryState={categoryState} subCategoryState={subCategoryState} descriptionState={descriptionState}/>
         </Col>
         <Col xs={12} sm={8} className="QuestionFormWrapper">
         <Form className="questionForm" onSubmit={handleSubmit}>
@@ -202,8 +220,15 @@ const QuestionForm = (props) => {
               <Select styles={style} onFocus={onFocusSubCategory} onBlur={onblurSubCategory} className="questionMultiSelect react-select-container" classNamePrefix="react-select" placeholder="välj taggar..."  isMulti closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false} components={{Option}} options={subCategoryOption} onChange={onChangeSubCategory} />
           
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <TextEditorToolbar editorState={editorState} setEditorState={setEditorState} ></TextEditorToolbar>
-                <TextEditor editorState={editorState} setEditorState={setEditorState}></TextEditor>
+          <Editor
+          onFocus={onFocusEditor}
+          onBlur={onblurEditor}
+           editorState={editorState}
+           toolbarClassName=""
+         wrapperClassName="textEditorWrapper"
+         editorClassName={editorFocused ? "textEditorActive" : "textEditor"}
+           onEditorStateChange={setEditorState}
+           />
                 </Form.Group>
 
                 <Form.Group className="questionFormButtonWrapper">

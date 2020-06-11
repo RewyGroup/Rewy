@@ -23,6 +23,8 @@ const QuestionForm = (props) => {
   const [subCategoryState,setSubCategoryState] = useState("NEUTRAL");
   const [descriptionState,setDescriptionState] = useState("NEUTRAL");
   const [editorFocused,setEditorFocused] = useState(false);
+  const [mutiSelectUpdated,setMultiSelectUpdated] = useState();
+  const [selectedSubCategory,setSelectedSubCategory] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -141,9 +143,20 @@ const QuestionForm = (props) => {
 
   const onChangeCategory = (event) => {
     setCategory(event.value);
+    if(subCategory.length > 0){
+    setSubCategory([]);
+    setSelectedSubCategory([]);
+    
+    }
   };
 
+  
+
   const onChangeSubCategory = (event) => {
+
+ 
+    setSelectedSubCategory(event);
+
     let eachVal ="";
     let selectedSubCategory =[];
     if(event){
@@ -162,6 +175,7 @@ const QuestionForm = (props) => {
   };
 
   const Option = props => {
+    
     return(
     <div>
       <components.Option className="selectCheckboxWrapper" {...props}>
@@ -173,6 +187,9 @@ const QuestionForm = (props) => {
     </div>
     );
   }
+
+  
+  
 
 
   const style = {
@@ -197,6 +214,10 @@ const QuestionForm = (props) => {
       }
     })
   };
+
+  
+
+ 
   
   return (
     <Row className="m-0 QuestionFormAndStepsWrapper">
@@ -213,11 +234,14 @@ const QuestionForm = (props) => {
               placeholder="titel..."
               onChange={onChangeTitle}/>
           </Form.Group>
-
+        
  
               <Select styles={style} onFocus={onFocusCategory} onBlur={onBlurCategory} className="questionSingleSelect react-select-container" classNamePrefix="react-select" placeholder="välj kategori..."  closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false}  options={categoryOption} onChange={onChangeCategory} />
 
-              <Select styles={style} onFocus={onFocusSubCategory} onBlur={onblurSubCategory} className="questionMultiSelect react-select-container" classNamePrefix="react-select" placeholder="välj taggar..."  isMulti closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false} components={{Option}} options={subCategoryOption} onChange={onChangeSubCategory} />
+              <Select styles={style} onFocus={onFocusSubCategory} 
+              onBlur={onblurSubCategory} className="questionMultiSelect react-select-container" 
+              classNamePrefix="react-select" placeholder="välj taggar..." value={selectedSubCategory}  isMulti closeMenuOnSelect={false} 
+              hideSelectedOptions={false} isSearchable={false} components={{Option}} options={subCategoryOption} onChange={onChangeSubCategory} />
           
           <Form.Group controlId="exampleForm.ControlTextarea1">
           <Editor

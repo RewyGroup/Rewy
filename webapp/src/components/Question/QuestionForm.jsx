@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Select,{components} from 'react-select'
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createQuestion } from "../../actions/question";
 import {EditorState,convertToRaw} from 'draft-js';
@@ -8,6 +8,7 @@ import "../../utils/TextEditor.css"
 import "./QuestionForm.css";
 import TextEditor from "../../utils/TextEditor";
 import TextEditorToolbar from "../../utils/TextEditorToolbar";
+import QuestionFormInfo from "../Question/QuestionFormInfo";
 
 const QuestionForm = (props) => {
 
@@ -18,12 +19,15 @@ const QuestionForm = (props) => {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState([]);
   const [categoryIndex,setCategoryIndex] = useState(-1);
+  const [titleState,setTitleState] = useState("NEUTRAL");
+  const [categoryState,setCategoryState] = useState("NEUTRAL");
+  const [subCategoryState,setSubCategoryState] = useState("NEUTRAL");
+  const [descriptionState,setDescriptionState] = useState("NEUTRAL");
 
- 
   const dispatch = useDispatch();
 
   const categoryList = useSelector((state) => state.categoryReducer.categoryList);
-
+  
   useEffect(() => {
     const index = getIndex(category,categoryList,"typeName");
     setCategoryIndex(index);
@@ -59,18 +63,58 @@ const QuestionForm = (props) => {
 
   const categoryOption =
     categoryList.length > 0 &&
-    categoryList.map((item, index) => (
-      <option key={index}>{item.typeName}</option>
+    categoryList.map((item) => (
+      { value: item.typeName, label: item.typeName}
     ));
 
     const subCategoryOption =
     categoryList.length > 0 && categoryIndex > -1 &&
-    categoryList[categoryIndex].subCategoryList.map((item, index) => (
+    categoryList[categoryIndex].subCategoryList.map((item) => (
       { value: item.name, label: item.name }
     ));
       
   
+    const onFocusTitle = (event) => {
+      
+      setTitleState("ACTIVE")
+    };
+    const onBlurTitle = (event) => {
+      if(title.length > 0){
+        setTitleState("CORRECT")
+      }
+      else{
+        setTitleState("NEUTRAL")
+      }
+      
+    }
 
+    const onFocusCategory = (event) => {
+      
+      setCategoryState("ACTIVE")
+    };
+    const onBlurCategory = (event) => {
+      if(category.length > 0){
+        setCategoryState("CORRECT")
+      }
+      else{
+        setCategoryState("NEUTRAL")
+      }
+      
+    }
+
+    const onFocusSubCategory = (event) => {
+      
+      setSubCategoryState("ACTIVE")
+    };
+    const onblurSubCategory = (event) => {
+      if(subCategory.length > 0){
+        setSubCategoryState("CORRECT")
+      }
+      else{
+        setSubCategoryState("NEUTRAL")
+      }
+      
+    }
 
 
   const onChangeTitle = (event) => {
@@ -78,7 +122,7 @@ const QuestionForm = (props) => {
   };
 
   const onChangeCategory = (event) => {
-    setCategory(event.target.value);
+    setCategory(event.value);
   };
 
   const onChangeSubCategory = (event) => {
@@ -102,8 +146,8 @@ const QuestionForm = (props) => {
   const Option = props => {
     return(
     <div>
-      <components.Option {...props}>
-        <input type="checkbox"
+      <components.Option className="selectCheckboxWrapper" {...props}>
+        <input className="selectCheckbox" type="checkbox"
         checked={props.isSelected}
         onChange ={e=> null}/>
         <label>{props.value}</label>
@@ -111,44 +155,65 @@ const QuestionForm = (props) => {
     </div>
     );
   }
+
+
+  const style = {
+    control: (base,state) => ({
+      ...base,
+      boxShadow: state.isFocused ? '0 0 0 0.2rem rgba(0,123,255,.25);': 0,
+      borderColor: state.isFocused
+      ? '#80bdff'
+      : base.borderColor,
+    '&:hover': {
+      borderColor: state.isFocused
+        ? '#80bdff'
+        : base.borderColor,
+    }    
+    }),
+    option: (base,state) => ({
+      ...base,
+      backgroundColor: state.isSelected ? '#5B7E9A' : '#ffffff',
+      '&:active': {
+        backgroundColor: state.isSelected ? '#292D48' : '#285273',
+        color: state.isSelected ? 'white' : 'white',
+      }
+    })
+  };
   
   return (
-
+    <Row className="m-0 QuestionFormAndStepsWrapper">
+              <Col xs={12} sm={4} className="questionFormStepsWrapper">
+         <QuestionFormInfo titleState={titleState} categoryState={categoryState} subCategoryState={subCategoryState} descriptionState={text}/>
+        </Col>
+        <Col xs={12} sm={8} className="QuestionFormWrapper">
         <Form className="questionForm" onSubmit={handleSubmit}>
           
           <Form.Group controlId="exampleForm.ControlInput1">
-            <Form.Label>choose a Title</Form.Label>
-            <Form.Control
+            <Form.Label className="questionFormHeader">Ställ en fråga</Form.Label>
+            <Form.Control onFocus={onFocusTitle} onBlur={onBlurTitle} className="questionFormControl"
               type="text"
-              placeholder="title"
+              placeholder="titel..."
               onChange={onChangeTitle}/>
           </Form.Group>
 
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>choose Category</Form.Label>
-            <Form.Control as="select"  onChange={onChangeCategory}>
-              <option></option>
-              {categoryOption}
-            </Form.Control>
-          </Form.Group>
+ 
+              <Select styles={style} onFocus={onFocusCategory} onBlur={onBlurCategory} className="questionSingleSelect react-select-container" classNamePrefix="react-select" placeholder="välj kategori..."  closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false}  options={categoryOption} onChange={onChangeCategory} />
 
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>choose Tags</Form.Label>
-            <Select className="questionMultiSelect" placeholder="select a tag..."  isMulti closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false} components={{Option}} options={subCategoryOption} onChange={onChangeSubCategory} />
-          </Form.Group>
-
+              <Select styles={style} onFocus={onFocusSubCategory} onBlur={onblurSubCategory} className="questionMultiSelect react-select-container" classNamePrefix="react-select" placeholder="välj taggar..."  isMulti closeMenuOnSelect={false} hideSelectedOptions={false} isSearchable={false} components={{Option}} options={subCategoryOption} onChange={onChangeSubCategory} />
+          
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Describe your Question</Form.Label>
             <TextEditorToolbar editorState={editorState} setEditorState={setEditorState} ></TextEditorToolbar>
                 <TextEditor editorState={editorState} setEditorState={setEditorState}></TextEditor>
                 </Form.Group>
 
-          <Form.Group>
-            <Button variant="dark" type="submit">
-              Create
+                <Form.Group className="questionFormButtonWrapper">
+            <Button className="questionFormButton" type="submit">
+              fråga
             </Button>
          </Form.Group>
         </Form>
+        </Col>
+        </Row>
   );
 };
 

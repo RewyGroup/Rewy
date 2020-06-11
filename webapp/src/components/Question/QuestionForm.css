@@ -1,13 +1,96 @@
-.questionFormRow{
-    justify-content: center;
+.QuestionFormAndStepsWrapper{
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.questionFormStepsWrapper{
+    background-color:#FCFCFC;
 }
 
 .questionForm {
-    font-family: Arial, Helvetica, sans-serif;
-    padding:60px;
+    font-family: "Roboto";
+    padding:30px;
     background-color: #fff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05), 0 20px 48px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.1);
+   
 }
+
+.questionFormHeader{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color:#292D48;
+}
+.questionFormControl{
+    border-radius: 0;
+    border: 2px solid #C4C4C4;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: auto;
+}
+.questionSingleSelect{
+    margin-bottom: 1rem;
+}
+
+.questionMultiSelect{
+    margin-bottom: 1rem;
+}
+
 svg{
     color: #343a40;
+}
+.selectCheckboxWrapper{
+    text-align: start;
+    padding:10px;
+}
+.selectCheckbox{
+    width:20px;
+}
+.questionSingleSelect > div{
+    border-radius: 0;
+    border: 2px solid #C4C4C4;
+    z-index: 3;  
+}
+
+.questionMultiSelect > div{
+    border-radius: 0;
+    border: 2px solid #C4C4C4;
+    z-index: 2;
+}
+.react-select__multi-value__label{
+    background-color: #EFEFEF;
+    font-weight: 500;
+    color: #295374 !important;
+}
+.react-select__multi-value__remove{
+    background-color: #EFEFEF;
+}
+.react-select__multi-value__remove:hover{
+    background-color: #c4c4c4 !important;
+    
+}
+.react-select__multi-value__remove:hover >svg{
+    fill:#ffffff;
+}
+
+
+.react-select__menu-list{
+    margin:10px;
+    color: #295374;
+    font-size: 1rem;
+}
+    
+
+
+
+
+
+.questionFormButtonWrapper{
+    text-align: center;
+}
+.questionFormButton{
+    background-color: #ffffff;
+    color: #292D48;
+    border-radius: 0;
+    border: 3px solid #292D48;
+    font-family: "Roboto",sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
 }

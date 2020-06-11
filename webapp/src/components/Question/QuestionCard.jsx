@@ -48,10 +48,7 @@ const QuestionCard = props => {
     const handleAccordionClick =(e) =>{
       e.stopPropagation();
       e.preventDefault();
-    }
-
-    console.log(correctAnswer);
-    
+    }    
  
 
   return (

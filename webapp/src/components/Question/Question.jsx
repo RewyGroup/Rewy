@@ -9,7 +9,8 @@ import {createQuestionVote} from "../../actions/question";
 import {checkUpVote} from "../../utils/CheckUpVote"
 import { checkDownVote } from "../../utils/CheckDownVote";
 import CheckVoteType from "../../utils/CheckVoteType"
-import {Editor, EditorState,convertFromRaw} from 'draft-js';
+import {EditorState,convertFromRaw} from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 
 const Question = (props) => {
   const { question, token , history , isLoggedIn } = props;
@@ -126,7 +127,10 @@ if(once){
           <Col xs={11}>
             {isWYSIWYG ?  <div>
                     <div className ="questionTextView">
-                <Editor placeholder="" editorState={textState} readOnly={true} /> 
+                    <Editor
+                     toolbarHidden={true}
+                     editorState={textState}
+                     readOnly={true}/>
                 </div>
                 </div>:
             <div className="questionText">

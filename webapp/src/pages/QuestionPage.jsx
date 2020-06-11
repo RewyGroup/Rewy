@@ -11,7 +11,6 @@ const QuestionPage = (props) => {
   const {question} = props.history.location;
 
   
-  
     const dispatch = useDispatch();
     var parts = props.location.pathname.split('/');
     const id = parts[parts.length - 1];   
@@ -23,6 +22,7 @@ const QuestionPage = (props) => {
     const isLoggedIn = useSelector((state) => state.loginReducer.isLoggedIn);
     const questionLoaded = useSelector((state) => state.questionReducer.questionLoaded);
 
+
     if(checker){
         if (session_token) {
           dispatch(stillLoggedIn(session_token));
@@ -33,15 +33,16 @@ const QuestionPage = (props) => {
 
     useEffect(() => {
         if(questionLoaded){  
-          setActiveQuestion(question); 
+          setActiveQuestion(question);           
         }else{
           dispatch(getQuestionById(id,session_token));  
         }
+
         }, [])
 
         useEffect(() => {
 
-          if(activeQuestion === null && newQuestion && newQuestion.category){
+          if(activeQuestion === null && !question && newQuestion && newQuestion.category){
               
             setActiveQuestion(newQuestion);
             }

@@ -1,13 +1,11 @@
 import React,{useState} from 'react';
-import {Col,Row,Nav} from 'react-bootstrap';
+import {Col,Nav} from 'react-bootstrap';
 import './Sidebar.css'
 import { useEffect } from 'react';
 
 function Sidebar(props) {
         const {active} = props;
-        const [activeKey,setActiveKey] = useState("");
-        console.log(active);
-        
+        const [activeKey,setActiveKey] = useState("");        
         const handleSelect = (eventKey) => {
                 setActiveKey(eventKey);
         };

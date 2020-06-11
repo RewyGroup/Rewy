@@ -76,3 +76,10 @@
         text-align: center;
     }
 }
+
+@media (max-width:991px){
+    .sidebarWrapper{
+min-height: 200px;
+
+    }
+}

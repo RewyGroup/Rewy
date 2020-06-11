@@ -18,6 +18,7 @@ const AnswerForm = (props) => {
   const [questionId,setQuestionId] = useState(null);
   const [text, setText] = useState("");
   const [editorState,setEditorState] = useState(EditorState.createEmpty(),)
+  const [editorFocused,setEditorFocused] = useState(false);
   const id = useSelector(state => state.loginReducer.user.id);
 
   useEffect(() =>{
@@ -32,6 +33,17 @@ useEffect(() => {
   var res  = rawString.replace(/"/g, "\"")
   setText(res);
 }, [editorState]);
+
+
+const onFocusEditor = (event) => {
+  setEditorFocused(true);
+};
+const onblurEditor = (event) => {
+
+  setEditorFocused(false);
+  
+}
+
 
   const dispatch = useDispatch();
 
@@ -59,10 +71,12 @@ useEffect(() => {
             <Form.Label className="answerFormLabel">Skriv ditt svar</Form.Label>
   
                 <Editor
+            onFocus={onFocusEditor}
+            onBlur={onblurEditor}
            editorState={editorState}
            toolbarClassName=""
          wrapperClassName="textEditorWrapper"
-         editorClassName="textEditor"
+         editorClassName={editorFocused ? "textEditorActive" : "textEditor"}
            onEditorStateChange={setEditorState}
            />
           </Form.Group>

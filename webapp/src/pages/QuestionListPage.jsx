@@ -32,6 +32,7 @@ const QuestionListPage = (props) => {
 
         }else{
             if(selectedCategory === location){
+                window.location.reload();
                 dispatch(getAllQuestionsByCategoryName(location))
             }
         }
@@ -42,15 +43,15 @@ const QuestionListPage = (props) => {
         dispatch(stillLoggedIn(session_token));
     }
 
-    const questions = questionlist && questionlist.length > 0 &&  
+    const questions = questionlist && questionlist.length > 0 &&
     questionlist.map((question,index)=>(<QuestionCard key={index} question={question} history={props.history}/>)) 
     
     
         return (<div>
 <SuccessToast message={message} showSuccessToast={showSuccessToast}/>
-    <Row className="mr-0">
+    <Row className="m-0">
     <Col className="sidebarWrapper" xs={12} lg={2}>
-        <Sidebar/>
+        <Sidebar active={"EXPLORE"}/>
     </Col>
     <Col xs={{span:10, offset:1}} lg={{span:7, offset:1}}>
 {questions}

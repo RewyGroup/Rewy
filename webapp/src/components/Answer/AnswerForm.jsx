@@ -3,9 +3,9 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {createAnswer} from '../../actions/answer';
 import {EditorState,convertToRaw} from 'draft-js';
-import TextEditor from "../../utils/TextEditor";
-import TextEditorToolbar from "../../utils/TextEditorToolbar";
-
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import "../../utils/TextEditor.css"
 
 import "./AnswerForm.css";
 
@@ -18,6 +18,7 @@ const AnswerForm = (props) => {
   const [questionId,setQuestionId] = useState(null);
   const [text, setText] = useState("");
   const [editorState,setEditorState] = useState(EditorState.createEmpty(),)
+  const [editorFocused,setEditorFocused] = useState(false);
   const id = useSelector(state => state.loginReducer.user.id);
 
   useEffect(() =>{
@@ -32,6 +33,17 @@ useEffect(() => {
   var res  = rawString.replace(/"/g, "\"")
   setText(res);
 }, [editorState]);
+
+
+const onFocusEditor = (event) => {
+  setEditorFocused(true);
+};
+const onblurEditor = (event) => {
+
+  setEditorFocused(false);
+  
+}
+
 
   const dispatch = useDispatch();
 
@@ -56,13 +68,21 @@ useEffect(() => {
 
         <Form className="answerForm" onSubmit={handleSubmit}>
           <Form.Group controlId="exampleForm.ControlTextarea2">
-            <Form.Label>Answer the Question</Form.Label>
-            <TextEditorToolbar editorState={editorState} setEditorState={setEditorState} ></TextEditorToolbar>
-                <TextEditor editorState={editorState} setEditorState={setEditorState}></TextEditor>
+            <Form.Label className="answerFormLabel">Skriv ditt svar</Form.Label>
+  
+                <Editor
+            onFocus={onFocusEditor}
+            onBlur={onblurEditor}
+           editorState={editorState}
+           toolbarClassName=""
+         wrapperClassName="textEditorWrapper"
+         editorClassName={editorFocused ? "textEditorActive" : "textEditor"}
+           onEditorStateChange={setEditorState}
+           />
           </Form.Group>
-          <Form.Group>
-            <Button variant="dark" type="submit">
-              Submit Answer
+          <Form.Group className="answerFormSubmitButtonWrapper">
+            <Button className="answerFormSubmitButton" type="submit">
+              Svara
             </Button>
          </Form.Group>
 

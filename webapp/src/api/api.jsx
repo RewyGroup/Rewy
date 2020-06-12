@@ -7,6 +7,7 @@ export const api = () => {
          signIn : (user) => axios.post(baseURL + "/auth/login",user),
          register: (user) => axios.post(baseURL + "/user/create",user),
          getUserById: (id) => axios.get(baseURL + "/user/" + id),
+         getAllUsers: () => axios.get(baseURL + "/user/all"),
          updateProfileInformation:(user,token) => axios.post(baseURL+"/user/update/profileInformation",user,{ headers:{'Authorization': 'Bearer '+ token}}),
          updateProfileImageUrlByUserId:(id,imageUrl,token) => axios.post(baseURL + "/user/"+ id +"/update/profileImage",imageUrl,{ headers:{'Authorization': 'Bearer '+ token}}),
          createQuestionVote: (questionWeb,token) => axios.post(baseURL +"/question/vote",questionWeb,{ headers:{'Authorization': 'Bearer '+ token}}),

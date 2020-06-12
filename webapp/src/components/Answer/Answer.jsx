@@ -9,7 +9,8 @@ import { checkDownVote } from "../../utils/CheckDownVote";
 import CheckVoteType from "../../utils/CheckVoteType"
 import calculateVotes from "../../utils/CalculateVotes";
 import {createAnswerVote} from "../../actions/answer";
-import {Editor, EditorState,convertFromRaw} from 'draft-js';
+import {EditorState,convertFromRaw} from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
 
 
 const Answer = (props) => {
@@ -100,17 +101,20 @@ const Answer = (props) => {
 
     return (
         <div>
-            <Row>
-                <Col xs={1} className="answerVoteCol">
+            <Row className="m-0">
+                <Col xs={{ span: 1, offset: 1 }} className="answerVoteCol">
                 <CheckVoteType voteType={voteType} upVote={upVote} downVote={downVote} voteCounter={voteCounter}/>
                 </Col>
 
-                <Col xs={11} className="answerDescription" >
+                <Col xs={10} className="answerDescription" >
 
-                    <Row className="answerText">
+                    <Row className="m-0" className="answerText">
                       {isWYSIWYG ?  <div>
                     <div className ="answerTextView">
-                <Editor placeholder="" editorState={textState} readOnly={true} /> 
+                    <Editor
+                     toolbarHidden={true}
+                     editorState={textState}
+                     readOnly={true}/> 
                 </div>
                 </div>:
                         <div>{answer.text} </div>}
@@ -121,16 +125,16 @@ const Answer = (props) => {
 
                 </Col>
             </Row>
-            <Row className="answerFooter" >
+            <Row className="answerFooter m-0" >
                 <Col xs={1}></Col >
                 <Col xs={1} className="answerButtonCol" >
                     {!hasCorrect && isOwner ? <Button onClick={handleOnClickCorrect} className="correctButton" variant="success" value={answer.id}>Correct</Button>:""}
                     </Col>
                 <Col className="answerFooterCol">
                         <div className="answerFooterInfo">
-                            <div className="answerUserInfoText"> Posted by: {user.username} </div>
-                            <div className="answerUserInfoText"> Posted at: {createdAt}</div>
-                            <div className="answerUserInfoText"> Last edited:</div>
+                            <div className="answerUserInfoText"> Skapad av:<span className="answerUserInfoCreatedBy"><img className="questionCardThumbnail" src={user.profileImageUrl} alt="thumbnail" /> {user.username}</span></div>
+                            <div className="answerUserInfoText"> Skapad: {createdAt}</div>
+                            <div className="answerUserInfoText"> Senast ändrad:</div>
                         </div>
                         </Col>
                     </Row>

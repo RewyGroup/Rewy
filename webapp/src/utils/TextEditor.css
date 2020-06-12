@@ -1,3 +1,5 @@
+
+
 .textEditorWrapper{
     display: block;
     height: fit-content;
@@ -6,13 +8,26 @@
 }
 
 .textEditor{
+    height: 250px;
 display: block;
 min-height: 9em;
-border-radius:  0 0 3px 3px;
 padding: 5px;
 font-size: 17px;
 font-weight: 300;
-box-shadow: 0px 0px 3px 1px rgba(15, 15,15 ,0.17);
+border: 2px solid #C4C4C4;
+overflow: hidden;
+}
+
+.textEditorActive{
+box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+height: 250px;
+display: block;
+min-height: 9em;
+padding: 5px;
+font-size: 17px;
+font-weight: 300;
+border: 2px solid #C4C4C4;
+overflow: auto;
 }
 
 .textEditorToolbar{
@@ -21,8 +36,18 @@ box-shadow: 0px 0px 3px 1px rgba(15, 15,15 ,0.17);
     display: block;
     min-height: 48px;
     padding: 5px 5px;
-    border-radius: 2px 2px 0 0;
-    box-shadow: 0px 0px 3px 1px rgba(15, 15, 15, 0.17);
+    border-top: 2px solid #C4C4C4;
+    border-left: 2px solid #C4C4C4;
+    border-right: 2px solid #C4C4C4;
+ 
+}
+.textEditorToolbar > div > div{
+    display: inline-block;
+    margin-right: 5px;
+}
+.textEditorToolbar  > div{
+    display: inline-block;
+    margin-right: 5px;
 }
 
 .answerTextView{
@@ -55,9 +80,9 @@ padding: 10px;
     height: 27px;
     display: inline-block;
     margin-right: 5px;
-    border: 1px solid #34495e;
+    border: 1px solid #292D48;
     text-align: center;
-    box-shadow: 0px 1px 11px 1px rgba(15, 15, 15, 0.2);
+
     background-color: #fff;
     font-size: 16px;
     transition: all 250ms ease-in-out;
@@ -84,8 +109,8 @@ padding: 10px;
     align-items: center;
     margin-right: 5px;
     text-align: center;
-    box-shadow: 0px 1px 11px 1px rgba(15, 15, 15, 0.2);
-    background-color: rgba(244,128,36,1);;
+
+    background-color: rgba(244,128,36,1);
     font-size: 16px;
     font-family: Oxygen, sans-serif;
     transition: all 250ms ease-in-out;
@@ -94,4 +119,29 @@ padding: 10px;
 .styleButtonsActive > svg{
     color: #fff;
     vertical-align: middle;
+}
+
+.rdw-option-wrapper.rdw-option-active {
+    background-color: rgba(244,128,36,1) !important;
+    border: 1px solid rgba(244,128,36,1) !important;
+    box-shadow: none;
+}
+.rdw-option-wrapper {
+    border: 1px solid  #292D48 !important;
+    width: 30px !important;
+    height: 28px !important;
+    border-radius: 0 !important;
+}
+.rdw-image-imagewrapper > img {
+    width: 100% !important;
+}
+
+.rdw-editor-toolbar{
+    border-radius: 0;
+    border: 2px solid #c4c4c4 !important;
+    margin-bottom: 0.5rem;
+}
+.rdw-editor-toolbar > div > div{
+    border-radius: 0 !important;
+    border: 2px solid  #292D48 !important;
 }

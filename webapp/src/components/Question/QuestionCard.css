@@ -6,6 +6,7 @@
 .cardRow:hover{
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
     transform: scale(1.01);
+    cursor: pointer;
 }
 
 .cardCard{
@@ -111,6 +112,18 @@ background-color: #F4F3F1;
     text-overflow: ellipsis;
  
 }
+.questionCardCorrectCardBody{
+    padding: 15px;
+}
+
+
+.questionCardThumbnail{
+    background-color: white;
+    width: 30px;
+    border-radius: 30px;
+    border: 2px solid white;
+    margin-left: 5px;
+}
 
 .questionCardCreatedByTime{
     text-align: end;
@@ -121,7 +134,6 @@ background-color: #F4F3F1;
 }
 .questionCardCreatedByName{
     font-weight: 500;
-    margin-left: 10px;
     color: #22243B;
 }
 .questionCardComments{
@@ -194,6 +206,18 @@ background-color: #F4F3F1;
 .questionCardCorrectAnswerAccordion{
     width: 100%;
 }
+.questionCardCorrectAnswerInfo > div{
+    display: inline-block;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #BDBEC0;
+    padding:0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .questionCardCorrectAnswerCard{
     border-radius: 0;
@@ -208,6 +232,24 @@ background-color: #F4F3F1;
     border-top: 1px solid rgba(199,209,216,.45) ;
 
 }
+.questionCardCorrectAnswerByText{
+    background-color:  #3AC271;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.7rem;
+    padding: 5px;
+    }
+
+.questionCardCorrectAnswerCreatedAt{
+    text-align: end;
+}
+.questionCardCorrectAnswerEditor{
+    margin-top: 15px;
+}
+
 
 @media (max-width:768px){
     .cardRow{

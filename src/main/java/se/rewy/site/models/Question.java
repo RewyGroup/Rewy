@@ -33,6 +33,7 @@ public class Question {
 
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question", cascade = CascadeType.ALL)
+    @OrderBy("createdAt")
     private Set<Answer> answers;
 
     @ManyToMany

@@ -24,8 +24,8 @@ function ProfilePage(props) {
 
     const profileImageMessage = "Profile image successfully changed!"
     const profileInfoMessage = "Profile successfully updated!"
-
-    const user = optionalUser && optionalUser.id && <ProfileCard token={session_token} user={optionalUser}/>;
+    
+    const user = optionalUser && optionalUser.id && <ProfileCard token={session_token} user={optionalUser}  history={props.history}/>;
     const ImageSuccessToast = showImageSuccessToast && <SuccessToast message={profileImageMessage} showSuccessToast={showImageSuccessToast} />
     const InfoSuccessToast = showInfoSuccessToast && <SuccessToast message={profileInfoMessage} showSuccessToast={showInfoSuccessToast} />
     

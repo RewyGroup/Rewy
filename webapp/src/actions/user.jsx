@@ -39,12 +39,18 @@ export const updateProfileInformation = (user,token) =>{
         })
     }
 };
+export const getAllQuestionsById = (userId) => async (dispatch) => {
+
+    const response = await api.getAllQuestionsByUserId(userId);
+    dispatch({ type: "GET_ALL_USER_QUESTIONS_SUCCESS", payload: response.data });
+  };
+
 
 
 const updateProfile = () => {
     return{
         type: 'UPDATE_PROFILE_SUCCESS',
-        
+
     }
 }
 

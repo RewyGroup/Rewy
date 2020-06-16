@@ -6,14 +6,20 @@ import { faEdit,faEnvelope,faMapMarkerAlt,faVenusMars } from '@fortawesome/free-
 import Avatar from 'react-avatar-edit';
 import './ProfileCard.css';
 import ProfileImageModal from'./ProfileImageModal';
-import { uploadProfileImage,updateProfileImageUrlByUserId } from '../../actions/user';
+import { uploadProfileImage,updateProfileImageUrlByUserId,getAllQuestionsById} from '../../actions/user';
 import ProfileEditModal from './ProfileEditModal';
+import ProfileQuestionCard from './profileQuestionCard';
+
+
 
 const ProfileCard = (props) => {
 
-  const {user,token} = props;
+  const {user,token,history} = props;
 
   const imageUrl = useSelector(state => state.userReducer.imageUrl);
+  const questionList = useSelector(state => state.questionReducer.questionList);
+
+  
 
   const [preview,setPreview] = useState(null);
   const [imageSrc,setImageSrc] = useState(null);
@@ -95,6 +101,8 @@ const ProfileCard = (props) => {
 
   } 
 
+  const userQuestions = questionList &&
+  questionList.map((question) => (<ProfileQuestionCard question={question} history={props.history}/>));
 
 
   useEffect(() =>{
@@ -129,7 +137,7 @@ const ProfileCard = (props) => {
         setPreview(user.profileImageUrl);
         
       }
-      
+        dispatch(getAllQuestionsById(user.id));
       },[]);
   
 
@@ -170,7 +178,9 @@ const ProfileCard = (props) => {
               />{user.gender}</div>
     </Tab>
     <Tab className="profileCardTab" eventKey="questions" title="Dina frågor">
-
+      <div className="profileCardQuestionsWrapper">
+      {userQuestions}
+      </div>
     </Tab>
   </Tabs>
   </Col>

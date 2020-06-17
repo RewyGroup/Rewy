@@ -1,7 +1,6 @@
 package se.rewy.site.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,6 +13,7 @@ public class Category {
 
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
+    @OrderBy("name asc")
     private Set<SubCategory> subCategoryList;
 
 

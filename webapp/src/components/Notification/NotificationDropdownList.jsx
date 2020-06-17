@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {Overlay,Popover} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faFileInvoice } from '@fortawesome/free-solid-svg-icons'
 import Notification from './Notification';
 import {getNotificationById,setNotificationsToShown} from '../../actions/notification';
 
@@ -16,17 +16,30 @@ function NotificationDropdownList(props) {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.loginReducer.user.id);
     const optionalNotifications = useSelector(state => state.notificationReducer.notifications);
-    const notShownNotifications = optionalNotifications.filter(notification => notification.shown === false);
-
+    const [toShownNotification,setToShownNotification] = useState([]);
+    const [fiveNotifications,setFiveNotifications] = useState([]);
+    
    useEffect(() =>{
-    if(notShownNotifications.length> 0){
-      notShownNotifications.forEach(function (notification){
+    if(toShownNotification.length> 0){
+      toShownNotification.forEach(function (notification){
       notification.notification.user.role =  notification.notification.user.role.toUpperCase();      
 
-      })       
-    }
-    },[notShownNotifications]);
+      })
+      var counter = toShownNotification.length;
+      if(counter > 0 && counter < 5){
 
+        var five =[...toShownNotification];
+
+        for(var i = 0;  i < 5-counter; i++){          
+          five.push(optionalNotifications[i])
+
+        }
+        setFiveNotifications(five);
+        
+      }    
+    }
+    },[toShownNotification]);
+    
    useEffect(() =>{
 
     if(userId){
@@ -36,14 +49,30 @@ function NotificationDropdownList(props) {
 
 
     useEffect(() =>{
-
        if(optionalNotifications.length > 0){
-        sortDesc(); 
-        var counter = optionalNotifications.filter(notification => notification.shown===false).length;
+        sortDesc();
+        var notShownNotifications = optionalNotifications.filter(notification => notification.shown === false);
+        var counter = notShownNotifications.length;
+
+
         if(counter > 0){
             setNotifierWarning(true);
             setNewNotifications(counter);
         }
+        
+        if(counter > 0 && counter < 5){
+          
+          setToShownNotification(optionalNotifications.filter(notification => notification.shown === false)); 
+
+        }else{
+          const five = optionalNotifications.splice(0,5);
+          setFiveNotifications(five);
+        }
+
+        if(counter > 5){
+          setToShownNotification(notShownNotifications.splice(0,5));
+        }
+        
        }    
     },[optionalNotifications]);
 
@@ -55,12 +84,12 @@ function NotificationDropdownList(props) {
     const handleClick = (event) => {
       setShow(!show);
       setTarget(event.target);
-      dispatch(setNotificationsToShown(notShownNotifications,token));
+      dispatch(setNotificationsToShown(toShownNotification,token));
       setNotifierWarning(false);
     };
 
 
-    const notificationList = optionalNotifications && <Notification notificationList={optionalNotifications}/>; 
+    const notificationList = fiveNotifications &&  fiveNotifications.map((notification,index) => <Notification key={index} notification={notification}/>); 
     
 
 
@@ -75,9 +104,11 @@ function NotificationDropdownList(props) {
         containerPadding={10}
       >
         <Popover id="popover-contained" className="notificationPopover">
+          <div>
             {notificationList}
+            </div>
             <Popover.Content className="notificationFooter">
-            <a  href="/notifications">see more notifications</a>
+            <a  href="/notifications">see fler händelser</a>
           </Popover.Content>
         </Popover>
       </Overlay>

@@ -7,15 +7,12 @@ import Notification from './Notification';
 import {getNotificationById,setNotificationsToShown} from '../../actions/notification';
 
 function NotificationDropdownList(props) {
-
-    const {token} = props
-    
+    const {token} = props;
 
     const [show, setShow] = useState(false);
     const [target, setTarget] = useState(null);
     const [notifierWarning,setNotifierWarning] = useState(false);
     const [newNotifications,setNewNotifications] = useState(0);
-
     const dispatch = useDispatch();
     const userId = useSelector(state => state.loginReducer.user.id);
     const optionalNotifications = useSelector(state => state.notificationReducer.notifications);
@@ -37,7 +34,24 @@ function NotificationDropdownList(props) {
     }
     },[userId]);
 
-  
+
+    useEffect(() =>{
+
+       if(optionalNotifications.length > 0){
+        sortDesc(); 
+        var counter = optionalNotifications.filter(notification => notification.shown===false).length;
+        if(counter > 0){
+            setNotifierWarning(true);
+            setNewNotifications(counter);
+        }
+       }    
+    },[optionalNotifications]);
+
+
+    function sortDesc(){
+      optionalNotifications.sort(function(a, b){ return b.id - a.id});
+    }
+
     const handleClick = (event) => {
       setShow(!show);
       setTarget(event.target);
@@ -48,20 +62,7 @@ function NotificationDropdownList(props) {
 
     const notificationList = optionalNotifications && <Notification notificationList={optionalNotifications}/>; 
     
-    
 
-    useEffect(() =>{
-
-       if(optionalNotifications.length > 0){
-           
-        var counter = optionalNotifications.filter(notification => notification.shown===false).length;
-        if(counter > 0){
-            setNotifierWarning(true);
-            setNewNotifications(counter);
-        }
-
-       }    
-    },[optionalNotifications]);
 
         return (
         <div className="notification-list">

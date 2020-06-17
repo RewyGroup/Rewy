@@ -1,16 +1,12 @@
 package se.rewy.site.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Question {
+public class Question implements Comparable<Question>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +22,7 @@ public class Question {
     private Category category;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @OrderBy("name asc ")
     @JoinTable(name = "question_sub_category_list",
             joinColumns = @JoinColumn(name ="question_id"),
             inverseJoinColumns = @JoinColumn(name = "sub_category_id"))
@@ -111,4 +108,11 @@ public class Question {
     public LocalDateTime getCreatedAt() { return createdAt; }
 
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+
+
+    @Override
+    public int compareTo(Question question) {
+        return 0;
+    }
 }

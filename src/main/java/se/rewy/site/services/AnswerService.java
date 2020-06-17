@@ -51,7 +51,7 @@ public class AnswerService {
                 notification.setType("answer");
                 notification.setUser(user);
                 notification.setCreatedAt(LocalDateTime.now());
-                notification.setNotificationText(user.getUsername() + " has answered your question " + question.getTitle());
+                notification.setNotificationText(user.getUsername() + " har svarat på din fråga " + question.getTitle());
                 notificationRepository.save(notification);
 
                 long userToNotify = questionOwner.getId();

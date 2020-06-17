@@ -24,6 +24,7 @@
 }
 
 .notificationPopover{
+    font-family: 'Roboto';
     max-width: 450px;
 }
 
@@ -33,11 +34,18 @@
     border-top: none;
     background-color: lightgrey;
 }
+.notificationCreatedAt{
+    color: #BDBEC0;
+    text-align: end;
+    font-size: 0.6rem;
+
+}
 .notificationText{
     padding: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.75rem;
 }
 
 .notificationCard:hover{

@@ -1,0 +1,112 @@
+.usersCards{
+    padding: 0px 40px;
+}
+.userCard{
+    padding: 15px 30px;
+}
+.userCardWrapper{
+    font-family: "Roboto";
+    text-align: center;
+    margin-bottom: 100px;
+    max-width: 250px;
+
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+}
+.userCardImg{
+    width: 120px;
+    position: relative;
+    top: -60px;
+    border-radius: 90px;
+    border: 8px solid #ffffff;
+    background-color:#ffffff;
+    box-shadow: 0 1px 3px rgba(175, 172, 172, 0.06), 0 2px 6px rgba(0,0,0,0.06), 0 3px 8px rgba(0,0,0,0.09);
+}
+
+.userCardNameWrapper{
+    margin-top: -50px;
+    margin-bottom: 20px;
+}
+.userCardFullname{
+    color: #292D48;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+.userCardUsername{
+    color: #94989F;
+}
+.userCardStats{
+    color: #94989F; 
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.userCardStatsNumber{
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+.userCardButtonWrapper{
+    margin-top: 20px;
+}
+
+.userCardButton{    
+    text-transform: uppercase;
+    border-radius: 0;
+    background-color: #FF8D8D;
+    border-color: #FF8D8D;
+    margin-bottom: 20px;
+}
+@media (max-width:768px){
+    .userCardImg{
+        width: 55%;
+        
+    }
+}
+@media (max-width:414px){
+    .usersCards{
+        padding: 0px 10px;
+    }
+    .userCardImg{
+        width: 80%;
+        top: -45px;
+    }
+    .userCardNameWrapper{
+        margin-top: -40px;
+        margin-bottom: 20px;
+    }
+    .userCard{
+        margin-top: 30px;
+        padding:10px !important;
+    }
+}
+@media (max-width:375px){
+    .usersCards{
+        padding: 0px 5px;
+    }
+    .userCardImg{
+        width: 70%;
+        top: -40px;
+        border: 5px solid #ffffff;
+    }
+    .userCardNameWrapper{
+        margin-top: -30px;
+        margin-bottom: 20px;
+    }
+    .userCard{
+        margin-top: 30px;
+        padding:10px !important;
+    }
+
+}
+@media (max-width:320px){
+    .usersCards{
+        padding: 0px 5px;
+    }
+    .userCardImg{
+        width: 70%;
+        top: -30px;
+    }
+    .userCardNameWrapper{
+        margin-top: -20px;
+        margin-bottom: 20px;
+    }
+
+}

@@ -6,11 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.rewy.site.exception.UserServiceException;
 import se.rewy.site.models.Question;
-import se.rewy.site.models.VoteType;
 import se.rewy.site.models.web.QuestionWeb;
 import se.rewy.site.services.QuestionService;
 
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/question")

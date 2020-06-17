@@ -11,6 +11,7 @@ import { checkDownVote } from "../../utils/CheckDownVote";
 import CheckVoteType from "../../utils/CheckVoteType"
 import {EditorState,convertFromRaw} from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
+import moment from 'moment';
 
 const Question = (props) => {
   const { question, token , history , isLoggedIn } = props;
@@ -21,7 +22,8 @@ const Question = (props) => {
   const [once,setOnce] = useState(true);
   const [voteCounter,setVoteCounter] = useState(0);
   const[isWYSIWYG, setIsWYSIWYG] = useState(false);
-  const createdAt = question.createdAt.replace("T", " ");
+  const [createdAt,setCreatedAt] = useState();
+  
   const [textState,setTextState] = useState(EditorState.createEmpty(),);
   const SubCategoryList =
     subCategoryList.length > 0 &&
@@ -44,7 +46,9 @@ const Question = (props) => {
   };
 
   useEffect(() => {
-
+      var date = moment(question.createdAt).fromNow();
+      setCreatedAt(date);
+   
     
     if(loggedInUserVote.length > 0){
       setVoteType(loggedInUserVote[0].type);

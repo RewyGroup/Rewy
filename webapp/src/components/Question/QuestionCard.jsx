@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import calculateVotes from "../../utils/CalculateVotes";
 import { EditorState, convertFromRaw } from "draft-js";
 import { Editor } from 'react-draft-wysiwyg';
-
+import moment from 'moment';
 const QuestionCard = (props) => {
   const { question, history } = props;
   const { answers } = question;
@@ -14,7 +14,7 @@ const QuestionCard = (props) => {
   const [isWYSIWYG, setIsWYSIWYG] = useState(false);
   const [textState, setTextState] = useState(EditorState.createEmpty());
   const [accordionIsOpen,setAccordionIsOpen] = useState(false);
-
+  var date = moment(question.createdAt).fromNow();
   const correctAnswer =
     answers.length > 0 && answers.filter((answer) => answer.correct === true);
   useEffect(() => {
@@ -44,12 +44,6 @@ const QuestionCard = (props) => {
     history.push({ pathname: path, question: question });
   };
 
-  const handleButtonClick = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    document.getElementById(e.target.value).click();
-  };
-
   const handleAccordionClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -65,7 +59,7 @@ const QuestionCard = (props) => {
   }
 
   return (
-    <Row  onClick={hasCorrectAnswer ? handleCorrectClick : handleOnClick} className="cardRow mr-0">
+    <Row  onClick={hasCorrectAnswer ? handleCorrectClick : handleOnClick} className="cardRow mr-0 ml-0">
       <Col className="questionCardVotes" xs={1}>
         <div>{calculateVotes(question.votes)}</div>
         <div>
@@ -115,7 +109,7 @@ const QuestionCard = (props) => {
             {question.answers.length} svar
           </Col>
           <Col xs={3} className="questionCardCreatedByTime">
-            {question.createdAt.replace("T", " ")}
+            {date}
           </Col>
         </div>
         <div className="questionCardTitle">{question.title}</div>

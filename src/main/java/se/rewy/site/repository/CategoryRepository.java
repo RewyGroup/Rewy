@@ -2,7 +2,6 @@ package se.rewy.site.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import se.rewy.site.models.Category;
-
 import java.util.Optional;
 import java.util.Set;
 

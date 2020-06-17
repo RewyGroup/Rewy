@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {Container} from 'react-bootstrap'
+import {Container,Row,Col} from 'react-bootstrap'
 import {stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
 import { getQuestionById } from '../actions/question';
 import Question from '../components/Question/Question'
+import Sidebar from '../utils/Sidebar';
 
 const QuestionPage = (props) => {
 
@@ -52,7 +53,20 @@ const QuestionPage = (props) => {
         const selectedQuestion = activeQuestion &&  activeQuestion.category && <Question history={props.history} isLoggedIn={isLoggedIn} token={session_token} question={activeQuestion}></Question>
         
 
-        return (<Container>{selectedQuestion} </Container> );
+        return (
+          <div>
+          <Row className="m-0">
+          <Col className="sidebarWrapper" xs={12} lg={2}>
+              <Sidebar active={"EXPLORE"}/>
+          </Col>
+              <Col xs={12}  lg={10}>
+                  <Container>
+                  {selectedQuestion} 
+                  </Container>
+              </Col>
+              </Row>
+          </div>
+           );
 }
 
 export default QuestionPage;

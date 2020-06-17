@@ -14,7 +14,7 @@ import ProfileQuestionCard from './profileQuestionCard';
 
 const ProfileCard = (props) => {
 
-  const {user,token,history} = props;
+  const {user,token,history,isLoggedInUser} = props;
 
   const imageUrl = useSelector(state => state.userReducer.imageUrl);
   const questionList = useSelector(state => state.questionReducer.questionList);
@@ -102,7 +102,7 @@ const ProfileCard = (props) => {
   } 
 
   const userQuestions = questionList &&
-  questionList.map((question) => (<ProfileQuestionCard question={question} history={props.history}/>));
+  questionList.map((question,index) => (<ProfileQuestionCard key={index} question={question} history={history}/>));
 
 
   useEffect(() =>{
@@ -153,9 +153,9 @@ const ProfileCard = (props) => {
         <Col className="profileCardInfoWrapper" xs={12}>
         <img className="profileImage" src={preview} onClick={profileImgClick} alt="Preview" />
         <div className="profileCardInfoEditIcon">
-        <FontAwesomeIcon className="profileCardInfoEditIconSvg"
+        {isLoggedInUser ? <FontAwesomeIcon className="profileCardInfoEditIconSvg"
                 icon={faEdit} onClick={handleShowEditModal}
-              />
+              />:<div className="profileCardNoSvg"></div>}
               </div>
       <div className="profileCardInfoName">{user.firstName} {user.lastName}</div>
       <div className="profileCardInfoUsername">@{user.username}</div>
@@ -177,14 +177,14 @@ const ProfileCard = (props) => {
                 icon={faVenusMars} 
               />{user.gender}</div>
     </Tab>
-    <Tab className="profileCardTab" eventKey="questions" title="Dina frågor">
+    <Tab className="profileCardTab" eventKey="questions" title={isLoggedInUser ? "Dina frågor" : user.username + "'s frågor"}>
       <div className="profileCardQuestionsWrapper">
       {userQuestions}
       </div>
     </Tab>
   </Tabs>
   </Col>
-  <ProfileImageModal show={showImageModal} handleUpdate={handleUpdateImageModal} handleClose={handleCloseImageModal} showAvatar={showAvatar()}/>
+{isLoggedInUser ? <ProfileImageModal show={showImageModal} handleUpdate={handleUpdateImageModal} handleClose={handleCloseImageModal} showAvatar={showAvatar()}/>:""}
   <ProfileEditModal token={token} show={showEditModal} handleUpdate={handleUpdateEditModal} handleClose={handleCloseEditModal} user={user}/>
   </Row>
 

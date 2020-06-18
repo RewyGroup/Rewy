@@ -28,8 +28,21 @@ const ProfileCard = (props) => {
   const [baseName,setBaseName]= useState(null)
   const [croppedImage,setCroppedImage] = useState(null);
   const [showEditModal,setShowEditModal] = useState(false);
-
+  const [userQuestions, setUserQuestions]=useState();
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    questionList.map((question) =>{
+      var timeinmillis = Date.parse(question.createdAt);
+      question.createdAt = timeinmillis;            
+  });
+
+    questionList.sort(function(a, b){ return b.createdAt - a.createdAt});
+    const questions = questionList &&
+    questionList.map((question,index) => (<ProfileQuestionCard key={index} question={question} history={history}/>));
+    setUserQuestions(questions);
+  }
+  ,[questionList]);
 
   function onClose(saveImage) {
     if(saveImage){
@@ -101,8 +114,6 @@ const ProfileCard = (props) => {
 
   } 
 
-  const userQuestions = questionList &&
-  questionList.map((question,index) => (<ProfileQuestionCard key={index} question={question} history={history}/>));
 
 
   useEffect(() =>{

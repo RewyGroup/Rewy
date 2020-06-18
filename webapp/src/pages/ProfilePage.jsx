@@ -61,7 +61,7 @@ function ProfilePage(props) {
 
      useEffect(()=>{
         
-        if(selectedUser.id === userId){
+        if(selectedUser.id && selectedUser.id === userId){
             setIsLoggedInUser(true);
         }
 

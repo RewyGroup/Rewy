@@ -59,6 +59,11 @@
 }
 
 .correctButton{
-    width: auto;
-    padding:.375rem .75rem;
+    font-family: "Roboto";
+    border: none;
+    background-color:#3AC271;
+    text-transform: uppercase;
+    border-radius: 0;
+    font-weight: 500;
+    font-size: 0.9rem;
 }

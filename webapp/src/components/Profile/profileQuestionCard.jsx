@@ -3,13 +3,14 @@ import { Row, Col } from "react-bootstrap";
 import "./ProfileQuestionCard.css";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from 'moment';
 
 
 const ProfileQuestionCard = (props) => {
   const { question, history } = props;
 
   const [hasCorrectAnswer, setCorrectAnswer] = useState(false);
-
+  const createdAt =moment(question.createdAt).fromNow();
 
 
   useEffect(() => {
@@ -73,7 +74,7 @@ const handleOnClick = (e) => {
             {question.answers.length} svar
           </Col>
           <Col xs={3} className="questionCardCreatedByTime">
-            {question.createdAt.replace("T", " ")}
+            {createdAt}
           </Col>
         </div>
         <div className="questionCardTitle">{question.title}</div>

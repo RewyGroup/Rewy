@@ -1,9 +1,11 @@
 package se.rewy.site.models;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name ="user")
@@ -25,6 +27,11 @@ public class User {
     private String gender;
     private LocalDate dateOfBirth;
     private String occupation;
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @OrderBy("priority asc")
+    private Set<Preference> preferences;
 
     public User(){}
 

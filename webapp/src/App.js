@@ -9,6 +9,7 @@ import QuestionListPage from './pages/QuestionListPage';
 import QuestionPage from './pages/QuestionPage';
 import CreateQuestionPage from './pages/CreateQuestionPage';
 import ProfilePage from './pages/ProfilePage';
+import UsersPage from './pages/UsersPage';
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
       <Route exact path="/user/:username" component={ProfilePage}/>
       <Route exact path={"/question/category/:category"} component={QuestionListPage}/>
       <Route exact path={"/question/:questionId"} component={QuestionPage}/>
-
+      <Route exact path="/users/all" component={UsersPage}/>
     </Switch>
     </Router>
     </div>

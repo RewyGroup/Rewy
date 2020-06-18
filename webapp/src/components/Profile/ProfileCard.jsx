@@ -6,14 +6,20 @@ import { faEdit,faEnvelope,faMapMarkerAlt,faVenusMars } from '@fortawesome/free-
 import Avatar from 'react-avatar-edit';
 import './ProfileCard.css';
 import ProfileImageModal from'./ProfileImageModal';
-import { uploadProfileImage,updateProfileImageUrlByUserId } from '../../actions/user';
+import { uploadProfileImage,updateProfileImageUrlByUserId,getAllQuestionsById} from '../../actions/user';
 import ProfileEditModal from './ProfileEditModal';
+import ProfileQuestionCard from './profileQuestionCard';
+
+
 
 const ProfileCard = (props) => {
 
-  const {user,token} = props;
+  const {user,token,history,isLoggedInUser} = props;
 
   const imageUrl = useSelector(state => state.userReducer.imageUrl);
+  const questionList = useSelector(state => state.questionReducer.questionList);
+
+  
 
   const [preview,setPreview] = useState(null);
   const [imageSrc,setImageSrc] = useState(null);
@@ -22,8 +28,21 @@ const ProfileCard = (props) => {
   const [baseName,setBaseName]= useState(null)
   const [croppedImage,setCroppedImage] = useState(null);
   const [showEditModal,setShowEditModal] = useState(false);
-
+  const [userQuestions, setUserQuestions]=useState();
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    questionList.map((question) =>{
+      var timeinmillis = Date.parse(question.createdAt);
+      question.createdAt = timeinmillis;            
+  });
+
+    questionList.sort(function(a, b){ return b.createdAt - a.createdAt});
+    const questions = questionList &&
+    questionList.map((question,index) => (<ProfileQuestionCard key={index} question={question} history={history}/>));
+    setUserQuestions(questions);
+  }
+  ,[questionList]);
 
   function onClose(saveImage) {
     if(saveImage){
@@ -129,7 +148,7 @@ const ProfileCard = (props) => {
         setPreview(user.profileImageUrl);
         
       }
-      
+        dispatch(getAllQuestionsById(user.id));
       },[]);
   
 
@@ -145,9 +164,9 @@ const ProfileCard = (props) => {
         <Col className="profileCardInfoWrapper" xs={12}>
         <img className="profileImage" src={preview} onClick={profileImgClick} alt="Preview" />
         <div className="profileCardInfoEditIcon">
-        <FontAwesomeIcon className="profileCardInfoEditIconSvg"
+        {isLoggedInUser ? <FontAwesomeIcon className="profileCardInfoEditIconSvg"
                 icon={faEdit} onClick={handleShowEditModal}
-              />
+              />:<div className="profileCardNoSvg"></div>}
               </div>
       <div className="profileCardInfoName">{user.firstName} {user.lastName}</div>
       <div className="profileCardInfoUsername">@{user.username}</div>
@@ -169,12 +188,14 @@ const ProfileCard = (props) => {
                 icon={faVenusMars} 
               />{user.gender}</div>
     </Tab>
-    <Tab className="profileCardTab" eventKey="questions" title="Dina frågor">
-
+    <Tab className="profileCardTab" eventKey="questions" title={isLoggedInUser ? "Dina frågor" : user.username + "'s frågor"}>
+      <div className="profileCardQuestionsWrapper">
+      {userQuestions}
+      </div>
     </Tab>
   </Tabs>
   </Col>
-  <ProfileImageModal show={showImageModal} handleUpdate={handleUpdateImageModal} handleClose={handleCloseImageModal} showAvatar={showAvatar()}/>
+{isLoggedInUser ? <ProfileImageModal show={showImageModal} handleUpdate={handleUpdateImageModal} handleClose={handleCloseImageModal} showAvatar={showAvatar()}/>:""}
   <ProfileEditModal token={token} show={showEditModal} handleUpdate={handleUpdateEditModal} handleClose={handleCloseEditModal} user={user}/>
   </Row>
 

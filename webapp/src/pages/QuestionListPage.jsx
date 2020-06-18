@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {stillLoggedIn} from '../actions/login';
 import {getAllQuestions,getAllQuestionsByCategoryName} from '../actions/question';
@@ -17,6 +17,7 @@ const QuestionListPage = (props) => {
     const {showSuccessToast,message} = props.location;
     var parts = props.location.pathname.split('/');
     const location = parts[parts.length - 1];
+    const [questions,setQuestions] = useState([]);
 
     
     useEffect(() => {
@@ -37,14 +38,34 @@ const QuestionListPage = (props) => {
             }
         }
     }, [])
-    
+
+
+        useEffect(() => {
+        if(questionlist.length > 0){
+
+            setQuestions(sortDesc());
+        } 
+            
+    }, [questionlist])
+
 
     if(session_token){
         dispatch(stillLoggedIn(session_token));
     }
 
-    const questions = questionlist && questionlist.length > 0 &&
-    questionlist.map((question,index)=>(<QuestionCard key={index} question={question} history={props.history}/>)) 
+    function sortDesc(){
+        
+        questionlist.map((question,index) =>{
+            var timeinmillis = Date.parse(question.createdAt);
+            question.createdAt = timeinmillis;            
+        });
+
+        questionlist.sort(function(a, b){ return b.createdAt - a.createdAt});
+        return questionlist.map((question,index) =>(<QuestionCard key={index} question={question} history={props.history}/>))
+         
+
+
+    }
     
     
         return (<div>

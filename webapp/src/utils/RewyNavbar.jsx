@@ -10,7 +10,7 @@ import NotificationDropdownList from '../components/Notification/NotificationDro
 import {Cookies} from 'react-cookie';
 
 function RewyNavbar() {
-
+   
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state=>state.loginReducer.isLoggedIn);
   const user = useSelector(state => state.loginReducer.user)

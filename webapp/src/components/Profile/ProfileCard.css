@@ -24,6 +24,9 @@
     text-align: end;
     margin-top: -180px;
 }
+.profileCardNoSvg{
+    height: 46px;
+}
 .profileCardInfoEditIconSvg{
     color: #292D48;
 }
@@ -98,7 +101,7 @@
     border-radius: 90px;
     border: 8px solid #ffffff;
     background-color: #ffffff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.06), 0 3px 8px rgba(0,0,0,0.09);
+    box-shadow: 0 1px 3px rgba(175, 172, 172, 0.06), 0 2px 6px rgba(0,0,0,0.06), 0 3px 8px rgba(0,0,0,0.09);
     transition: transform .2s;
 }
 
@@ -136,7 +139,7 @@
 @media (max-width:375px){
     .profileImage{
         border: 6px solid #ffffff;
-        top: -55px;
+        top: -45px;
     }
     .profileCardInfoEditIcon{
         margin-top: -110px

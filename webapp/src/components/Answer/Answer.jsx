@@ -11,6 +11,7 @@ import calculateVotes from "../../utils/CalculateVotes";
 import {createAnswerVote} from "../../actions/answer";
 import {EditorState,convertFromRaw} from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
+import moment from 'moment';
 
 
 const Answer = (props) => {
@@ -26,8 +27,8 @@ const Answer = (props) => {
     const session_token = cookies.get("session_token");
     const dispatch = useDispatch();
     const [once,setOnce] = useState(true);
-    const createdAt =answer.createdAt.replace("T"," ");
-
+    const createdAt =moment(answer.createdAt).fromNow();
+  
     const handleOnClickCorrect = event =>{        
         dispatch(setCorrectAnswer(answer.id,session_token));
         window.location.reload();
@@ -128,7 +129,7 @@ const Answer = (props) => {
             <Row className="answerFooter m-0" >
                 <Col xs={1}></Col >
                 <Col xs={1} className="answerButtonCol" >
-                    {!hasCorrect && isOwner ? <Button onClick={handleOnClickCorrect} className="correctButton" variant="success" value={answer.id}>Correct</Button>:""}
+                    {!hasCorrect && isOwner ? <Button onClick={handleOnClickCorrect} className="correctButton" value={answer.id}>korrekt</Button>:""}
                     </Col>
                 <Col className="answerFooterCol">
                         <div className="answerFooterInfo">

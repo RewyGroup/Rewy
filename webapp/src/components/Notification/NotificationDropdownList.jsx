@@ -2,34 +2,44 @@ import React, {useState,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {Overlay,Popover} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faFileInvoice } from '@fortawesome/free-solid-svg-icons'
 import Notification from './Notification';
 import {getNotificationById,setNotificationsToShown} from '../../actions/notification';
 
 function NotificationDropdownList(props) {
-
-    const {token} = props
-    
+    const {token} = props;
 
     const [show, setShow] = useState(false);
     const [target, setTarget] = useState(null);
     const [notifierWarning,setNotifierWarning] = useState(false);
     const [newNotifications,setNewNotifications] = useState(0);
-
     const dispatch = useDispatch();
     const userId = useSelector(state => state.loginReducer.user.id);
     const optionalNotifications = useSelector(state => state.notificationReducer.notifications);
-    const notShownNotifications = optionalNotifications.filter(notification => notification.shown === false);
-
+    const [toShownNotification,setToShownNotification] = useState([]);
+    const [fiveNotifications,setFiveNotifications] = useState([]);
+    
    useEffect(() =>{
-    if(notShownNotifications.length> 0){
-      notShownNotifications.forEach(function (notification){
+    if(toShownNotification.length> 0){
+      toShownNotification.forEach(function (notification){
       notification.notification.user.role =  notification.notification.user.role.toUpperCase();      
 
-      })       
-    }
-    },[notShownNotifications]);
+      })
+      var counter = toShownNotification.length;
+      if(counter > 0 && counter < 5){
 
+        var five =[...toShownNotification];
+
+        for(var i = 0;  i < 5-counter; i++){          
+          five.push(optionalNotifications[i])
+
+        }
+        setFiveNotifications(five);
+        
+      }    
+    }
+    },[toShownNotification]);
+    
    useEffect(() =>{
 
     if(userId){
@@ -37,31 +47,51 @@ function NotificationDropdownList(props) {
     }
     },[userId]);
 
-  
-    const handleClick = (event) => {
-      setShow(!show);
-      setTarget(event.target);
-      dispatch(setNotificationsToShown(notShownNotifications,token));
-      setNotifierWarning(false);
-    };
-
-
-    const notificationList = optionalNotifications && <Notification notificationList={optionalNotifications}/>; 
-    
-    
 
     useEffect(() =>{
-
        if(optionalNotifications.length > 0){
-           
-        var counter = optionalNotifications.filter(notification => notification.shown===false).length;
+        sortDesc();
+        var notShownNotifications = optionalNotifications.filter(notification => notification.shown === false);
+        var counter = notShownNotifications.length;
+
+
         if(counter > 0){
             setNotifierWarning(true);
             setNewNotifications(counter);
         }
+        
+        if(counter > 0 && counter < 5){
+          
+          setToShownNotification(optionalNotifications.filter(notification => notification.shown === false)); 
 
+        }else{
+          const five = optionalNotifications.splice(0,5);
+          setFiveNotifications(five);
+        }
+
+        if(counter > 5){
+          setToShownNotification(notShownNotifications.splice(0,5));
+        }
+        
        }    
     },[optionalNotifications]);
+
+
+    function sortDesc(){
+      optionalNotifications.sort(function(a, b){ return b.id - a.id});
+    }
+
+    const handleClick = (event) => {
+      setShow(!show);
+      setTarget(event.target);
+      dispatch(setNotificationsToShown(toShownNotification,token));
+      setNotifierWarning(false);
+    };
+
+
+    const notificationList = fiveNotifications &&  fiveNotifications.map((notification,index) => <Notification key={index} notification={notification}/>); 
+    
+
 
         return (
         <div className="notification-list">
@@ -74,9 +104,11 @@ function NotificationDropdownList(props) {
         containerPadding={10}
       >
         <Popover id="popover-contained" className="notificationPopover">
+          <div>
             {notificationList}
+            </div>
             <Popover.Content className="notificationFooter">
-            <a  href="/notifications">see more notifications</a>
+            <a  href="/notifications">see fler händelser</a>
           </Popover.Content>
         </Popover>
       </Overlay>

@@ -14,3 +14,12 @@ border: none;
     text-align: center;
     padding-bottom: 20px;
 }
+
+.profileEditProfileButton{
+    font-family: "Roboto";
+    border: none;
+    background-color:#3AC271;
+    text-transform: uppercase;
+    border-radius: 0;
+    font-size: 0.9rem;
+}

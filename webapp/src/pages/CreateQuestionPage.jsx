@@ -4,8 +4,7 @@ import {stillLoggedIn} from '../actions/login';
 import {Cookies} from 'react-cookie';
 import {getAllCategories} from '../actions/category'
 import QuestionForm from '../components/Question/QuestionForm';
-import QuestionFormInfo from '../components/Question/QuestionFormInfo';
-import {Row, Container, Col} from 'react-bootstrap';
+import {Row,Col} from 'react-bootstrap';
 import Sidebar from '../utils/Sidebar';
 
 

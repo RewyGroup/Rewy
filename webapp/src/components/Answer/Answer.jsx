@@ -128,7 +128,7 @@ const Answer = (props) => {
             <Row className="answerFooter m-0" >
                 <Col xs={1}></Col >
                 <Col xs={1} className="answerButtonCol" >
-                    {!hasCorrect && isOwner ? <Button onClick={handleOnClickCorrect} className="correctButton" variant="success" value={answer.id}>Correct</Button>:""}
+                    {!hasCorrect && isOwner ? <Button onClick={handleOnClickCorrect} className="correctButton" value={answer.id}>korrekt</Button>:""}
                     </Col>
                 <Col className="answerFooterCol">
                         <div className="answerFooterInfo">

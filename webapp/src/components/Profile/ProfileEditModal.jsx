@@ -89,8 +89,8 @@ function ProfileEditModal(props) {
                 {userInformation()}
                 </Modal.Body>
               <Modal.Footer className="profileEditMoldalFooter">
-                <Button variant="success" type="submit">
-                  Save Changes
+                <Button className="profileEditProfileButton" type="submit">
+                  spara ändringar
                 </Button>
               </Modal.Footer>
               {errorMessage ? <div className="profileEditMoldalError">{errorMessage}</div> : <div></div>}

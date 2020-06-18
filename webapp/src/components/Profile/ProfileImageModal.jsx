@@ -15,8 +15,8 @@ function ProfileImageModal(props) {
               </Modal.Header>
               <Modal.Body className="profileModalBody">{props.showAvatar}</Modal.Body>
               <Modal.Footer>
-                <Button variant="success" onClick={handleUpdate}>
-                  Save Changes
+                <Button className="profileEditProfileButton" onClick={handleUpdate}>
+                  spara ändringar
                 </Button>
               </Modal.Footer>
             </Modal>

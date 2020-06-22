@@ -29,20 +29,30 @@ const ProfileCard = (props) => {
   const [croppedImage,setCroppedImage] = useState(null);
   const [showEditModal,setShowEditModal] = useState(false);
   const [userQuestions, setUserQuestions]=useState();
+  const [counter,setCounter] = useState(0); 
+  const[questionListIsLoading, setQuestionListIsLoading]=useState(true);
   const dispatch = useDispatch();
+
 
   useEffect(()=>{
     questionList.map((question) =>{
       var timeinmillis = Date.parse(question.createdAt);
       question.createdAt = timeinmillis;            
   });
-
     questionList.sort(function(a, b){ return b.createdAt - a.createdAt});
     const questions = questionList &&
     questionList.map((question,index) => (<ProfileQuestionCard key={index} question={question} history={history}/>));
     setUserQuestions(questions);
+    setCounter(counter+1);
   }
   ,[questionList]);
+  
+  useEffect(()=>{
+    if(counter ===2){
+      setQuestionListIsLoading(false);
+    }
+  },[counter])
+
 
   function onClose(saveImage) {
     if(saveImage){
@@ -190,7 +200,7 @@ const ProfileCard = (props) => {
     </Tab>
     <Tab className="profileCardTab" eventKey="questions" title={isLoggedInUser ? "Dina frågor" : user.username + "'s frågor"}>
       <div className="profileCardQuestionsWrapper">
-      {userQuestions}
+      {questionListIsLoading ? "Loading": userQuestions}
       </div>
     </Tab>
   </Tabs>

@@ -18,7 +18,10 @@ const ProfileQuestionCard = (props) => {
       
       setCorrectAnswer(true);
     }
-  }, []);
+    else{
+      setCorrectAnswer(false)
+    }
+  }, [question]);
   
 
 const correctAnswer =

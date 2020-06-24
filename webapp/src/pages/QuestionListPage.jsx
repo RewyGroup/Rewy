@@ -7,6 +7,7 @@ import {Col,Row} from 'react-bootstrap';
 import QuestionCard from '../components/Question/QuestionCard';
 import SuccessToast from '../utils/SuccessToast';
 import Sidebar from '../utils/Sidebar';
+import { withRouter } from "react-router-dom";
 
 const QuestionListPage = (props) => {
     const dispatch = useDispatch();
@@ -18,9 +19,9 @@ const QuestionListPage = (props) => {
     var parts = props.location.pathname.split('/');
     const location = parts[parts.length - 1];
     const [questions,setQuestions] = useState([]);
-
     
-    useEffect(() => {
+    
+    useEffect(() => {    
         if(questionlist.length === 0){    
             
             if(location === "all"){
@@ -56,8 +57,11 @@ const QuestionListPage = (props) => {
     function sortDesc(){
         
         questionlist.map((question,index) =>{
+            if(question.createdAt.length === 19){
             var timeinmillis = Date.parse(question.createdAt);
-            question.createdAt = timeinmillis;            
+             
+            question.createdAt = timeinmillis;
+            }
         });
 
         questionlist.sort(function(a, b){ return b.createdAt - a.createdAt});
@@ -66,7 +70,10 @@ const QuestionListPage = (props) => {
 
 
     }
-    
+
+
+
+
     
         return (<div>
 <SuccessToast message={message} showSuccessToast={showSuccessToast}/>
@@ -82,4 +89,4 @@ const QuestionListPage = (props) => {
         );
 }
 
-export default QuestionListPage;
+export default withRouter(QuestionListPage);

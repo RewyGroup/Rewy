@@ -14,11 +14,15 @@ const QuestionCard = (props) => {
   const [isWYSIWYG, setIsWYSIWYG] = useState(false);
   const [textState, setTextState] = useState(EditorState.createEmpty());
   const [accordionIsOpen,setAccordionIsOpen] = useState(false);
-  var date = moment(question.createdAt).fromNow();
-  const correctAnswer =
+  const [date, setDate] = useState();
+
+
+    const correctAnswer =
     answers.length > 0 && answers.filter((answer) => answer.correct === true);
-  useEffect(() => {
-    if (correctAnswer.length > 0) {
+    
+  useEffect(() => {    
+    setDate(moment(question.createdAt).fromNow());
+    if (correctAnswer.length > 0) { 
       if (correctAnswer[0].text.startsWith("{")) {
         setIsWYSIWYG(true);
         const raw = JSON.parse(correctAnswer[0].text);
@@ -42,7 +46,9 @@ const QuestionCard = (props) => {
     e.preventDefault();
     const path = "/question/" + question.id;
     history.push({ pathname: path, question: question });
+  
   };
+
 
   const handleAccordionClick = (e) => {
     e.stopPropagation();
@@ -57,6 +63,7 @@ const QuestionCard = (props) => {
     }
   
   }
+
 
   return (
     <Row  onClick={hasCorrectAnswer ? handleCorrectClick : handleOnClick} className="cardRow mr-0 ml-0">

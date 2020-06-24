@@ -46,8 +46,14 @@ export const createQuestionVote = (questionWeb,token) =>{
 }
 
 
+export const setQuestion = (question) =>{
 
-
+    return{
+    type: 'SET_QUESTION_SUCCESS',
+    payload: question
+    
+}
+};
 
 
 const questionSuccess = (message) =>{

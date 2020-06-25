@@ -37,9 +37,6 @@ const QuestionPage = (props) => {
       if(question){
         setActiveQuestion(question);
       }
-      else{
-        dispatch(getQuestionById(id, session_token));
-      }
     }
      else {
       dispatch(getQuestionById(id, session_token));
@@ -54,7 +51,6 @@ const QuestionPage = (props) => {
       setActiveQuestion(newQuestion);
     }
   }, [newQuestion]);
-
 
 
   useEffect(() => {

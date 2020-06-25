@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom";
 
 const QuestionPage = (props) => {
 
-  const { question } = props.history.location;
+  const { question,pathname } = props.history.location;
 
   const dispatch = useDispatch();
   var parts = props.location.pathname.split('/');
@@ -66,7 +66,7 @@ const QuestionPage = (props) => {
     <div>
       <Row className="m-0">
         <Col className="sidebarWrapper" xs={12} lg={2}>
-          <Sidebar active={"EXPLORE"} />
+          <Sidebar active={"EXPLORE"} pathname={pathname}/>
         </Col>
         <Col xs={12} lg={10}>
           <Container>

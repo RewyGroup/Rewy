@@ -11,7 +11,8 @@ import Sidebar from '../utils/Sidebar';
 
 
 function ProfilePage(props) {
-    const {history} = props
+    const {history} = props;
+    const {pathname}= history.location;
     const dispatch = useDispatch();
     
 
@@ -107,7 +108,7 @@ function ProfilePage(props) {
             {InfoSuccessToast}
             <Row className="m-0">
             <Col className="sidebarWrapper" xs={12} lg={2}>
-                <Sidebar active={"USERS"}/>
+                <Sidebar active={"USERS"} pathname={pathname}/>
             </Col>
                 <Col xs={12} lg={10}>
                 <Container>

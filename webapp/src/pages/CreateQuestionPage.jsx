@@ -9,7 +9,7 @@ import Sidebar from '../utils/Sidebar';
 
 
 const CreateQuestionPage = (props) => {
-
+    const {pathname} = props.history.location;
     const [checker,setChecker] = useState(true);
     const [userId,setUserId] = useState(null);
 
@@ -55,7 +55,7 @@ const CreateQuestionPage = (props) => {
             
         <Row className="m-0">
         <Col className="sidebarWrapper" xs={12} lg={2}>
-            <Sidebar active={"ASK"}/>
+            <Sidebar active={"ASK"} pathname={pathname}/>
         </Col>
             <Col xs={12} lg={{span:7, offset:1}}>
             <QuestionForm userId={userId} token={session_token}/>

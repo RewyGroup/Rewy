@@ -48,9 +48,11 @@
     padding:20px 10px;
     border-right: 3px solid #295374 ;
     display: block;
+    
+}
+.active.sidebarElementFocused{
     pointer-events: none;
     cursor: default;
-    
 }
 .sidebarElement:hover{
     text-decoration: none;

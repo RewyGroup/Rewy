@@ -9,7 +9,8 @@ import Sidebar from '../utils/Sidebar';
 import UserCard from '../components/User/UserCard';
 
 function UsersPage(props) {
-    const {history} = props
+    const {history} = props;
+    const {pathname}= history.location;
     const users = useSelector(state => state.userReducer.users);
     const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ function UsersPage(props) {
         return (
             <Row className="m-0">
             <Col className="sidebarWrapper" xs={12} lg={2}>
-                <Sidebar active={"USERS"}/>
+                <Sidebar active={"USERS"}  pathname={pathname}/>
             </Col>
                 <Col xs={12} lg={10} className="usersCards">
                     <Container>

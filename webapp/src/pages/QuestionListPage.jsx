@@ -7,8 +7,10 @@ import {Col,Row} from 'react-bootstrap';
 import QuestionCard from '../components/Question/QuestionCard';
 import SuccessToast from '../utils/SuccessToast';
 import Sidebar from '../utils/Sidebar';
+import { withRouter } from "react-router-dom";
 
 const QuestionListPage = (props) => {
+    const {pathname} = props.history.location;
     const dispatch = useDispatch();
     const cookies = new Cookies();
     const session_token = cookies.get("session_token");
@@ -18,9 +20,9 @@ const QuestionListPage = (props) => {
     var parts = props.location.pathname.split('/');
     const location = parts[parts.length - 1];
     const [questions,setQuestions] = useState([]);
-
     
-    useEffect(() => {
+    
+    useEffect(() => {    
         if(questionlist.length === 0){    
             
             if(location === "all"){
@@ -56,8 +58,11 @@ const QuestionListPage = (props) => {
     function sortDesc(){
         
         questionlist.map((question,index) =>{
+            if(question.createdAt.length === 19){
             var timeinmillis = Date.parse(question.createdAt);
-            question.createdAt = timeinmillis;            
+             
+            question.createdAt = timeinmillis;
+            }
         });
 
         questionlist.sort(function(a, b){ return b.createdAt - a.createdAt});
@@ -66,13 +71,16 @@ const QuestionListPage = (props) => {
 
 
     }
-    
+
+
+
+
     
         return (<div>
 <SuccessToast message={message} showSuccessToast={showSuccessToast}/>
     <Row className="m-0">
     <Col className="sidebarWrapper" xs={12} lg={2}>
-        <Sidebar active={"EXPLORE"}/>
+        <Sidebar active={"EXPLORE"} pathname={pathname}/>
     </Col>
     <Col xs={{span:10, offset:1}} lg={{span:7, offset:1}}>
 {questions}
@@ -82,4 +90,4 @@ const QuestionListPage = (props) => {
         );
 }
 
-export default QuestionListPage;
+export default withRouter(QuestionListPage);

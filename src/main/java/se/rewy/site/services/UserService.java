@@ -8,26 +8,31 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.rewy.site.exception.UserServiceException;
+import se.rewy.site.models.Preference;
 import se.rewy.site.models.Role;
 import se.rewy.site.models.User;
 import se.rewy.site.models.UserCredentials;
+import se.rewy.site.repository.PreferenceRepository;
 import se.rewy.site.repository.UserRepository;
 
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final PreferenceRepository preferenceRepository;
     private final MailService mailService;
 
     @Autowired
-    public UserService(UserRepository userRepository, MailService mailService) {
+    public UserService(UserRepository userRepository,PreferenceRepository preferenceRepository, MailService mailService) {
         this.userRepository = userRepository;
+        this.preferenceRepository = preferenceRepository;
         this.mailService = mailService;
     }
 
@@ -121,6 +126,7 @@ public class UserService implements UserDetailsService {
 
         return ResponseEntity.ok().build();
     }
+
     public void updateUser(User user) {
         Optional<User> optionalUser = userRepository.findById(user.getId());
         if (optionalUser.isPresent()) {
@@ -133,6 +139,41 @@ public class UserService implements UserDetailsService {
             userRepository.save(oldUser);
         }
     }
+
+    public void updateUserPreferences(long userId, Set<Preference> newPreferences) {
+
+        Set<Preference> UserPreferences =  preferenceRepository.findAllByUser_Id(userId);
+
+        User user = userRepository.findById(userId).get();
+
+        if(UserPreferences.size() > 0) {
+
+            Set<Long> preferenceIds = newPreferences.stream()
+                    .map(preference -> preference.getId()).collect(Collectors.toSet());
+
+            List<Preference> preferencesToDelete =
+                    UserPreferences.stream()
+                            .filter(p -> !preferenceIds.contains(p.getId()))
+                            .collect(Collectors.toList());
+
+        preferencesToDelete.forEach(preference -> preferenceRepository.delete(preference));
+        }
+       newPreferences.forEach(preference -> {
+           preference.setUser(user);
+           preferenceRepository.save(preference);
+       });
+
+    }
+    public Set<Preference> findAllUserPreferences(long userId) {
+        Set<Preference> UserPreferences =  preferenceRepository.findAllByUser_Id(userId);
+        UserPreferences.forEach(preference -> preference.getCategory().setSubCategoryList(null));
+
+        Set<Preference> sortedUserPreferencesByPriorityList = UserPreferences.stream()
+                .sorted(Comparator.comparing(Preference::getPriority)).collect(Collectors.toCollection(LinkedHashSet::new));
+
+        return sortedUserPreferencesByPriorityList;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

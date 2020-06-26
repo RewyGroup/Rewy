@@ -5,6 +5,7 @@ const initialState = {
     imageUrl: null,
     updatedImage: false,
     updatedProfile: false,
+    userPreferences:[],
     error:""
 };
 
@@ -26,6 +27,8 @@ const userReducer = ( state = initialState ,action) => {
             return {...state, imageUrl:"", updatedProfile: true}
         case 'GET_ALL_USERS_SUCCESS':
             return {...state, users: action.payload, user:{}}
+        case 'PREFERENCES_FETCH_SUCCESS':
+            return{...state,userPreferences:action.payload}    
         default:
             return {...state}
     }

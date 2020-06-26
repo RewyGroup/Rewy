@@ -5,7 +5,7 @@ const initialState = {
     questionList:[],
     question:{} ,
     questionIsCreated :false,
-    questionLoaded: false
+    questionLoaded: false,
 };
 
 
@@ -26,6 +26,8 @@ const questionReducer = ( state = initialState ,action) => {
             return {...state, message: "", error: "", question:action.payload, questionIsCreated: false}     
         case 'QUESTION_VOTE_CREATED_SUCCESS':
             return {...state,  message: "", error: "", questionList: [], question:{}, questionIsCreated: false}
+            case 'SET_QUESTION_SUCCESS':
+                return{...state, question:action.payload}
         default:
             return {...state, message: "", error:"", questionIsCreated: false}
     }

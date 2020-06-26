@@ -14,8 +14,10 @@ import ProfileQuestionCard from './profileQuestionCard';
 
 const ProfileCard = (props) => {
 
-  const {user,token,history,isLoggedInUser} = props;
+  const {user,token,history,isLoggedInUser,userPreferences} = props;
 
+  console.log(userPreferences);
+  
   const imageUrl = useSelector(state => state.userReducer.imageUrl);
   const questionList = useSelector(state => state.questionReducer.questionList);
 
@@ -29,20 +31,30 @@ const ProfileCard = (props) => {
   const [croppedImage,setCroppedImage] = useState(null);
   const [showEditModal,setShowEditModal] = useState(false);
   const [userQuestions, setUserQuestions]=useState();
+  const [counter,setCounter] = useState(0); 
+  const[questionListIsLoading, setQuestionListIsLoading]=useState(true);
   const dispatch = useDispatch();
+
 
   useEffect(()=>{
     questionList.map((question) =>{
       var timeinmillis = Date.parse(question.createdAt);
       question.createdAt = timeinmillis;            
   });
-
     questionList.sort(function(a, b){ return b.createdAt - a.createdAt});
     const questions = questionList &&
     questionList.map((question,index) => (<ProfileQuestionCard key={index} question={question} history={history}/>));
     setUserQuestions(questions);
+    setCounter(counter+1);
   }
   ,[questionList]);
+  
+  useEffect(()=>{
+    if(counter ===2){
+      setQuestionListIsLoading(false);
+    }
+  },[counter])
+
 
   function onClose(saveImage) {
     if(saveImage){
@@ -101,9 +113,6 @@ const ProfileCard = (props) => {
     onClose(true);
   } 
 
-  
-
-
 
   const handleShowEditModal = () => setShowEditModal(true);
 
@@ -153,10 +162,14 @@ const ProfileCard = (props) => {
   
 
 
+    const userPreferenceList = 
+    userPreferences.length > 0 && 
+    userPreferences.map((preferece) => (preferece.text === preferece.category.typeName ?<span className="userPreferenceCategory">{preferece.text}</span>:
+    <span className="userPreferenceSubCategory">#{preferece.text}</span>));
 
+      
 
   return (
-
       <Row className="mr-0 ml-0 profileCard">
         <Col className="profileCardWrapper" xs={12}>
           <img  className="profileCardBanner" src="/banner.png" alt="banner" />
@@ -187,10 +200,11 @@ const ProfileCard = (props) => {
         <div className="profileCardInformation"><FontAwesomeIcon className="profileInfoIcon"
                 icon={faVenusMars} 
               />{user.gender}</div>
+        {userPreferences.length > 0?<div className="profileCardPreferenceWrapper">{userPreferenceList}</div>:<div></div>}
     </Tab>
     <Tab className="profileCardTab" eventKey="questions" title={isLoggedInUser ? "Dina frågor" : user.username + "'s frågor"}>
       <div className="profileCardQuestionsWrapper">
-      {userQuestions}
+      {questionListIsLoading ? "Loading": userQuestions}
       </div>
     </Tab>
   </Tabs>

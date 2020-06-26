@@ -17,6 +17,10 @@ public class Preference {
     private String text;
     private int priority;
 
+
+    @OneToOne
+    private Category category;
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -54,6 +58,7 @@ public class Preference {
     public void setText(String text) {
         this.text = text;
     }
+
     public int getPriority() {
         return priority;
     }
@@ -61,4 +66,14 @@ public class Preference {
     public void setPriority(int priority) {
         this.priority = priority;
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+
 }

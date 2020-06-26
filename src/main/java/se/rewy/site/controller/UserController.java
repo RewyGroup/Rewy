@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.rewy.site.exception.UserServiceException;
+import se.rewy.site.models.Preference;
 import se.rewy.site.models.User;
 import se.rewy.site.services.UserService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -51,7 +53,13 @@ public class UserController {
         }
         return ResponseEntity.ok().build();
     }
+    @PostMapping("{id}/update/preferences")
+    ResponseEntity <?> updatePreferences( @PathVariable long id, @RequestBody Set<Preference> newPreferences){
 
+        userService.updateUserPreferences(id,newPreferences);
+
+        return ResponseEntity.ok().build();
+    }
 
 
     @GetMapping("{id}")
@@ -69,6 +77,11 @@ public class UserController {
     ResponseEntity<Set<User>> findAllUsers(){
         Set<User> allUsers = userService.findAllUsers();
        return ResponseEntity.ok(allUsers);
+    }
+    @GetMapping("/{id}/preferences")
+    ResponseEntity<Set<Preference>> findAllUserPreferences(@PathVariable long id){
+        Set<Preference> preferences = userService.findAllUserPreferences(id);
+        return ResponseEntity.ok(preferences);
     }
 
 

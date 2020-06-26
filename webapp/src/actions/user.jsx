@@ -57,6 +57,12 @@ export const getUserByUsername = (username) => async (dispatch) => {
     dispatch({ type: "SELECTED_USER_FETCH_SUCCESS", payload: response.data });
   };
 
+  export const getAllUserPreferences = (userId) => async (dispatch) => {
+
+    const response = await api.getAllUserPreferences(userId);
+    dispatch({ type: "PREFERENCES_FETCH_SUCCESS", payload: response.data });
+  };
+
 
 
 const updateProfile = () => {

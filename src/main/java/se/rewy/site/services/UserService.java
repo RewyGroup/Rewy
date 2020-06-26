@@ -19,9 +19,7 @@ import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -166,6 +164,16 @@ public class UserService implements UserDetailsService {
        });
 
     }
+    public Set<Preference> findAllUserPreferences(long userId) {
+        Set<Preference> UserPreferences =  preferenceRepository.findAllByUser_Id(userId);
+        UserPreferences.forEach(preference -> preference.getCategory().setSubCategoryList(null));
+
+        Set<Preference> sortedUserPreferencesByPriorityList = UserPreferences.stream()
+                .sorted(Comparator.comparing(Preference::getPriority)).collect(Collectors.toCollection(LinkedHashSet::new));
+
+        return sortedUserPreferencesByPriorityList;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

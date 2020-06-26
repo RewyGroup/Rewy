@@ -6,7 +6,7 @@ import {Container,Col,Row} from 'react-bootstrap';
 import {getUserById} from '../actions/user';
 import ProfileCard from '../components/Profile/ProfileCard';
 import SuccessToast from '../utils/SuccessToast';
-import {getUserByUsername} from '../actions/user'
+import {getUserByUsername,getAllUserPreferences} from '../actions/user'
 import Sidebar from '../utils/Sidebar';
 
 
@@ -27,6 +27,7 @@ function ProfilePage(props) {
     const optionalUser = useSelector(state => state.userReducer.user);
     const updatedImage = useSelector(state => state.userReducer.updatedImage);
     const updatedProfile = useSelector(state => state.userReducer.updatedProfile);
+    const userPreferences = useSelector(state => state.userReducer.userPreferences);
     const [isLoggedInUser,setIsLoggedInUser] = useState(false);
     
     const username = props.location.pathname.split('/')[2];
@@ -34,7 +35,7 @@ function ProfilePage(props) {
     const profileImageMessage = "Profile image successfully changed!"
     const profileInfoMessage = "Profile successfully updated!"
     
-    const user = selectedUser && selectedUser.id && <ProfileCard token={session_token} user={selectedUser} history={props.history} isLoggedInUser={isLoggedInUser}/>;
+    const user = selectedUser && selectedUser.id && <ProfileCard token={session_token} user={selectedUser} userPreferences={userPreferences} history={props.history} isLoggedInUser={isLoggedInUser}/>;
     const ImageSuccessToast = showImageSuccessToast && <SuccessToast message={profileImageMessage} showSuccessToast={showImageSuccessToast} />
     const InfoSuccessToast = showInfoSuccessToast && <SuccessToast message={profileInfoMessage} showSuccessToast={showInfoSuccessToast} />
     
@@ -67,6 +68,14 @@ function ProfilePage(props) {
         }
 
          },[selectedUser]);
+
+    useEffect(()=>{
+
+    if(isLoggedInUser){
+        dispatch(getAllUserPreferences(userId))
+    }
+
+        },[isLoggedInUser]);
 
 
 

@@ -9,6 +9,7 @@ import se.rewy.site.models.Preference;
 import se.rewy.site.models.User;
 import se.rewy.site.services.UserService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -76,6 +77,11 @@ public class UserController {
     ResponseEntity<Set<User>> findAllUsers(){
         Set<User> allUsers = userService.findAllUsers();
        return ResponseEntity.ok(allUsers);
+    }
+    @GetMapping("/{id}/preferences")
+    ResponseEntity<Set<Preference>> findAllUserPreferences(@PathVariable long id){
+        Set<Preference> preferences = userService.findAllUserPreferences(id);
+        return ResponseEntity.ok(preferences);
     }
 
 

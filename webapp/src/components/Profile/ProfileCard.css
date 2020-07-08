@@ -120,31 +120,7 @@
     margin:0px 15px 0px 20px;
     font-size: 26px;
 }
-.profileCardPreferenceWrapper{
-    padding:20px;
-}
 
-.profileCardPreferenceWrapper > span{
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 300;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.userPreferenceCategory{
-    color: #ffffff;
-    font-size: 0.7rem !important;
-    padding: 5px 10px;
-    background: linear-gradient(90deg, #FF9838 0%, #FB6161 100%);
-    text-transform: uppercase;
-    margin-right: 10px;
-}
-.userPreferenceSubCategory{
-    margin-right: 10px;
-    color: #285273;
-}
 @media (max-width:767px){
     .profileImage{
         width: 30%;

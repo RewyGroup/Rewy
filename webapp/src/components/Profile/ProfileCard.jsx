@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Card, Tabs,Tab } from 'react-bootstrap';
+import { Row, Col,Tabs,Tab } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit,faEnvelope,faMapMarkerAlt,faVenusMars } from '@fortawesome/free-solid-svg-icons';
 import Avatar from 'react-avatar-edit';
@@ -9,6 +9,7 @@ import ProfileImageModal from'./ProfileImageModal';
 import { uploadProfileImage,updateProfileImageUrlByUserId,getAllQuestionsById} from '../../actions/user';
 import ProfileEditModal from './ProfileEditModal';
 import ProfileQuestionCard from './profileQuestionCard';
+import ProfilePreference from './ProfilePreference';
 
 
 
@@ -16,7 +17,6 @@ const ProfileCard = (props) => {
 
   const {user,token,history,isLoggedInUser,userPreferences} = props;
 
-  console.log(userPreferences);
   
   const imageUrl = useSelector(state => state.userReducer.imageUrl);
   const questionList = useSelector(state => state.questionReducer.questionList);
@@ -32,6 +32,7 @@ const ProfileCard = (props) => {
   const [showEditModal,setShowEditModal] = useState(false);
   const [userQuestions, setUserQuestions]=useState();
   const [counter,setCounter] = useState(0); 
+  const [tab,setTab] = useState(true); 
   const[questionListIsLoading, setQuestionListIsLoading]=useState(true);
   const dispatch = useDispatch();
 
@@ -123,6 +124,16 @@ const ProfileCard = (props) => {
 
   } 
 
+  const activeTab = (e) => {
+    if(e === "info"){
+      setTab(true);
+    }
+    else{
+      setTab(false);
+    }
+
+  } 
+
 
 
   useEffect(() =>{
@@ -164,12 +175,13 @@ const ProfileCard = (props) => {
 
     const userPreferenceList = 
     userPreferences.length > 0 && 
-    userPreferences.map((preferece) => (preferece.text === preferece.category.typeName ?<span className="userPreferenceCategory">{preferece.text}</span>:
-    <span className="userPreferenceSubCategory">#{preferece.text}</span>));
+    userPreferences.map((preferece) => (preferece.text === preferece.category.typeName ?<div className="userPreferenceWrapper"><div className="userPreferenceCategory">{preferece.text}</div></div>:
+    <div className="userPreferenceWrapper"><div className="userPreferenceSubCategory">#{preferece.text}</div></div>));
 
       
 
   return (
+    <div>
       <Row className="mr-0 ml-0 profileCard">
         <Col className="profileCardWrapper" xs={12}>
           <img  className="profileCardBanner" src="/banner.png" alt="banner" />
@@ -185,12 +197,12 @@ const ProfileCard = (props) => {
       <div className="profileCardInfoUsername">@{user.username}</div>
       </Col>
       <Col className="profileCardWrapper" xs={12}>
-    <Tabs className="profileCardTabs" fill defaultActiveKey="info" id="uncontrolled-tab-example">
+    <Tabs className="profileCardTabs" fill defaultActiveKey="info" id="uncontrolled-tab-example" onSelect={activeTab}>
   
     <Tab  className="profileCardTab" eventKey="points" title="Poäng">
 
     </Tab>
-    <Tab className="profileCardTab" eventKey="info" title="Information">
+    <Tab className="profileCardTab" eventKey="info" title="Information" >
         <div className="profileCardInformation"><FontAwesomeIcon className="profileInfoIcon"
                 icon={faEnvelope} 
               />{user.email}</div>
@@ -199,8 +211,7 @@ const ProfileCard = (props) => {
               />{user.occupation}</div>
         <div className="profileCardInformation"><FontAwesomeIcon className="profileInfoIcon"
                 icon={faVenusMars} 
-              />{user.gender}</div>
-        {userPreferences.length > 0?<div className="profileCardPreferenceWrapper">{userPreferenceList}</div>:<div></div>}
+              />{user.gender}</div>  
     </Tab>
     <Tab className="profileCardTab" eventKey="questions" title={isLoggedInUser ? "Dina frågor" : user.username + "'s frågor"}>
       <div className="profileCardQuestionsWrapper">
@@ -212,7 +223,10 @@ const ProfileCard = (props) => {
 {isLoggedInUser ? <ProfileImageModal show={showImageModal} handleUpdate={handleUpdateImageModal} handleClose={handleCloseImageModal} showAvatar={showAvatar()}/>:""}
   <ProfileEditModal token={token} show={showEditModal} handleUpdate={handleUpdateEditModal} handleClose={handleCloseEditModal} user={user}/>
   </Row>
-
+  <Row className="m-0">{userPreferences.length > 0 && tab ?
+<ProfilePreference userPreferenceList={userPreferenceList}/>
+    :<div></div>}</Row>
+  </div>
   );
 };
 

@@ -63,4 +63,10 @@ public class QuestionController {
         Set <Question> allQuestions = questionService.findQuestionsByUserId(userId);
         return ResponseEntity.ok(allQuestions);
     }
+
+    @GetMapping("preference/{userId}")
+    public ResponseEntity<List<Question>>getPreferencedQuestionsByUserId(@PathVariable Long userId){
+        List<Question> allQuestions = questionService.findAllPreferenceQuestionsByUserId(userId);
+        return ResponseEntity.ok(allQuestions);
+    }
 }

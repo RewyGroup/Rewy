@@ -1,5 +1,6 @@
 package se.rewy.site.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -37,6 +38,10 @@ public class Question implements Comparable<Question>{
     private Set<Vote> votes;
 
     private LocalDateTime createdAt;
+
+
+    @JsonIgnore
+    private int points;
 
     public Question() {
     }
@@ -109,7 +114,13 @@ public class Question implements Comparable<Question>{
 
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
+    public int getPoints() {
+        return points;
+    }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
     @Override
     public int compareTo(Question question) {
